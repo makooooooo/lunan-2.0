@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "350722858345",
+    "project_id": "lunancapstone",
+    "storage_bucket": "lunancapstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350722858345:android:ccac40bf4fd515e843f1f8",
+        "android_client_info": {
+          "package_name": "com.example.lunan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350722858345-7uvnpqqvvaj3e9fg3c2vqlvo62nn13js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRYC6HC1q2USAEgy7jdKzXIkONvKyEHv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350722858345-7uvnpqqvvaj3e9fg3c2vqlvo62nn13js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
