@@ -53,7 +53,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  // Perform any additional actions after closing the dialog
+                  Navigator.of(context).pop();
                 },
                 child: const Text('OK'),
               ),
@@ -337,9 +337,20 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text('Submit'),
+                 Container(
+                width: 100,
+                margin: const EdgeInsets.all(20),
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 19, 195, 122),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  child: const Text('Submit'),
+                ),
               ),
             ],
           ),

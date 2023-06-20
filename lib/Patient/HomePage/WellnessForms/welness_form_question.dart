@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form_chooser.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:intl/intl.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class WellnessFormQuestion extends StatefulWidget {
   WellnessFormQuestion({super.key});
@@ -10,10 +14,70 @@ class WellnessFormQuestion extends StatefulWidget {
 }
 
 class _WellnessFormQuestion extends State<WellnessFormQuestion> {
-  double questionOneValue = 1;
-  double questionTwoValue = 1;
-  double questionThreeValue = 1;
-  double questionFourValue = 1;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  double questionOneValue = 0;
+  double questionTwoValue = 0;
+  double questionThreeValue = 0;
+  double questionFourValue = 0;
+
+Future<void> _submitForm() async {
+    final User? user = _auth.currentUser;
+    final uid = user?.uid;
+
+    // Get the current date
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+
+    final formData = {
+      'WellnessQ1': questionOneValue,
+      'WellnessQ2': questionTwoValue,
+      'WellnessQ3': questionThreeValue,
+      'WellnessQ4': questionFourValue,
+      'UID': uid,
+      'DateSubmitted': formattedDate,
+    };
+
+    try {
+      await FirebaseFirestore.instance.collection('WellnessForm').add(formData);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Form data submitted successfully!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); // Pop the current route
+              },
+            child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text('Error submitting form data: $e'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // Perform any additional actions after closing the dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +129,47 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                               ('- Not a very happy person.')
                             ),
                           )
-                       
+
+                       else if (questionOneValue == 2)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Not a happy person.')
+                            ),
+                          )
+
+                          else if (questionOneValue == 3)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Somewhat happy.')
+                            ),
+                          )
+
+                          else if (questionOneValue == 4)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A moderately happy person.')
+                            ),
+                          )
+ 
+                           else if (questionOneValue == 5)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A happy person.')
+                            ),
+                          )
+ 
+                           else if (questionOneValue == 6)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A very happy person.')
+                            ),
+                          )
+ 
                         else if (questionOneValue == 7)
                           Container(
                             margin: const EdgeInsets.all(10),
@@ -75,7 +179,7 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           ),
                         Slider(
                             value: questionOneValue,
-                            min: 1,
+                            min: 0,
                             max: 7,
                             divisions: 7,
                             label: questionOneValue.toStringAsFixed(0),
@@ -105,20 +209,60 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- Less happy.')
+                              ('- Not a very happy person.')
                             ),
                           )
-                       
+
+                       else if (questionTwoValue == 2)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Not a happy person.')
+                            ),
+                          )
+
+                          else if (questionTwoValue == 3)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Somewhat happy.')
+                            ),
+                          )
+
+                          else if (questionTwoValue == 4)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A moderately happy person.')
+                            ),
+                          )
+ 
+                           else if (questionTwoValue == 5)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A happy person.')
+                            ),
+                          )
+ 
+                           else if (questionTwoValue == 6)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A very happy person.')
+                            ),
+                          )
+ 
                         else if (questionTwoValue == 7)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- More happy.')
+                              ('- A very happy person.')
                             ),
                           ),
                         Slider(
                             value: questionTwoValue,
-                            min: 1,
+                            min: 0,
                             max: 7,
                             divisions: 7,
                             label: questionTwoValue.toStringAsFixed(0),
@@ -148,20 +292,60 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- Not at all.')
+                              ('- Not a very happy person.')
                             ),
                           )
-                       
+
+                       else if (questionThreeValue == 2)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Not a happy person.')
+                            ),
+                          )
+
+                          else if (questionThreeValue == 3)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Somewhat happy.')
+                            ),
+                          )
+
+                          else if (questionThreeValue == 4)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A moderately happy person.')
+                            ),
+                          )
+ 
+                           else if (questionThreeValue == 5)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A happy person.')
+                            ),
+                          )
+ 
+                           else if (questionThreeValue == 6)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A very happy person.')
+                            ),
+                          )
+ 
                         else if (questionThreeValue == 7)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- A great deal.')
+                              ('- A very happy person.')
                             ),
                           ),
                         Slider(
                             value: questionThreeValue,
-                            min: 1,
+                            min: 0,
                             max: 7,
                             divisions: 7,
                             label: questionThreeValue.toStringAsFixed(0),
@@ -193,20 +377,60 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- Not at all.')
+                              ('- Not a very happy person.')
                             ),
                           )
-                       
+
+                       else if (questionFourValue == 2)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Not a happy person.')
+                            ),
+                          )
+
+                          else if (questionFourValue == 3)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Somewhat happy.')
+                            ),
+                          )
+
+                          else if (questionFourValue == 4)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A moderately happy person.')
+                            ),
+                          )
+ 
+                           else if (questionFourValue == 5)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A happy person.')
+                            ),
+                          )
+ 
+                           else if (questionFourValue == 6)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- A very happy person.')
+                            ),
+                          )
+ 
                         else if (questionFourValue == 7)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- A great deal.')
+                              ('- A very happy person.')
                             ),
                           ),
                         Slider(
                             value: questionFourValue,
-                            min: 1,
+                            min: 0,
                             max: 7,
                             divisions: 7,
                             label: questionFourValue.toStringAsFixed(0),
@@ -221,28 +445,20 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                 ),
                 
                 Container(
-                      width: 100,
-                      margin: const EdgeInsets.all(20),
-                      height: 30,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const WellnessFormChooser()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                           backgroundColor: Color.fromARGB(255, 19, 195, 122),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Set the corner radius here
-                            ),
-                          ),
-                          child: const Text(
-                            'Submit',
-                          )),
+                  width: 100,
+                  margin: const EdgeInsets.all(20),
+                  height: 30,
+                  child: ElevatedButton(
+                    onPressed: _submitForm,
+                      style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 19, 195, 122),
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                  ),
+                    child: const Text('Submit'),
+                  ),
+                ),
               ],
             ),
           ),
