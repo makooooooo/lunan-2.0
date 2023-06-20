@@ -6,6 +6,62 @@ import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 class DashboardModal extends StatelessWidget {
   const DashboardModal();
 
+  Future<void> _submitMood(BuildContext context, String mood) async {
+    final user = FirebaseAuth.instance.currentUser;
+    final userId = user?.uid;
+
+    final formData = {
+      'UID': userId,
+      'Mood': mood,
+      'DateSubmitted': DateTime.now(),
+    };
+
+    try {
+  await FirebaseFirestore.instance.collection('MoodTracker').add(formData);
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Success'),
+        content: const Text('Mood submitted successfully!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the success dialog
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Dashboard(), // Navigate to Dashboard
+                ),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text('Error submitting mood: $e'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Go back to previous screen
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -38,7 +94,7 @@ class DashboardModal extends StatelessWidget {
             body: Center(
               child: Container(
                 width: 300,
-            height: 325,
+                height: 325,
                 decoration: BoxDecoration(
                   color: const Color(0xff7DB9B6),
                   borderRadius: BorderRadius.circular(20),
@@ -74,12 +130,7 @@ class DashboardModal extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Dashboard(),
-                              ),
-                            );
+                            _submitMood(context, 'Angry');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -90,7 +141,9 @@ class DashboardModal extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Feel like crying');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: const CircleBorder(),
@@ -100,7 +153,9 @@ class DashboardModal extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Sad');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: const CircleBorder(),
@@ -110,7 +165,9 @@ class DashboardModal extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Okay');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: const CircleBorder(),
@@ -126,7 +183,9 @@ class DashboardModal extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Calm');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: CircleBorder(),
@@ -136,7 +195,9 @@ class DashboardModal extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Happy');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: CircleBorder(),
@@ -146,7 +207,9 @@ class DashboardModal extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _submitMood(context, 'Cheerful');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: CircleBorder(),
