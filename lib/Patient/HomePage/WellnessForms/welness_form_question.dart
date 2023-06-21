@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:intl/intl.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class WellnessFormQuestion extends StatefulWidget {
   WellnessFormQuestion({super.key});
@@ -10,10 +14,76 @@ class WellnessFormQuestion extends StatefulWidget {
 }
 
 class _WellnessFormQuestion extends State<WellnessFormQuestion> {
+
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   double questionOneValue = 0;
   double questionTwoValue = 0;
   double questionThreeValue = 0;
   double questionFourValue = 0;
+
+
+
+Future<void> _submitForm() async {
+    final User? user = _auth.currentUser;
+    final uid = user?.uid;
+
+    // Get the current date
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+
+    final formData = {
+      'WellnessQ1': questionOneValue,
+      'WellnessQ2': questionTwoValue,
+      'WellnessQ3': questionThreeValue,
+      'WellnessQ4': questionFourValue,
+      'UID': uid,
+      'DateSubmitted': formattedDate,
+    };
+
+    try {
+      await FirebaseFirestore.instance.collection('WellnessForm').add(formData);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Form data submitted successfully!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); // Pop the current route
+              },
+            child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text('Error submitting form data: $e'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // Perform any additional actions after closing the dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +135,18 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                               ('- Not a very happy person.')
                             ),
                           )
+
                           else if (questionOneValue == 1)
+
+
+
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- Not a happy person.')
                             ),
                           )
+
                           else if (questionOneValue == 2)
                           Container(
                             margin: const EdgeInsets.all(10),
@@ -80,20 +155,24 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                             ),
                           )
                           else if (questionOneValue == 3)
+
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- A moderately happy person.')
                             ),
                           )
+
                           else if (questionOneValue == 4)
+
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- A happy person.')
                             ),
-                          )
+
                         else if (questionOneValue == 5)
+
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
@@ -110,9 +189,10 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                         Slider(
                             value: questionOneValue,
                             min: 0,
+
                             max: 6,
                             divisions: 6,
-                            label: questionOneValue.toStringAsFixed(0),
+           label: questionOneValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
@@ -142,6 +222,7 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                               ('- Not a very happy person.')
                             ),
                           )
+
                           else if (questionTwoValue == 1)
                           Container(
                             margin: const EdgeInsets.all(10),
@@ -182,13 +263,16 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- A very happy and joyful person.')
+
                             ),
                           ),
                         Slider(
                             value: questionTwoValue,
                             min: 0,
+
                             max: 6,
                             divisions: 6,
+
                             label: questionTwoValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
@@ -230,6 +314,7 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
+
                               ('- Somewhat happy person.')
                             ),
                           )
@@ -259,13 +344,16 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- A very happy joyful person.')
+
                             ),
                           ),
                         Slider(
                             value: questionThreeValue,
                             min: 0,
+
                             max: 6,
                             divisions: 6,
+
                             label: questionThreeValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
@@ -298,11 +386,14 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                               ('- Not a very happy person.')
                             ),
                           )
+
                           else if (questionFourValue == 1)
+
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- Not a happy person.')
+
                             ),
                           )
                           else if (questionFourValue == 2)
@@ -338,14 +429,16 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                             margin: const EdgeInsets.all(10),
                             child: const Text(
                               ('- A very happy and joyful person.')
+
                             ),
                           ),
                         Slider(
                             value: questionFourValue,
                             min: 0,
+
                             max: 6,
                             divisions: 6,
-                            label: questionFourValue.toStringAsFixed(0),
+            label: questionFourValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
@@ -357,6 +450,7 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                 ),
                 
                 Container(
+
                       width: 100,
                       margin: const EdgeInsets.all(20),
                       height: 30,
@@ -378,7 +472,12 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                           child: const Text(
                             'Submit',
                           )),
+
                     ),
+                  ),
+                    child: const Text('Submit'),
+                  ),
+                ),
               ],
             ),
           ),
