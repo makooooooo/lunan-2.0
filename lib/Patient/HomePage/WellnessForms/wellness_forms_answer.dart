@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class WellnessFormsAnswer extends StatelessWidget {
@@ -282,6 +286,28 @@ class WellnessFormsAnswer extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
+                            ))),
+                    Expanded(
+                        child: Container(
+                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      decoration: const BoxDecoration(color: Color(0xffF5E9CF)),
+                    )),
+                    Container(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const WellnessForms()),
+                           );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff7DB97F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Set the corner radius here
+
                             ),
                           ),
                         ],

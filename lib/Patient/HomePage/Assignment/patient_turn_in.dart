@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Assignment/completed.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -41,57 +42,75 @@ class PatientTurnIn extends StatelessWidget {
             ),
             Flex(
               direction: Axis.horizontal,
-              
               children: [
-                  Expanded(
-              child: Container(
-              margin: const EdgeInsets.all(20),
-              
-              decoration: BoxDecoration(
-                  color: const Color(0xff4D455D),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(children: <Widget>[
-                const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        'Activity # 1\nJournal and Drawing Entry | Due: March 8, 20203',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-                Container(
-                    margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            attachFile();
-                          },
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            side: MaterialStateProperty.all<BorderSide>(
-                              const BorderSide(color: Color(0xffF5E9CF), width: 2.0),
+                Expanded(
+                    child: Container(
+                  margin: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: const Color(0xff4D455D),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(children: <Widget>[
+                    const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            'Activity # 1\nJournal and Drawing Entry | Due: March 8, 20203',
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
                           ),
-                          child: const Text('Attach File'),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Image.asset('assets/iconPaperClip.png'),
-                        )
-                        
-                      ],
-                    )),
-              ]),
-            )
-            )
+                        )),
+                    Container(
+                        margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
+                        child: Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                attachFile();
+                              },
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                side: MaterialStateProperty.all<BorderSide>(
+                                  const BorderSide(
+                                      color: Color(0xffF5E9CF), width: 2.0),
+                                ),
+                              ),
+                              child: const Text('Attach File'),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: Image.asset('assets/iconPaperClip.png'),
+                            )
+                          ],
+                        )),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(200, 0, 0, 15),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Completed()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff7DB97F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              // Set the corner radius here
+                            ),
+                          ),
+                          child: const Text(
+                            'Submit',
+                          )),
+                    ),
+                  ]),
+                ))
               ],
             )
-            
           ],
         ),
       ),

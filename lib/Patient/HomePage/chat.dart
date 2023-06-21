@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lunan/Patient/MenuList/menulist.dart';
-
+  
 class chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: const Color(0xff7DB9B6),
       ),
 
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+     
       body: Center(
           child: Container(
             width: 320,
