@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
+import 'package:lunan/Therapist/HomePage/IntakeForms/intake_form.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/view_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/patient_list.dart';
 
@@ -149,7 +151,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PatientCaseNotes()),
+                              builder: (context) => const IntakeForm()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -177,7 +179,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PatientCaseNotes()),
+                              builder: (context) => const ViewCaseNotes()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
