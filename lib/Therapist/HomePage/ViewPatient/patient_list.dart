@@ -67,7 +67,7 @@ class PatientList extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 16),
                     child: Text(
-                      'Patient B \nDate Added \nLast Session',
+                      'Patient B \nDate Added \nLast Session \nDiagnosis',
                       style: TextStyle(
                         color: Colors.white,
                       ),
