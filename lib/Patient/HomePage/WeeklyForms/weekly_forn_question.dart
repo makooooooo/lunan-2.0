@@ -112,7 +112,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                 ),
               ),
 
-            ),
+            
             const Divider(
               color: Color(0xff4D455D), // Customize the color of the line
               thickness: 2, // Adjust the thickness of the line
@@ -493,10 +493,8 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                           )),
 
                     ),
-                  ),
-                  child: const Text('Submit'),
-                ),
-              ),
+                 
+              
             ],
           ),
         ),

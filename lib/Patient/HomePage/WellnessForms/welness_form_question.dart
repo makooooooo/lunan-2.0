@@ -171,7 +171,7 @@ Future<void> _submitForm() async {
                             child: const Text(
                               ('- A happy person.')
                             ),
-
+                          )
                         else if (questionOneValue == 5)
 
 
@@ -476,10 +476,8 @@ Future<void> _submitForm() async {
                           )),
 
                     ),
-                  ),
-                    child: const Text('Submit'),
-                  ),
-                ),
+                 
+                
               ],
             ),
           ),

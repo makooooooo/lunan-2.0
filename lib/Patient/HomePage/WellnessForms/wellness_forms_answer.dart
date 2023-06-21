@@ -287,7 +287,7 @@ class WellnessFormsAnswer extends StatelessWidget {
                                 ),
                               ),
 
-                            ))),
+                            )),
                     Expanded(
                         child: Container(
                       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -310,10 +310,10 @@ class WellnessFormsAnswer extends StatelessWidget {
 
                             ),
                           ),
-                        ],
+                        child: const Text('Go to Wellness Forms'),
                       ),
                     ),
-                  ),
+                  
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: ElevatedButton(
@@ -329,6 +329,10 @@ class WellnessFormsAnswer extends StatelessWidget {
                       child: const Text('Okay'),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
                 ],
               ),
             ),
