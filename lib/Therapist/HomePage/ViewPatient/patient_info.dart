@@ -129,7 +129,7 @@ class _PatientInfoState extends State<PatientInfo> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PatientList()),
+                                           PatientList()),
                                 );
                                 
                               }
