@@ -65,8 +65,15 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
                               ('- Not a very happy person.')
                             ),
                           )
+                        else if (questionOneValue == 2)
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            child: const Text(
+                              ('- Not a very happy person.')
+                            ),
+                          )
                        
-                        else if (questionOneValue == 7)
+                        else if (questionOneValue == 3)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(

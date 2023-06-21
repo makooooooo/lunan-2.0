@@ -105,7 +105,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                             min: 0,
                             max: 5,
                             divisions: 5,
-                            label: (5 - questionOneValue).toStringAsFixed(0),
+                            label: questionOneValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
