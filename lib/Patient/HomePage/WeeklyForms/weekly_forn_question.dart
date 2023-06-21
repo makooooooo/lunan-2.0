@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
-
 import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 
@@ -16,11 +13,12 @@ class WeeklyFormsQuestion extends StatefulWidget {
   WeeklyFormsQuestion({Key? key}) : super(key: key);
 
   @override
-  State<WeeklyFormsQuestion> createState() => _WeeklyFormsQuestionState(); 
+  State<WeeklyFormsQuestion> createState() => _WeeklyFormsQuestionState();
 }
 
 class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   double questionOneValue = 0;
   double questionTwoValue = 0;
@@ -47,7 +45,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
     };
 
     try {
-      await FirebaseFirestore.instance.collection('WeeklyForm').add(formData);
+      await _firestore.collection('WeeklyForm').add(formData);
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -469,30 +467,21 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                       ]),
                 ),
                 
-                Container(
-                      width: 100,
-                      margin: const EdgeInsets.all(20),
-                      height: 30,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Dashboard()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                           backgroundColor: Color.fromARGB(255, 19, 195, 122),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Set the corner radius here
-                            ),
-                          ),
-                          child: const Text(
-                            'Submit',
-                          )),
-
+                  Container(
+                width: 100,
+                margin: const EdgeInsets.all(20),
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: _submitForm, // Call the submit form function
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 19, 195, 122),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                  ),
+                  child: const Text('Submit'),
+                ),
+              ),
                  
               
             ],

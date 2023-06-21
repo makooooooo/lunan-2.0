@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
+import 'package:intl/intl.dart';
 
 class DashboardModal extends StatelessWidget {
   const DashboardModal();
@@ -10,11 +11,12 @@ class DashboardModal extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     final userId = user?.uid;
 
-    final formData = {
-      'UID': userId,
-      'Mood': mood,
-      'DateSubmitted': DateTime.now(),
-    };
+    final dateFormatter = DateFormat('yyyy-MM-dd');
+final formData = {
+  'UID': userId,
+  'Mood': mood,
+  'DateSubmitted': dateFormatter.format(DateTime.now()),
+};
 
     try {
   await FirebaseFirestore.instance.collection('MoodTracker').add(formData);
