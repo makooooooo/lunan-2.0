@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class chatT extends StatelessWidget {
   @override
@@ -7,12 +6,11 @@ class chatT extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         backgroundColor: const Color(0xff7DB9B6),
       ),
 
-      drawer: Drawer(
-        child: MenuListT(),
-      ),
+      
       body: Center(
           child: Container(
             width: 320,

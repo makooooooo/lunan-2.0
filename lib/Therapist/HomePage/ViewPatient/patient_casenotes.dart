@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/create_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
