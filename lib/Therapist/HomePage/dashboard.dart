@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
-import 'package:lunan/Therapist/HomePage/WeeklyForms/patient_list.dart';
-import 'package:lunan/Therapist/HomePage/WellnessForm/patient_list.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/chat.dart';
 

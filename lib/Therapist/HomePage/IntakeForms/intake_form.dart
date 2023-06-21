@@ -13,7 +13,7 @@ class IntakeForm extends StatefulWidget {
 class _IntakeFormState extends State<IntakeForm> {
   bool _isCheckedmale = false;
   bool _isCheckedfemale = false;
-   bool _isCheckedothers = false;
+  bool _isCheckedothers = false;
   late DateTime now;
   late String formattedDate;
 
@@ -104,134 +104,817 @@ class _IntakeFormState extends State<IntakeForm> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: Text('Name:'),
+              Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Cell Phone Number:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
                   ),
-                  Container(
-                    width: 300,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: TextField(
-                      onChanged: (value) {
-                        // Handle the text field value changes here
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('(Last)'), Text('(First)'), Text('(MI)')],
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: Text('Your Birth Date :'),
-                  ),
-                  Container(
-                    width: 100,
-                    margin: const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                    child: TextField(
-                      onChanged: (value) {
-                        // Handle the text field value changes here
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 40),
-                    child: Text('Age:'),
-                  ),
-                  Container(
-                    width: 50,
-                    margin: const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                    child: TextField(
-                      onChanged: (value) {
-                        // Handle the text field value changes here
-                      },
-                    ),
-                  ),
-                ],
               ),
-              Container(
-                margin: EdgeInsets.only(right: 200),
-                child: Text('Today\'s Date : $formattedDate'),
+              Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Text('Gender:'),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Home Phone Number:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
                   ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Email:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Sexual Preference:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Marital Status:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Previous Psychotherapy:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Current prescribed psychiatric meditations:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Emergency contact person name:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Emergency contact person number:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Suicidal thoughts:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Past suicidal thoughts:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Current homicidal thoughts:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Previous homicidal thoughts:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Current physical health:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Last physical Examination:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'List of chronis health problem:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Any Allergies:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'List of maintenance medication:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Regular intake of alcohol:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Engage in recreational drug use:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Habit of Smoke(# of cigar per day):',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Any past head injury:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Lately significant changes or stressors:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Depressed Mood or Sadness:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Anxiety:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Phobias:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Hallucinations:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Sexual Abuse:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Physical Abuse:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                margin: EdgeInsets.only(left: 10),
+                child: const Text(
+                  'Emotional Abuse:',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                    color: Color(0xff4D455D),
+                  ),
+                ),
+              ),
+              ),
+               Align(
+                alignment: Alignment.centerLeft,
+                child:Container(
+                height: 25,
+                width: 350,
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
+                child: TextField(
+                  onChanged: (value) {
+                    // Handle the text field value changes here
+                  },
+                ),
+              ),
+              ),
 
-                  Checkbox(
-                    value: _isCheckedmale,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _isCheckedmale = value!;
-                      });
-                    },
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: Text('Male'),
-                  ),
-                  
-                  Checkbox(
-                    value: _isCheckedfemale,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _isCheckedfemale = value!;
-                      });
-                    },
-                  ),
-                  Container(
-                    
-                    child: Text('Female'),
-                  ),
-                   Checkbox(
-                    value: _isCheckedothers,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _isCheckedothers = value!;
-                      });
-                    },
-                  ),
-                  Container(
-                    child: Text('Others'),
-                  ),
-                  
-                ],
-              ),
-               Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: Text('Address:'),
-                  ),
-                  Container(
-                    width: 300,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: TextField(
-                      onChanged: (value) {
-                        // Handle the text field value changes here
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('(Street and Number)'), Text('(City)'), Text('(Province)'),Text('(Zip)')],
-                ),
-              ),
             ],
           ),
         ),

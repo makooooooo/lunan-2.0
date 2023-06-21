@@ -179,7 +179,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ViewCaseNotes()),
+                              builder: (context) => const PatientCaseNotes()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
