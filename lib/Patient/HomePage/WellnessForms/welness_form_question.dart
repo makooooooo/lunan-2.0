@@ -7,16 +7,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class WellnessFormQuestion extends StatefulWidget {
-  WellnessFormQuestion({super.key});
+  WellnessFormQuestion({Key? key}) : super(key: key);
 
   @override
   State<WellnessFormQuestion> createState() => _WellnessFormQuestion();
 }
 
 class _WellnessFormQuestion extends State<WellnessFormQuestion> {
-
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   double questionOneValue = 0;
   double questionTwoValue = 0;
@@ -452,30 +451,20 @@ Future<void> _submitForm() async {
                 ),
                 
                 Container(
-
-                      width: 100,
-                      margin: const EdgeInsets.all(20),
-                      height: 30,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Dashboard()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                           backgroundColor: Color.fromARGB(255, 19, 195, 122),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Set the corner radius here
-                            ),
-                          ),
-                          child: const Text(
-                            'Submit',
-                          )),
-
+                width: 100,
+                margin: const EdgeInsets.all(20),
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: _submitForm, // Call the submit form function
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 19, 195, 122),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                  ),
+                  child: const Text('Submit'),
+                ),
+              ),
                  
                 
               ],
