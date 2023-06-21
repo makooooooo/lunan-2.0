@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class WellnessFormsAnswer extends StatelessWidget {
@@ -71,11 +72,11 @@ class WellnessFormsAnswer extends StatelessWidget {
                     Container(
                       child: ElevatedButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => const ()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const WellnessForms()),
+                           );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff7DB97F),

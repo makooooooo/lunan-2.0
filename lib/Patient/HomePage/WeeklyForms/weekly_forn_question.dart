@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
@@ -105,7 +106,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                             min: 0,
                             max: 5,
                             divisions: 5,
-                            label: (5 - questionOneValue).toStringAsFixed(0),
+                            label: questionOneValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
@@ -408,7 +409,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const WeeklyFormChooser()),
+                                  builder: (context) => const Dashboard()),
                             );
                           },
                           style: ElevatedButton.styleFrom(

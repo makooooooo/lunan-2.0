@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class WeeklyFormsAnswer extends StatelessWidget {
@@ -75,11 +76,11 @@ class WeeklyFormsAnswer extends StatelessWidget {
                  
                   child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const ()),
-                        // );
+                         Navigator.push(
+                          context,
+                           MaterialPageRoute(
+                               builder: (context) => const WeeklyForms ()),
+                       );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff7DB97F),
