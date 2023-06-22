@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_patientA.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
@@ -95,7 +96,7 @@ class TurendInAssignment extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TurnedINAssignmentPatientA(),
+                            builder: (context) => TurnedInAssignmentInfo(),
                           ),
                         );
                       },

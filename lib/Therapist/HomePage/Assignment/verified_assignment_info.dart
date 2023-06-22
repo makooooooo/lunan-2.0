@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_patientA.dart';
 
-class TurnedInAssignmentInfo extends StatelessWidget {
-  const TurnedInAssignmentInfo({super.key});
+class VerifiedAssignmentInfo extends StatelessWidget {
+  const VerifiedAssignmentInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const VerifiedAssignmentPatientA()),
+                                      const VerifiedAssignment()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -98,7 +99,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const VerifiedAssignmentPatientA()),
+                                      const VerifiedAssignment()),
                             );
                           },
                           style: ElevatedButton.styleFrom(

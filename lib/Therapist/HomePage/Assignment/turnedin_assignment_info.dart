@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_patientA.dart';
 
 class TurnedInAssignmentInfo extends StatelessWidget {
@@ -74,7 +75,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINAssignmentPatientA()),
+                                      const TurendInAssignment()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -98,7 +99,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINAssignmentPatientA()),
+                                      const TurendInAssignment()),
                             );
                           },
                           style: ElevatedButton.styleFrom(

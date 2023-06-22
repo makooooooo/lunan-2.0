@@ -42,6 +42,7 @@ class CreateCaseNotes extends StatelessWidget {
                             ),
                           ),
                         ))),
+                        
                 Expanded(
                     child: Container(
                   margin: const EdgeInsets.fromLTRB(10, 25, 10, 20),
@@ -70,8 +71,29 @@ class CreateCaseNotes extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xffF5E9CF),
                         borderRadius: BorderRadius.circular(15),
+                        
                       ),
+                      child: Container(
+                          margin: EdgeInsets.only(left: 15),
+                          decoration: BoxDecoration(
+                           color: Color(0xffF5E9CF), // Set the desired background color
+                            borderRadius: BorderRadius.circular(
+                                8), // Set the desired border radius
+                          ),
+                          child: const TextField(
+                            decoration: InputDecoration(
+                                hintText: 'Enter text',
+                                border: InputBorder
+                                    .none, // Remove the default border
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 14.0)),
+                            style: TextStyle(fontSize: 10),
+                          ),
+                      )
+                         
                     )),
+                    
+                   
                     Row(children: [
                       Container(
                       width: 100,

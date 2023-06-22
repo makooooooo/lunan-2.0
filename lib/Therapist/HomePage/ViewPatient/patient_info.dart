@@ -5,7 +5,9 @@ import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/view_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dart';
 
 class PatientInfo extends StatefulWidget {
   const PatientInfo({Key? key}) : super(key: key);
@@ -235,7 +237,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PatientWeeklyForms()),
+                              builder: (context) => const TurnedINWeeklyFroms()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -265,7 +267,7 @@ class _PatientInfoState extends State<PatientInfo> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const PatientWellnessForms()),
+                                  const TurnedINWellnessFroms()),
                         );
                       },
                       style: ElevatedButton.styleFrom(

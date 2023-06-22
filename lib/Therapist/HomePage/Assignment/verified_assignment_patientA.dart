@@ -94,7 +94,7 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>TurnedInAssignmentInfo(),
+                            builder: (context) =>VerifiedAssignmentInfo(),
                           ),
                         );
                       },
