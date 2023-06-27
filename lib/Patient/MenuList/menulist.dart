@@ -6,6 +6,8 @@ import 'package:lunan/Patient/ProfileSetting/profile.dart';
 import 'package:lunan/Patient/SignIn/log_in.dart';
 
 class MenuList extends StatelessWidget {
+  const MenuList({super.key});
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;

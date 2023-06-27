@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/chat.dart';
+import 'package:lunan/Therapist/Scheduling/schedule.dart';
 
 class DashboardT extends StatelessWidget {
   const DashboardT({Key? key});
@@ -29,10 +30,12 @@ class DashboardT extends StatelessWidget {
             return Text('Therapist not found');
           }
 
-          final firstName = documents[0].get('firstName') as String? ?? 'Unknown';
+          final firstName =
+              documents[0].get('firstName') as String? ?? 'Unknown';
 
           return Scaffold(
-            backgroundColor: const Color(0xffF5E9CF), // Set the background color
+            backgroundColor:
+                const Color(0xffF5E9CF), // Set the background color
             appBar: AppBar(
               backgroundColor: const Color(0xff7DB9B6),
               actions: [
@@ -99,7 +102,8 @@ class DashboardT extends StatelessWidget {
                             child: Column(
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
                                   child: const Text(
                                     'View\nPatients',
                                     textAlign: TextAlign.center,
@@ -115,7 +119,13 @@ class DashboardT extends StatelessWidget {
                           width: 150,
                           height: 150,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Schedule()),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xff7DB9B6),
                               shape: RoundedRectangleBorder(
@@ -127,7 +137,8 @@ class DashboardT extends StatelessWidget {
                             child: Column(
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
                                   child: const Text('Schedule'),
                                 ),
                                 Image.asset('assets/iconCalendar.png'),
