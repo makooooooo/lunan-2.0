@@ -85,10 +85,9 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.all(30),
+                margin: const EdgeInsets.all(5),
               ),
-              const Image(image: AssetImage('assets/lunan.png')),
-              const SizedBox(height: 40),
+              const Image(image: AssetImage('assets/logo.png')),
               const Text(
                 'Welcome!',
                 style: TextStyle(fontSize: 30, color: Color(0xff4D455D)),
