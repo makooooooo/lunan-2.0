@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
+import 'package:file_picker/file_picker.dart';
+
+import '../../../Patient/HomePage/Assignment/patient_turn_in.dart';
 
 class CreateCaseNotes extends StatelessWidget {
   const CreateCaseNotes({super.key});
@@ -14,7 +17,7 @@ class CreateCaseNotes extends StatelessWidget {
         backgroundColor: const Color(0xff7DB9B6),
       ),
       drawer: Drawer(
-        child: MenuList(),
+        child: MenuListT(),
       ),
       body: Center(
           child: SingleChildScrollView(
@@ -42,7 +45,6 @@ class CreateCaseNotes extends StatelessWidget {
                             ),
                           ),
                         ))),
-                        
                 Expanded(
                     child: Container(
                   margin: const EdgeInsets.fromLTRB(10, 25, 10, 20),
@@ -65,84 +67,110 @@ class CreateCaseNotes extends StatelessWidget {
                                 ),
                               ),
                             ))),
+                    Container(
+                        margin: const EdgeInsets.fromLTRB(15, 5, 0, 10),
+                        child: Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                attachFile();
+                              },
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                side: MaterialStateProperty.all<BorderSide>(
+                                  const BorderSide(
+                                      color: Color(0xffF5E9CF), width: 2.0),
+                                ),
+                              ),
+                              child: const Text('Attach File'),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: Image.asset('assets/iconPaperClip.png'),
+                            )
+                          ],
+                        )),
                     Expanded(
                         child: Container(
-                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      decoration: BoxDecoration(
-                        color: Color(0xffF5E9CF),
-                        borderRadius: BorderRadius.circular(15),
-                        
-                      ),
-                      child: Container(
-                          margin: EdgeInsets.only(left: 15),
-                          decoration: BoxDecoration(
-                           color: Color(0xffF5E9CF), // Set the desired background color
-                            borderRadius: BorderRadius.circular(
-                                8), // Set the desired border radius
-                          ),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Enter text',
-                                border: InputBorder
-                                    .none, // Remove the default border
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 14.0)),
-                            style: TextStyle(fontSize: 10),
-                          ),
-                      )
-                         
-                    )),
-                    
-                   
-                    Row(children: [
-                      Container(
-                      width: 100,
-                      margin: const EdgeInsets.fromLTRB(120, 10, 10, 10),
-                      height: 30,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const PatientInfo()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 211, 34, 87),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Set the corner radius here
+                            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            decoration: BoxDecoration(
+                              color: Color(0xffF5E9CF),
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ),
-                          child: const Text(
-                            'Cancel',
-                          )),
-                    ),
-                    Container(
-                      width: 100,
-                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      height: 30,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const PatientCaseNotes()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                           backgroundColor: Color.fromARGB(255, 19, 195, 122),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  15), // Set the corner radius here
-                            ),
-                          ),
-                          child: const Text(
-                            'Save',
-                          )),
-                    ),
-                    ],)
-                    
+                            child: Container(
+                              margin: EdgeInsets.only(left: 15),
+                              decoration: BoxDecoration(
+                                color: Color(
+                                    0xffF5E9CF), // Set the desired background color
+                                borderRadius: BorderRadius.circular(
+                                    8), // Set the desired border radius
+                              ),
+                              child: const TextField(
+                                decoration: InputDecoration(
+                                    hintText: 'Enter text',
+                                    border: InputBorder
+                                        .none, // Remove the default border
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 14.0)),
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ))),
+                    Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          margin: const EdgeInsets.fromLTRB(120, 10, 10, 10),
+                          height: 30,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PatientInfo()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 211, 34, 87),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      15), // Set the corner radius here
+                                ),
+                              ),
+                              child: const Text(
+                                'Cancel',
+                              )),
+                        ),
+                        Container(
+                          width: 100,
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          height: 30,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PatientCaseNotes()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 19, 195, 122),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      15), // Set the corner radius here
+                                ),
+                              ),
+                              child: const Text(
+                                'Save',
+                              )),
+                        ),
+                      ],
+                    )
                   ]),
                 )),
               ],
