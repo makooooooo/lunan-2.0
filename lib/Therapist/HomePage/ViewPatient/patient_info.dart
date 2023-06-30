@@ -3,10 +3,8 @@ import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/IntakeForms/intake_form.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/view_casenotes.dart';
-import 'package:lunan/Therapist/HomePage/WeeklyForms/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
-import 'package:lunan/Therapist/HomePage/WellnessForm/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/WellnessGuide/wellness_guide.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dart';
 
 class PatientInfo extends StatefulWidget {
@@ -27,7 +25,7 @@ class _PatientInfoState extends State<PatientInfo> {
       child: Dialog(
           child: SingleChildScrollView(
             child: Container(
-        height: 600,
+        height: 650,
         decoration: BoxDecoration(
           color: const Color(0xff7DB9B6),
           borderRadius: BorderRadius.circular(20),
@@ -279,6 +277,35 @@ class _PatientInfoState extends State<PatientInfo> {
                       ),
                       child: const Text(
                         'Patient Wellness Form',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xffF5E9CF),
+                        ),
+                      )),
+                ),
+                 Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  height: 40,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const WellnessGuide()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20), // Set the corner radius here
+                        ),
+                      ),
+                      child: const Text(
+                        'Patient Wellness Guide',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 12,
