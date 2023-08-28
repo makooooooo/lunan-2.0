@@ -16,9 +16,7 @@ class Completed extends StatelessWidget {
       
       ),
       
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+ 
       
       body: Center(
         child: Column(

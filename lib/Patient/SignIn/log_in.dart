@@ -11,7 +11,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
+  
+      final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
     Future<void> loginUser(BuildContext context) async {
@@ -76,8 +77,15 @@ class LoginPage extends StatelessWidget {
         );
       }
     }
-
-    return Scaffold(
+  
+    return WillPopScope (
+      onWillPop: () async {
+      return false;
+    },
+    
+    
+    
+    child: Scaffold (
       backgroundColor: const Color(0xffF5E9CF),
       body: SingleChildScrollView(
         child: Center(
@@ -152,6 +160,11 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+    ),
+    
     );
+
+
+  
   }
 }

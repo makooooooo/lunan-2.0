@@ -89,9 +89,7 @@ class _WellnessGuideState extends State<WellnessGuide> {
       appBar: AppBar(
         backgroundColor: const Color(0xff7DB9B6),
       ),
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+
       body: SingleChildScrollView(
         child: Center(
           child: Column(

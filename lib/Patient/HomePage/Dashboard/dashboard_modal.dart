@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:intl/intl.dart';
+import 'package:lunan/Patient/HomePage/landing_page.dart';
 
 class DashboardModal extends StatelessWidget {
   const DashboardModal();
@@ -33,7 +34,7 @@ final formData = {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Dashboard(), // Navigate to Dashboard
+                  builder: (context) => LandingPage(), // Navigate to Dashboard
                 ),
               );
             },

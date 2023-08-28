@@ -16,9 +16,7 @@ class WeeklyFormChooser extends StatelessWidget {
         backgroundColor: const Color(0xff7DB9B6),
       ),
       // Add the drawer for the menu
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+    
       body: SingleChildScrollView(
         child: Center(
          child: Row(

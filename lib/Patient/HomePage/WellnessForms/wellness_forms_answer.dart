@@ -89,9 +89,7 @@ class WellnessFormsAnswer extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xff7DB9B6),
       ),
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+   
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('MoodTracker')
