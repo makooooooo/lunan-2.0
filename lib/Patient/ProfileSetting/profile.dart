@@ -1,181 +1,178 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
+import 'package:lunan/Patient/HomePage/landing_page.dart';
+import 'package:lunan/Patient/ProfileSetting/edit_profile.dart';
+import 'package:lunan/Patient/SignIn/log_in.dart';
 
 class ProfileSetting extends StatelessWidget {
   const ProfileSetting({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF), // Set the background color
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xffF5E9CF),
-        iconTheme: const IconThemeData(color: Color(0xff4D455D)),
-      ),
-      body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: const Text(
-                  'Change Name',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 18,
-                    color: Color(0xff4D455D),
+    return WillPopScope(
+        onWillPop: () async {
+          // Handle back button press
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LandingPage()),
+          );
+          return false; // Return false to prevent default back behavior
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xffF5E9CF), // Set the background color
+          appBar: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: const Color(0xffF5E9CF),
+            iconTheme: const IconThemeData(color: Color(0xff4D455D)),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back), // Back button icon
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
+                );
+              },
+            ),
+          ),
+          body: SingleChildScrollView(
+              child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 70),
+                  child: const Text(
+                    "I'm \n John Doe",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      fontSize: 40,
+                      color: Color(0xff4D455D),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: 50,
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                child: TextField(
-                  keyboardType: TextInputType
-                      .text, // Set input type to email address
-                  decoration: const InputDecoration(
-                      hintText: 'John Doe.',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff7DB9B6))),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff7DB9B6)),
-                      )),
-
-                  onChanged: (value) {
-                    // Handle changes in the input
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: const Text(
-                  'Change Number',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 18,
-                    color: Color(0xff4D455D),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: const Text(
+                    "Mood : 😥",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 18,
+                      color: Color(0xff4D455D),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: 50,
-                margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TextField(
-                  keyboardType: TextInputType
-                      .number, // Set input type to email address
-                  decoration: const InputDecoration(
-                      hintText: '123456789.',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff7DB9B6))),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff7DB9B6)),
-                      )),
-
-                  onChanged: (value) {
-                    // Handle changes in the input
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: const Text(
-                  'Change Email',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 18,
-                    color: Color(0xff4D455D),
-                  ),
-                ),
-              ),
-              Container(
-                height: 50,
-                margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TextField(
-                  keyboardType: TextInputType
-                      .emailAddress, // Set input type to email address
-                  decoration: const InputDecoration(
-                      hintText: 'JohnDoe@email.com.',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff7DB9B6))),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff7DB9B6)),
-                      )),
-
-                  onChanged: (value) {
-                    // Handle changes in the input
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: const Text(
-                  'Change Contact Person',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    fontSize: 18,
-                    color: Color(0xff4D455D),
-                  ),
-                ),
-              ),
-              Container(
-                height: 50,
-                margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TextField(
-                  keyboardType: TextInputType
-                      .emailAddress, // Set input type to email address
-                  decoration: const InputDecoration(
-                      hintText: 'YesPapa@email.com.',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff7DB9B6))),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff7DB9B6)),
-                      )),
-
-                  onChanged: (value) {
-                    // Handle changes in the input
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-                height: 40,
-                width: 100,
-                child: ElevatedButton(
+                Container(
+                  height: 40,
+                  margin: const EdgeInsets.fromLTRB(
+                      30, 40, 30, 0), // Add horizontal margin
+                  child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Dashboard()),
+                            builder: (context) => const EditProfile()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7DB9B6),
+                      backgroundColor: Colors.white, // Background color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                            15), // Set the corner radius here
+                            20.0), // Adjust the value as needed
+                        side: const BorderSide(
+                          color: Color(0xff4D455D), // Outline color
+                          width: 2.0, // Increase the border width
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      'Save',
-                    )),
-              ),
-              
-            ],
-          ),
-        ),
-    
-    );
+                    child: const Row(
+                      children: [
+                        Icon(
+                          Icons.edit, // Replace with the desired icon
+                          color: Color(0xff4D455D), // Icon color
+                        ),
+                        SizedBox(width: 5), // Spacer between icon and text
+                        Text(
+                          'Edit Profile',
+                          style:
+                              TextStyle(color: Color(0xff4D455D)), // Text color
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  margin: const EdgeInsets.fromLTRB(
+                      30, 10, 30, 0), // Add horizontal margin
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showLogoutModal(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, // Background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            20.0), // Adjust the value as needed
+                        side: const BorderSide(
+                          color: Color(0xff4D455D), // Outline color
+                          width: 2.0, // Increase the border width
+                        ),
+                      ),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(
+                          Icons.logout, // Replace with the desired icon
+                          color: Color(0xff4D455D), // Icon color
+                        ),
+                        SizedBox(width: 5), // Spacer between icon and text
+                        Text(
+                          'Logout',
+                          style:
+                              TextStyle(color: Color(0xff4D455D)), // Text color
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )),
+        ));
   }
 }
+
+
+void _showLogoutModal(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Logout'),
+        content: Text('Are you sure you want to log out?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+            
+               Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+            },
+            child: Text('Logout'),
+          ),
+        ],
+      );
+    },
+  );
+}
+

@@ -17,9 +17,7 @@ class Assignment extends StatelessWidget {
       
       ),
       
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+
       
       body: Center(
         child: Column(

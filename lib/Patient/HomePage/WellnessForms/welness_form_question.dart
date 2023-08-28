@@ -91,9 +91,7 @@ Future<void> _submitForm() async {
         appBar: AppBar(
           backgroundColor: const Color(0xff7DB9B6),
         ),
-        endDrawer: Drawer(
-          child: MenuList(),
-        ),
+       
         body: SingleChildScrollView(
           child: Center(
             child: Column(
