@@ -16,7 +16,7 @@ class _LandingPageState extends State<LandingPage> {
   
   int currentIndex = 0;
   
-  final screens = [
+  final List<Widget> _pages = <Widget>[
     Dashboard(),
     ProfileSetting(),
     Chat()
@@ -25,10 +25,10 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
   
-      body: IndexedStack(
-        index: currentIndex,
-        children: screens,
+      body: Center (
+        child: _pages.elementAt(currentIndex)
       ),
+  
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xff7DB9B6),
         unselectedItemColor: Colors.white70,
@@ -37,7 +37,7 @@ class _LandingPageState extends State<LandingPage> {
         
         
         currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
+       
         
         
         items: const [
@@ -56,8 +56,13 @@ class _LandingPageState extends State<LandingPage> {
             label: 'Chat',
            
           )
+          
         ],
+         onTap: (int index) => setState(() => currentIndex = index),
+        
       ),
+      
+      
   
   ); 
 }
