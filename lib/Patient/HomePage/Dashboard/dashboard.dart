@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/Assignment/assignment.dart';
+import 'package:lunan/Patient/HomePage/Assignment/chooser.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
 
 import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form_chooser.dart';
@@ -97,7 +98,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Assignment()),
+                                builder: (context) => const AssignmentChooser()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

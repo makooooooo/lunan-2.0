@@ -1,21 +1,60 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Assignment/assignment.dart';
+import 'package:lunan/Patient/HomePage/Assignment/chooser.dart';
 import 'package:lunan/Patient/HomePage/Assignment/completed.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:file_picker/file_picker.dart';
 
-class PatientTurnIn extends StatelessWidget {
+class PatientTurnIn extends StatefulWidget {
   const PatientTurnIn({super.key});
+
+  @override
+  State<PatientTurnIn> createState() => _PatientTurnInState();
+}
+
+class _PatientTurnInState extends State<PatientTurnIn> {
+  String? selectedFileName;
+
+  Future<void> attachFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      // Use the file as needed (e.g., upload, process, etc.)
+
+      String fileName = file.uri.pathSegments.last;
+
+      setState(() {
+        selectedFileName = fileName;
+      });
+
+      print('Selected file: ${file.path}');
+    } else {
+      // User canceled the file picking
+      print('File picking canceled');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Assignment()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
-
- 
 
       body: Center(
         child: Column(
@@ -77,10 +116,25 @@ class PatientTurnIn extends StatelessWidget {
                               ),
                               child: const Text('Attach File'),
                             ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Image.asset('assets/iconPaperClip.png'),
-                            )
+                           
+                            selectedFileName != null
+                                ? Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: Text(selectedFileName!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      
+                                    ),
+                                  )
+                                : Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: const Text('No file selected',
+                                      style: TextStyle(
+                                       color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                           ],
                         )),
                     Container(
@@ -90,7 +144,8 @@ class PatientTurnIn extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Completed()),
+                                  builder: (context) =>
+                                      const AssignmentChooser()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -112,18 +167,5 @@ class PatientTurnIn extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Future<void> attachFile() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-  if (result != null) {
-    File file = File(result.files.single.path!);
-    // Use the file as needed (e.g., upload, process, etc.)
-    print('Selected file: ${file.path}');
-  } else {
-    // User canceled the file picking
-    print('File picking canceled');
   }
 }

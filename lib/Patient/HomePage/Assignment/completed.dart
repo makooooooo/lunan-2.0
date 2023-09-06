@@ -6,18 +6,12 @@ class Completed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(  
-    backgroundColor: const Color(0xffF5E9CF), // Set the background color
+    return Scaffold(
+      backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-    
         backgroundColor: const Color(0xff7DB9B6),
-      
-        
-      
       ),
-      
- 
-      
+
       body: Center(
         child: Column(
           children: <Widget>[
@@ -41,7 +35,7 @@ class Completed extends StatelessWidget {
             InkWell(
               // onTap: () {
               //   Navigator.push(
-              //     context, 
+              //     context,
               //     MaterialPageRoute(
               //        builder: (context) => const PatientTurnIn()
               //       ),
@@ -54,25 +48,53 @@ class Completed extends StatelessWidget {
                   color: const Color(0xff4D455D),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16),
-                      child: Text(
-                        'Activity # 1\nJournal and Drawing Entry | Due: March 8, 2023',
-                        style: TextStyle(
-                          color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Text(
+                          'Activity # 1\nJournal and Drawing Entry\nDue: March 8, 2023',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    )),
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => WeeklyFormEdit(
+                            //       documentId: documentId,
+                            //       formData: formData,
+                            //     ),
+                            //   ),
+                            // );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                right: 16.0), // Adjust the right margin here
+                            child: const Icon(
+                              Icons.undo,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          
           ],
         ),
-      
       ),
-    
     );
   }
 }
