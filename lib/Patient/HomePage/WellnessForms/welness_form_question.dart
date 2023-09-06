@@ -14,7 +14,7 @@ class WellnessFormQuestion extends StatefulWidget {
 }
 
 class _WellnessFormQuestion extends State<WellnessFormQuestion> {
-final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   double questionOneValue = 0;
@@ -22,9 +22,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
   double questionThreeValue = 0;
   double questionFourValue = 0;
 
-
-
-Future<void> _submitForm() async {
+  Future<void> _submitForm() async {
     final User? user = _auth.currentUser;
     final uid = user?.uid;
 
@@ -46,21 +44,21 @@ Future<void> _submitForm() async {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Success'),
-          content: const Text('Form data submitted successfully!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                Navigator.of(context).pop(); // Pop the current route
-              },
-            child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+          return AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Form data submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).pop(); // Pop the current route
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     } catch (e) {
       showDialog(
         context: context,
@@ -83,7 +81,6 @@ Future<void> _submitForm() async {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +88,6 @@ Future<void> _submitForm() async {
         appBar: AppBar(
           backgroundColor: const Color(0xff7DB9B6),
         ),
-       
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -128,70 +124,45 @@ Future<void> _submitForm() async {
                         if (questionOneValue == 0)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a very happy person.')
-                            ),
+                            child: const Text(('- Not a very happy person.')),
                           )
-
-
-                          else if (questionOneValue == 1)
-
-
-
+                        else if (questionOneValue == 1)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a happy person.')
-                            ),
+                            child: const Text(('- Not a happy person.')),
                           )
-
-                          else if (questionOneValue == 2)
+                        else if (questionOneValue == 2)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Somewhat happy person.')
-                            ),
+                            child: const Text(('- Somewhat happy person.')),
                           )
-                          else if (questionOneValue == 3)
-
+                        else if (questionOneValue == 3)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A moderately happy person.')
-                            ),
+                            child: const Text(('- A moderately happy person.')),
                           )
-
-                          else if (questionOneValue == 4)
-
+                        else if (questionOneValue == 4)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A happy person.')
-                            ),
+                            child: const Text(('- A happy person.')),
                           )
                         else if (questionOneValue == 5)
-
-
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A very happy person.')
-                            ),
+                            child: const Text(('- A very happy person.')),
                           )
-                          else if (questionOneValue == 6)
+                        else if (questionOneValue == 6)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- A very happy and joyful person.')
-                            ),
+                                ('- A very happy and joyful person.')),
                           ),
                         Slider(
                             value: questionOneValue,
                             min: 0,
-
                             max: 6,
                             divisions: 6,
-           label: questionOneValue.toStringAsFixed(0),
+                            label: questionOneValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
@@ -214,64 +185,47 @@ Future<void> _submitForm() async {
                               color: Color(0xff4D455D),
                               fontWeight: FontWeight.bold),
                         ),
-                       if (questionTwoValue == 0)
+                        if (questionTwoValue == 0)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a very happy person.')
-                            ),
+                            child: const Text(('- Not a very happy person.')),
                           )
-
-                          else if (questionTwoValue == 1)
+                        else if (questionTwoValue == 1)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a happy person.')
-                            ),
+                            child: const Text(('- Not a happy person.')),
                           )
-                          else if (questionTwoValue == 2)
+                        else if (questionTwoValue == 2)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Somewhat happy person.')
-                            ),
+                            child: const Text(('- Somewhat happy person.')),
                           )
-                          else if (questionTwoValue == 3)
+                        else if (questionTwoValue == 3)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A mederately happy person.')
-                            ),
+                            child: const Text(('- A mederately happy person.')),
                           )
-                          else if (questionTwoValue == 4)
+                        else if (questionTwoValue == 4)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A happy person.')
-                            ),
+                            child: const Text(('- A happy person.')),
                           )
                         else if (questionTwoValue == 5)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A very happy person.')
-                            ),
+                            child: const Text(('- A very happy person.')),
                           )
-                          else if (questionTwoValue == 6)
+                        else if (questionTwoValue == 6)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- A very happy and joyful person.')
-
-                            ),
+                                ('- A very happy and joyful person.')),
                           ),
                         Slider(
                             value: questionTwoValue,
                             min: 0,
-
                             max: 6,
                             divisions: 6,
-
                             label: questionTwoValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
@@ -295,64 +249,47 @@ Future<void> _submitForm() async {
                               color: Color(0xff4D455D),
                               fontWeight: FontWeight.bold),
                         ),
-                         if (questionThreeValue == 0)
+                        if (questionThreeValue == 0)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a very happy person.')
-                            ),
+                            child: const Text(('- Not a very happy person.')),
                           )
-                          else if (questionThreeValue == 1)
+                        else if (questionThreeValue == 1)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a happy person.')
-                            ),
+                            child: const Text(('- Not a happy person.')),
                           )
-                          else if (questionThreeValue == 2)
+                        else if (questionThreeValue == 2)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-
-                              ('- Somewhat happy person.')
-                            ),
+                            child: const Text(('- Somewhat happy person.')),
                           )
-                          else if (questionThreeValue == 3)
+                        else if (questionThreeValue == 3)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A moderately happy person.')
-                            ),
+                            child: const Text(('- A moderately happy person.')),
                           )
-                          else if (questionThreeValue == 4)
+                        else if (questionThreeValue == 4)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A happy person.')
-                            ),
+                            child: const Text(('- A happy person.')),
                           )
                         else if (questionThreeValue == 5)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A very happy person.')
-                            ),
+                            child: const Text(('- A very happy person.')),
                           )
-                          else if (questionThreeValue == 6)
+                        else if (questionThreeValue == 6)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A very happy joyful person.')
-
-                            ),
+                            child:
+                                const Text(('- A very happy joyful person.')),
                           ),
                         Slider(
                             value: questionThreeValue,
                             min: 0,
-
                             max: 6,
                             divisions: 6,
-
                             label: questionThreeValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
@@ -376,68 +313,48 @@ Future<void> _submitForm() async {
                               color: Color(0xff4D455D),
                               fontWeight: FontWeight.bold),
                         ),
-                        
-                      
-                       if (questionFourValue == 0)
+                        if (questionFourValue == 0)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a very happy person.')
-                            ),
+                            child: const Text(('- Not a very happy person.')),
                           )
-
-                          else if (questionFourValue == 1)
-
+                        else if (questionFourValue == 1)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Not a happy person.')
-
-                            ),
+                            child: const Text(('- Not a happy person.')),
                           )
-                          else if (questionFourValue == 2)
+                        else if (questionFourValue == 2)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- Somewhat happy person.')
-                            ),
+                            child: const Text(('- Somewhat happy person.')),
                           )
-                          else if (questionFourValue == 3)
+                        else if (questionFourValue == 3)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A moderately happy person.')
-                            ),
+                            child: const Text(('- A moderately happy person.')),
                           )
-                          else if (questionFourValue == 4)
+                        else if (questionFourValue == 4)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A happy person.')
-                            ),
+                            child: const Text(('- A happy person.')),
                           )
                         else if (questionFourValue == 5)
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: const Text(
-                              ('- A very happy person.')
-                            ),
+                            child: const Text(('- A very happy person.')),
                           )
-                          else if (questionFourValue == 6)
+                        else if (questionFourValue == 6)
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: const Text(
-                              ('- A very happy and joyful person.')
-
-                            ),
+                                ('- A very happy and joyful person.')),
                           ),
                         Slider(
                             value: questionFourValue,
                             min: 0,
-
                             max: 6,
                             divisions: 6,
-            label: questionFourValue.toStringAsFixed(0),
+                            label: questionFourValue.toStringAsFixed(0),
                             activeColor: const Color(0xff7DB9B6),
                             thumbColor: const Color(0xff4D455D),
                             onChanged: (value) {
@@ -447,24 +364,22 @@ Future<void> _submitForm() async {
                             })
                       ]),
                 ),
-                
+
                 Container(
-                width: 100,
-                margin: const EdgeInsets.all(20),
-                height: 30,
-                child: ElevatedButton(
-                  onPressed: _submitForm, // Call the submit form function
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 19, 195, 122),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                  width: 100,
+                  margin: const EdgeInsets.all(20),
+                  height: 30,
+                  child: ElevatedButton(
+                    onPressed: _submitForm, // Call the submit form function
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 19, 195, 122),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
+                    child: const Text('Submit'),
                   ),
-                  child: const Text('Submit'),
                 ),
-              ),
-                 
-                
               ],
             ),
           ),

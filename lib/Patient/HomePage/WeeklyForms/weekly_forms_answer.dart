@@ -28,7 +28,6 @@ class WeeklyFormsAnswer extends StatelessWidget {
     } else if (wellnessQ1Value == '5.0') {
       updatedWellnessQ1Value = 'All the time';
     }
-    
 
     String updatedWellnessQ2Value = wellnessQ2Value;
     if (wellnessQ2Value == '1.0') {
@@ -67,7 +66,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
       updatedWellnessQ4Value = 'Most of the Time';
     } else if (wellnessQ4Value == '5.0') {
       updatedWellnessQ4Value = 'All the time';
-    } 
+    }
 
     String updatedWellnessQ5Value = wellnessQ5Value;
     if (wellnessQ5Value == '1.0') {
@@ -80,231 +79,173 @@ class WeeklyFormsAnswer extends StatelessWidget {
       updatedWellnessQ5Value = 'Most of the Time';
     } else if (wellnessQ5Value == '5.0') {
       updatedWellnessQ5Value = 'All the time';
-    } 
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
         backgroundColor: const Color(0xff7DB9B6),
       ),
-      
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 630,
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: const Color(0xff7DB9B6),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      child: const Text(
-                        'Weekly Form # 1',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              margin: EdgeInsets.all(15),
+              elevation: 4, // The depth of the card shadow
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(15), // Change the border radius value
+                side: const BorderSide(
+                  color: Color(0xff7DB9B6), // Border color
+                  width: 2, // Border width
                 ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(10, 25, 10, 20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff4D455D),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                'Date Submitted: $dateSubmitted',
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xffF5E9CF),
-                                ),
-                              ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(20), // Padding inside the card
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Weekly Form # 1',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Montserrat   ',
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff4D455D),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            decoration: const BoxDecoration(
-                              color: Color(0xffF5E9CF),
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          const TextSpan(
-                                            text:
-                                                'I have felt cheerful and in good spirits:\n',
-                                          ),
-                                          TextSpan(
-                                            text: updatedWellnessQ1Value,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 15),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          const TextSpan(
-                                            text:
-                                                'I have felt calm and relaxed:\n',
-                                          ),
-                                          TextSpan(
-                                            text: updatedWellnessQ2Value,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 15),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          const TextSpan(
-                                            text:
-                                                'I have felt active and vigorous: \n',
-                                          ),
-                                          TextSpan(
-                                            text: updatedWellnessQ3Value,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 15),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          const TextSpan(
-                                            text:
-                                                'I woke up feeling fresh and rested.: \n',
-                                          ),
-                                          TextSpan(
-                                            text: updatedWellnessQ4Value,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 15),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        children: [
-                                          const TextSpan(
-                                            text:
-                                                'My daily life has been filled with things that interest me.: \n',
-                                          ),
-                                          TextSpan(
-                                            text: updatedWellnessQ5Value,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          const SizedBox(height: 5),
+                          Text(
+                            dateSubmitted,
+                            style: const TextStyle(
+                              fontFamily: 'Montserrat   ',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff4D455D),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context); // Navigate back to previous screen
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0xff4D455D),
-                      onPrimary: const Color(0xffF5E9CF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 20,
+                        ],
                       ),
                     ),
-                    child: const Text(
-                      'Back',
+
+                    const SizedBox(height: 15),
+                    const Text(
+                      'I have felt cheerful and in good spirits. : ', // Replace with your description
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Color(0xff4D455D),
                       ),
                     ),
-                  ),
+
+                    const SizedBox(height: 10),
+                    Text(
+                      updatedWellnessQ1Value, // Replace with your description
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    //2
+                    const SizedBox(height: 10),
+                    const Text(
+                      'I have felt calm and relaxed. : ', // Replace with your description
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Color(0xff4D455D),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    Text(
+                      updatedWellnessQ2Value, // Replace with your description
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    //3
+                    const SizedBox(height: 10),
+                    const Text(
+                      'I have felt active and vigorous. :', // Replace with your description
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Color(0xff4D455D),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    Text(
+                      updatedWellnessQ3Value, // Replace with your description
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    //4
+                    const SizedBox(height: 10),
+                    const Text(
+                      'I woke up feeling fresh and rested. :', // Replace with your description
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Color(0xff4D455D),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    Text(
+                      updatedWellnessQ4Value, // Replace with your description
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Montserrat',
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    //5
+                    const SizedBox(height: 10),
+                    const Text(
+                      'My daily life has been filled with things that interest me. :', // Replace with your description
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        color: Color(0xff4D455D),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+                    Text(
+                      updatedWellnessQ5Value, // Replace with your description
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+
+                    // You can add more widgets here
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
