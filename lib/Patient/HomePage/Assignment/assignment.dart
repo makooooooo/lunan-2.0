@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Assignment/chooser.dart';
 import 'package:lunan/Patient/HomePage/Assignment/patient_turn_in.dart';
+import 'package:lunan/Patient/HomePage/landing_page.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class Assignment extends StatelessWidget {
@@ -10,9 +12,19 @@ class Assignment extends StatelessWidget {
     return Scaffold(  
     backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-    
-        backgroundColor: const Color(0xff7DB9B6),
-      
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AssignmentChooser()),
+            );
+          },
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
         
       
       ),

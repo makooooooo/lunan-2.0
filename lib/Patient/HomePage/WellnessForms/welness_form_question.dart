@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
+import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form_chooser.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -86,7 +88,18 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
     return Scaffold(
         backgroundColor: const Color(0xffF5E9CF),
         appBar: AppBar(
-          backgroundColor: const Color(0xff7DB9B6),
+          elevation: 0,
+          backgroundColor: const Color(0xffF5E9CF),
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WellnessFormChooser()),
+            );
+          },
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
         ),
         body: SingleChildScrollView(
           child: Center(

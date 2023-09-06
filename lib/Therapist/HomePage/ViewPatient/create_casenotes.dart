@@ -73,7 +73,7 @@ class CreateCaseNotes extends StatelessWidget {
                           children: [
                             TextButton(
                               onPressed: () {
-                                attachFile();
+                                // attachFile();
                               },
                               style: ButtonStyle(
                                 foregroundColor:

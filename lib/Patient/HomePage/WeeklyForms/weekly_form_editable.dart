@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
 
 class WeeklyFormEdit extends StatefulWidget {
   final Map<String, dynamic> formData;
   final String documentId;
-  const WeeklyFormEdit({required this.formData, required this.documentId, Key? key}) : super(key: key);
+  const WeeklyFormEdit(
+      {required this.formData, required this.documentId, Key? key})
+      : super(key: key);
 
   @override
   State<WeeklyFormEdit> createState() => _WeeklyFormEditState();
@@ -15,8 +18,6 @@ class WeeklyFormEdit extends StatefulWidget {
 class _WeeklyFormEditState extends State<WeeklyFormEdit> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
-
 
   double upQuestionOneValue = 0;
   double upQuestionTwoValue = 0;
@@ -24,8 +25,7 @@ class _WeeklyFormEditState extends State<WeeklyFormEdit> {
   double upQuestionFourValue = 0;
   double upQuestionFiveValue = 0;
   String getDocumentId = '';
-  
-  
+
   late String dateSubmitted;
   late double wellnessQ1Value;
   late double wellnessQ2Value;
@@ -44,19 +44,16 @@ class _WeeklyFormEditState extends State<WeeklyFormEdit> {
     wellnessQ4Value = double.parse(widget.formData['WeeklyQ4'].toString());
     wellnessQ5Value = double.parse(widget.formData['WeeklyQ5'].toString());
     documentId = widget.documentId;
-    
-    
+
     upQuestionOneValue = wellnessQ1Value;
     upQuestionTwoValue = wellnessQ2Value;
     upQuestionThreeValue = wellnessQ3Value;
     upQuestionFourValue = wellnessQ4Value;
     upQuestionFiveValue = wellnessQ5Value;
     getDocumentId = documentId;
-     
-    
   }
-  
-    Future<void> _updateForm() async {
+
+  Future<void> _updateForm() async {
     final User? user = _auth.currentUser;
     final uid = user?.uid;
     final collection = FirebaseFirestore.instance.collection('WeeklyForm');
@@ -117,16 +114,24 @@ class _WeeklyFormEditState extends State<WeeklyFormEdit> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
-  
-  
-   
-  
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WeeklyForms()),
+            );
+          },
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -437,7 +442,7 @@ class _WeeklyFormEditState extends State<WeeklyFormEdit> {
                     ]),
               ),
 
-                  Container(
+              Container(
                 width: 100,
                 margin: const EdgeInsets.all(20),
                 height: 30,

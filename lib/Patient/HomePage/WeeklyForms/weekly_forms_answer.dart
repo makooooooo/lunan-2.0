@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class WeeklyFormsAnswer extends StatelessWidget {
@@ -84,7 +86,18 @@ class WeeklyFormsAnswer extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+      elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WeeklyForms()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

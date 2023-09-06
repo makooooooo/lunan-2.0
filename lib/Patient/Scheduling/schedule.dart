@@ -122,11 +122,10 @@ class _ScheduleState extends State<Schedule> {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+      elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
       ),
-      drawer: Drawer(
-        child: MenuList(),
-      ),
+      
       body: Column(
         children: [
           TableCalendar<Event>(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
+import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class WellnessFormsAnswer extends StatelessWidget {
@@ -88,7 +90,18 @@ class WellnessFormsAnswer extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+      elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WellnessForms()),
+            );
+          },
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

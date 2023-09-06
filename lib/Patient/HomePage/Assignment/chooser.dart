@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Assignment/assignment.dart';
+import 'package:lunan/Patient/HomePage/Assignment/completed.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forn_question.dart';
 import 'package:lunan/Patient/HomePage/landing_page.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
-class WeeklyFormChooser extends StatelessWidget {
-  const WeeklyFormChooser({super.key});
+class AssignmentChooser extends StatelessWidget {
+  const AssignmentChooser({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class WeeklyFormChooser extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => WeeklyFormsQuestion()),
+                          builder: (context) => Assignment()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -56,7 +58,7 @@ class WeeklyFormChooser extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
-                        'View Weekly Question Forms',
+                        'View Assignments',
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -71,7 +73,7 @@ class WeeklyFormChooser extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const WeeklyForms()),
+                          builder: (context) => const Completed()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -85,7 +87,7 @@ class WeeklyFormChooser extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
-                        'View Weekly Forms',
+                        'Completed Assignments',
                         textAlign: TextAlign.center,
                       ),
                     ),

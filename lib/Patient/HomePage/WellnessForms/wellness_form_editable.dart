@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms.dart';
+import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form.dart';
 
 class WellnessFormEditable extends StatefulWidget {
   final Map<String, dynamic> formData;
@@ -114,7 +116,18 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+      elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WellnessForms()),
+            );
+          },
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -123,7 +136,7 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: const Text(
-                  'Weekly Question Forms',
+                  'Wellness Question Forms',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
