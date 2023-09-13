@@ -10,10 +10,18 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
-      ),
-      drawer: Drawer(
-        child: MenuList(),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TurnedINWeeklyFroms()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: Center(
           child: SingleChildScrollView(

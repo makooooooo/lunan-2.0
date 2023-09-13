@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
+import 'package:lunan/Therapist/HomePage/dashboard.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 
@@ -14,11 +16,19 @@ class PatientList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
-      ),
-      drawer: Drawer(
-        child: MenuListT(),
+    appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DashboardT()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: Center(
         child: Column(

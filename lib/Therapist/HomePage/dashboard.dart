@@ -36,34 +36,13 @@ class DashboardT extends StatelessWidget {
           return Scaffold(
             backgroundColor:
                 const Color(0xffF5E9CF), // Set the background color
-            appBar: AppBar(
-              backgroundColor: const Color(0xff7DB9B6),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => chatT()),
-                    );
-                  },
-                  icon: Icon(
-                    Icons.messenger,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-
-            // Add the drawer for the menu
-            drawer: Drawer(
-              child: MenuListT(),
-            ),
+         
             body: SingleChildScrollView(
               child: Center(
                 child: Column(
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
                       child: Text(
                         'Welcome back \n $firstName!',
                         textAlign: TextAlign.center,

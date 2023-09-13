@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/HomePage/chat.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
@@ -27,26 +28,20 @@ class _IntakeFormState extends State<IntakeForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => chatT()),
-              );
-            },
-            icon: Icon(
-              Icons.messenger,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: MenuListT(),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PatientInfo()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(

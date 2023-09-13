@@ -10,11 +10,19 @@ class VerifiedAssignmentInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
-      ),
-      drawer: Drawer(
-        child: MenuList(),
+     appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VerifiedAssignment()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: Center(
           child: SingleChildScrollView(

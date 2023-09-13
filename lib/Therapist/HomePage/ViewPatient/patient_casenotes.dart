@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/create_casenotes.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/view_casenotes.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
@@ -13,18 +14,26 @@ class PatientCaseNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
-      appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
-      ),
-      drawer: Drawer(
-        child: MenuListT(),
+       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PatientInfo()),
+            );
+          },
+          color: Color(0xff4D455D),// Change this color to your desired color
+        ),
       ),
       body: Center(
           child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: const Text(
                 'Patient Case\nNotes',
                 textAlign: TextAlign.center,
@@ -38,7 +47,7 @@ class PatientCaseNotes extends StatelessWidget {
             ),
             Container(
               width: 370,
-              height: 600,
+              height: 550,
               decoration: BoxDecoration(
                 color: const Color(0xff4D455D),
                 borderRadius: BorderRadius.circular(20),
