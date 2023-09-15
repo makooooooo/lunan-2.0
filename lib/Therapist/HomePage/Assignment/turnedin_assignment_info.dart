@@ -3,7 +3,8 @@ import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 
 class TurnedInAssignmentInfo extends StatelessWidget {
-  const TurnedInAssignmentInfo({super.key});
+  final String selectedPatientUID;
+  TurnedInAssignmentInfo({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +16,8 @@ class TurnedInAssignmentInfo extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TurendInAssignment()),
-            );
-          },
+             Navigator.pop(context);
+            },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
       ),
@@ -82,7 +80,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurendInAssignment()),
+                                      TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -106,7 +104,7 @@ class TurnedInAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurendInAssignment()),
+                                      TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(

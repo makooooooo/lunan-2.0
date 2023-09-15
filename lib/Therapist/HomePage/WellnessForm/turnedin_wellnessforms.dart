@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
-import 'package:lunan/Therapist/HomePage/WellnessForm/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms_info.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/verified_wellnessforms.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
@@ -18,10 +18,7 @@ class TurnedINWellnessFroms extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
+            Navigator.pop(context);
           },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
@@ -151,7 +148,7 @@ class TurnedINWellnessFroms extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PatientWellnessForms()),
+                                          const VerifiedWellnessForms()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

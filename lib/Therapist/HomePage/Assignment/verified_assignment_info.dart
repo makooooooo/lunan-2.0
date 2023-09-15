@@ -4,7 +4,8 @@ import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_patientA.dart';
 
 class VerifiedAssignmentInfo extends StatelessWidget {
-  const VerifiedAssignmentInfo({super.key});
+    final String selectedPatientUID;
+  VerifiedAssignmentInfo({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,8 @@ class VerifiedAssignmentInfo extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => VerifiedAssignment()),
-            );
-          },
+             Navigator.pop(context);
+            },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
       ),
@@ -83,7 +81,7 @@ class VerifiedAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const VerifiedAssignment()),
+                                       VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -107,7 +105,7 @@ class VerifiedAssignmentInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const VerifiedAssignment()),
+                                       VerifiedAssignment(selectedPatientUID: selectedPatientUID)),
                             );
                           },
                           style: ElevatedButton.styleFrom(

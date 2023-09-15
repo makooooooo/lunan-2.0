@@ -8,7 +8,8 @@ import 'package:lunan/Therapist/HomePage/ViewPatient/view_casenotes.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class PatientCaseNotes extends StatelessWidget {
-  const PatientCaseNotes({Key? key}) : super(key: key);
+    final String selectedPatientUID;
+  PatientCaseNotes({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,7 @@ class PatientCaseNotes extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
+            Navigator.pop(context);
           },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
@@ -73,7 +71,7 @@ class PatientCaseNotes extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ViewCaseNotes()),
+                            builder: (context) => ViewCaseNotes(selectedPatientUID: selectedPatientUID,)),
                       );
                     },
                     child: Container(
@@ -147,7 +145,7 @@ class PatientCaseNotes extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const CreateCaseNotes()
+                                      CreateCaseNotes(selectedPatientUID: selectedPatientUID,)
                               )
                             );
                           },

@@ -5,8 +5,9 @@ import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class AddAssignment extends StatefulWidget {
-  const AddAssignment({Key? key}) : super(key: key);
-
+  final String selectedPatientUID;
+  AddAssignment({Key? key, required this.selectedPatientUID}) : super(key: key);
+  
   @override
   State<AddAssignment> createState() => _AddAssignmentState();
 }
@@ -30,12 +31,9 @@ class _AddAssignmentState extends State<AddAssignment> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TurendInAssignment()),
-            );
-          },
-          color: Color(0xff4D455D),// Change this color to your desired color
+             Navigator.pop(context);
+            },
+          color: Color(0xff4D455D),
         ),
       ),
       body: Center(
@@ -178,13 +176,13 @@ class _AddAssignmentState extends State<AddAssignment> {
                                 height: 30,
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const TurendInAssignment()),
-                                      );
-                                    },
+  Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => TurendInAssignment(selectedPatientUID: widget.selectedPatientUID),
+  ),
+);
+},
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor:
                                           Color.fromARGB(255, 19, 195, 122),

@@ -4,7 +4,8 @@ import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_info.dar
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class VerifiedAssignmentPatientA extends StatelessWidget {
-  const VerifiedAssignmentPatientA({Key? key}) : super(key: key);
+  final String selectedPatientUID;
+  VerifiedAssignmentPatientA({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const VerifiedAssignmentPatientA()),
+                                    VerifiedAssignmentPatientA(selectedPatientUID: selectedPatientUID,)),
                           );
                         },
                         child: const Text('Turned In'),
@@ -65,7 +66,7 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifiedAssignment()),
+                                           VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                         },
                         child: const Text('Verified'),
@@ -94,7 +95,7 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>VerifiedAssignmentInfo(),
+                            builder: (context) =>VerifiedAssignmentInfo(selectedPatientUID: selectedPatientUID,),
                           ),
                         );
                       },
@@ -141,7 +142,7 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifiedAssignment()),
+                                          VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
