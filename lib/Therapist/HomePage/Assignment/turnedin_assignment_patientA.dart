@@ -5,7 +5,8 @@ import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 
 class TurnedINAssignmentPatientA extends StatelessWidget {
-  const TurnedINAssignmentPatientA({Key? key}) : super(key: key);
+  final String selectedPatientUID;
+  TurnedINAssignmentPatientA({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const TurendInAssignment()),
+                                     TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
                           );
                         },
                         child: const Text('Turned In'),
@@ -62,11 +63,11 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                                                      Navigator.push(
+                                  Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifiedAssignment()),
+                                          VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                         },
                         child: const Text('Verified'),
@@ -95,7 +96,7 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>TurnedInAssignmentInfo(),
+                            builder: (context) =>TurnedInAssignmentInfo(selectedPatientUID: selectedPatientUID,),
                           ),
                         );
                       },
@@ -142,7 +143,7 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const TurendInAssignment()),
+                                          TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

@@ -8,7 +8,10 @@ import 'package:lunan/Therapist/HomePage/WellnessGuide/wellness_guide.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dart';
 
 class PatientInfo extends StatefulWidget {
-  const PatientInfo({Key? key}) : super(key: key);
+  final Map<String, dynamic>? data; // Make the data parameter optional
+  final String selectedPatientUID;
+
+  const PatientInfo({Key? key, this.data, required this.selectedPatientUID}) : super(key: key);
 
   @override
   State<PatientInfo> createState() => _PatientInfoState();
@@ -19,25 +22,29 @@ bool isChecked = false;
 class _PatientInfoState extends State<PatientInfo> {
   @override
   Widget build(BuildContext context) {
+    // Extract the patient's information from the data map
+final String firstName = (widget.data ?? {})['firstName'] ?? '';
+final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
+
+
     return Theme(
-      data:
-          Theme.of(context).copyWith(dialogBackgroundColor: Colors.transparent),
+      data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.transparent),
       child: Dialog(
-          child: SingleChildScrollView(
-            child: Container(
-        height: 650,
-        decoration: BoxDecoration(
-          color: const Color(0xff7DB9B6),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Center(
-            child: Column(
-          children: [
-            Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Container(
+        child: SingleChildScrollView(
+          child: Container(
+            height: 650,
+            decoration: BoxDecoration(
+              color: const Color(0xff7DB9B6),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Container(
                         margin: const EdgeInsets.only(top: 10),
                         child: Row(
                           children: [
@@ -55,94 +62,88 @@ class _PatientInfoState extends State<PatientInfo> {
                             IconButton(
                               icon: const Icon(Icons.close),
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pop(); // Close the dialog
                               },
                             )
                           ],
-                        )))),
-            Container(
-              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-              decoration: BoxDecoration(
-                color: const Color(0xff4D455D),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: const Text(
-                            'Patient A \nDate Added \nLast Session ',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color(0xffF5E9CF),
-                            ),
-                          ),
-                        ))),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(15, 20, 0, 10),
-                    child: const Text(
-                      'Diagnosis : ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xffF5E9CF),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xff4D455D),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
                       children: [
-                        Container(
-                          width: 225,
-                          height: 30,
-                          margin: EdgeInsets.only(left: 15),
-                          padding: EdgeInsets.only(left: 5),
-                          decoration: BoxDecoration(
-                            color: Colors
-                                .grey[200], // Set the desired background color
-                            borderRadius: BorderRadius.circular(
-                                8), // Set the desired border radius
-                          ),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Enter text',
-                                border: InputBorder
-                                    .none, // Remove the default border
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 14.0)),
-                            style: TextStyle(fontSize: 10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xffF5E9CF),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        Checkbox(
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              isChecked = value!;
-                              if (isChecked) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                           PatientList()),
-                                );
-                                
-                              }
-                            });
-                          },
-                          activeColor: const Color(
-                              0xff7DB9B6), // Change the color of the checkbox when selected
-                          checkColor: Colors.white,
-                        )
-                      ],
-                    )
-                    ),
-                    Container(
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(15, 20, 0, 10),
+                            child: const Text(
+                              'Diagnosis : ',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Color(0xffF5E9CF),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 225,
+                                height: 30,
+                                margin: EdgeInsets.only(left: 15),
+                                padding: EdgeInsets.only(left: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Enter text',
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.symmetric(vertical: 14.0),
+                                  ),
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    isChecked = value!;
+                                    // You can handle checkbox state changes here
+                                  });
+                                },
+                                activeColor: const Color(0xff7DB9B6),
+                                checkColor: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
                   width: double.infinity,
                   margin: const EdgeInsets.fromLTRB(10, 60, 10, 10),
                   height: 40,
@@ -179,7 +180,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PatientCaseNotes()),
+                              builder: (context) =>  PatientCaseNotes(selectedPatientUID: widget.selectedPatientUID,)),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -207,7 +208,7 @@ class _PatientInfoState extends State<PatientInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const TurendInAssignment()),
+                              builder: (context) => TurendInAssignment(selectedPatientUID: widget.selectedPatientUID,)),
                         );
                       },
                       style: ElevatedButton.styleFrom(

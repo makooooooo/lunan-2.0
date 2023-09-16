@@ -7,7 +7,8 @@ import 'package:file_picker/file_picker.dart';
 import '../../../Patient/HomePage/Assignment/patient_turn_in.dart';
 
 class CreateCaseNotes extends StatelessWidget {
-  const CreateCaseNotes({super.key});
+  final String selectedPatientUID;
+  CreateCaseNotes({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,7 @@ class CreateCaseNotes extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientCaseNotes()),
-            );
+            Navigator.pop(context);
           },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
@@ -137,7 +135,7 @@ class CreateCaseNotes extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PatientInfo()),
+                                          PatientInfo(selectedPatientUID: selectedPatientUID,)),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -162,7 +160,7 @@ class CreateCaseNotes extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PatientCaseNotes()),
+                                          PatientCaseNotes(selectedPatientUID: selectedPatientUID,)),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

@@ -6,24 +6,23 @@ import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 
 class TurendInAssignment extends StatelessWidget {
-  const TurendInAssignment({Key? key}) : super(key: key);
+  final String selectedPatientUID;
+
+  TurendInAssignment({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
-     appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
-          },
-          color: Color(0xff4D455D),// Change this color to your desired color
+  Navigator.pop(context); // This will navigate back to the previous screen
+},
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
       body: Center(
@@ -60,7 +59,8 @@ class TurendInAssignment extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TurendInAssignment(),
+                                builder: (context) =>
+                                    TurendInAssignment(selectedPatientUID: selectedPatientUID),
                               ),
                             );
                           },
@@ -74,7 +74,7 @@ class TurendInAssignment extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const VerifiedAssignment(),
+                                builder: (context) =>  VerifiedAssignment(selectedPatientUID: selectedPatientUID),
                               ),
                             );
                           },
@@ -104,7 +104,7 @@ class TurendInAssignment extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TurnedInAssignmentInfo(),
+                            builder: (context) => TurnedInAssignmentInfo(selectedPatientUID: selectedPatientUID,),
                           ),
                         );
                       },
@@ -149,21 +149,21 @@ class TurendInAssignment extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-     floatingActionButton: Container(
-  margin: const EdgeInsets.fromLTRB(0, 0, 20, 50), // Adjust the margin as needed
-  child: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddAssignment(),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: const Color(0xff7DB9B6),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 20, 50), // Adjust the margin as needed
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddAssignment(selectedPatientUID: selectedPatientUID),
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: const Color(0xff7DB9B6),
+        ),
       ),
-     ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
-import 'package:lunan/Therapist/HomePage/WeeklyForms/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/verified_weeklyforms_info.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
@@ -18,10 +18,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
+            Navigator.pop(context);
           },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
@@ -151,7 +148,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const PatientWeeklyForms()),
+                                          const TurnedINWeeklyFroms()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

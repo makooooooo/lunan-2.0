@@ -35,11 +35,8 @@ class _IntakeFormState extends State<IntakeForm> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
-          },
+             Navigator.pop(context);
+            },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
       ),

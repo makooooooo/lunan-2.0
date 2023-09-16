@@ -16,7 +16,7 @@ class PatientList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
-    appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
@@ -27,7 +27,7 @@ class PatientList extends StatelessWidget {
               MaterialPageRoute(builder: (context) => DashboardT()),
             );
           },
-          color: Color(0xff4D455D),// Change this color to your desired color
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
       body: Center(
@@ -72,54 +72,58 @@ class PatientList extends StatelessWidget {
                 final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
 
                 return ListView.builder(
-  shrinkWrap: true,
-  itemCount: documents.length,
-  itemBuilder: (BuildContext context, int index) {
-    final document = documents[index];
-    final firstName = document['firstName'] as String? ?? '';
-    final dateCreated = document['dateCreated'] as String? ?? '';
-    final counselorUID = document['counselorUID'] as String? ?? '';
-    final profilePicUrl = document['ProfPic'] as String? ?? '';
+                  shrinkWrap: true,
+                  itemCount: documents.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final document = documents[index];
+                    final firstName = document['firstName'] as String? ?? '';
+                    final dateCreated = document['dateCreated'] as String? ?? '';
+                    final counselorUID = document['counselorUID'] as String? ?? '';
+                    final profilePicUrl = document['ProfPic'] as String? ?? '';
 
-    return InkWell(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const PatientInfo();
-          },
-        );
-      },
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        height: 80,
-        decoration: BoxDecoration(
-          color: const Color(0xff4D455D),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 16, right: 8),
-              child: CircleAvatar(
-                backgroundImage: profilePicUrl != null ? NetworkImage(profilePicUrl) : null,
-                radius: 20,
-              ),
-            ),
-            Expanded(
-              child: Text(
-                'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  },
-);
+                    return InkWell(
+                      onTap: () {
+                        final selectedPatientUID = document.id; // Assuming the UID is stored in the document id
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PatientInfo(
+                              data: document.data() as Map<String, dynamic>,
+                              selectedPatientUID: selectedPatientUID,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff4D455D),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 16, right: 8),
+                              child: CircleAvatar(
+                                backgroundImage: profilePicUrl != null ? NetworkImage(profilePicUrl) : null,
+                                radius: 20,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
             ),
           ],
@@ -138,3 +142,34 @@ class PatientList extends StatelessWidget {
         .snapshots();
   }
 }
+
+class PatientInfoOverlay extends StatelessWidget {
+  final String selectedPatientUID; // Add this line
+
+  PatientInfoOverlay({Key? key, required this.selectedPatientUID}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: GestureDetector(
+        onTap: () {
+          // Handle tapping on the overlay to close it.
+          Navigator.pop(context);
+        },
+        child: Container(
+          color: Colors.black.withOpacity(0.7), // Adjust the opacity as needed
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: PatientInfo(selectedPatientUID: selectedPatientUID), // Display your PatientInfo widget here
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+

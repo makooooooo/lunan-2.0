@@ -6,7 +6,8 @@ import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class VerifiedAssignment extends StatelessWidget {
-  const VerifiedAssignment({Key? key}) : super(key: key);
+  final String selectedPatientUID;
+  VerifiedAssignment({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,8 @@ class VerifiedAssignment extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PatientInfo()),
-            );
-          },
+             Navigator.pop(context);
+            },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),
       ),
@@ -62,7 +60,7 @@ class VerifiedAssignment extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const TurendInAssignment()),
+                                    TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
                           );
                         },
                         child: const Text('Turned In'),
@@ -76,7 +74,7 @@ class VerifiedAssignment extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifiedAssignment()),
+                                          VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
                             );
                         },
                         child: const Text('Verified'),
@@ -105,7 +103,7 @@ class VerifiedAssignment extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => VerifiedAssignmentInfo(),
+                            builder: (context) => VerifiedAssignmentInfo(selectedPatientUID: selectedPatientUID,),
                           ),
                         );
                       },
