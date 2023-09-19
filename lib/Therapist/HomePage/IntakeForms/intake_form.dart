@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/HomePage/chat.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class IntakeForm extends StatefulWidget {
-  const IntakeForm({Key? key}) : super(key: key);
+  final Map<String, dynamic>? data;
+  final String selectedPatientUID;
+
+
+  const IntakeForm({
+    Key? key,
+    this.data,
+    required this.selectedPatientUID,
+  }) : super(key: key);
 
   @override
   _IntakeFormState createState() => _IntakeFormState();
@@ -18,11 +27,155 @@ class _IntakeFormState extends State<IntakeForm> {
   late DateTime now;
   late String formattedDate;
 
+  TextEditingController cellPhoneController = TextEditingController();
+  TextEditingController allergiesController = TextEditingController();
+  TextEditingController allergyListController = TextEditingController();
+  TextEditingController sexualPrefController = TextEditingController();
+  TextEditingController maritalStatusController = TextEditingController();
+  TextEditingController therapyStatusController = TextEditingController();
+  TextEditingController currPyschMedsController = TextEditingController();
+  TextEditingController contactPersonNameController = TextEditingController();
+  TextEditingController suicidalThoughtsController = TextEditingController();
+  TextEditingController suicidalThoughtsPastController = TextEditingController();
+  TextEditingController suicidalThoughtsPastTimeController = TextEditingController();
+  TextEditingController currentHomicidalController = TextEditingController();
+  TextEditingController pastHomicidalController = TextEditingController();
+  TextEditingController pastHomicidalTimeController = TextEditingController();
+  TextEditingController currentPhysHealthController = TextEditingController();
+  TextEditingController lastPhysExamController = TextEditingController();
+  TextEditingController chronicIllController = TextEditingController();
+  TextEditingController maintMedsController = TextEditingController();
+  TextEditingController alcoholIntController = TextEditingController();
+  TextEditingController drugUseController = TextEditingController();
+  TextEditingController drugUseSelController = TextEditingController();
+  TextEditingController smokeSelController = TextEditingController();
+  TextEditingController smokeDailyController = TextEditingController();
+  TextEditingController headInjController = TextEditingController();
+  TextEditingController signChanController = TextEditingController();
+  TextEditingController depressedMoodNowSelController = TextEditingController();
+  TextEditingController depressedMoodNowRatController = TextEditingController();
+  TextEditingController anxSelController = TextEditingController();
+  TextEditingController anxRatingNowController = TextEditingController();
+  TextEditingController phobiasSelNowController = TextEditingController();
+  TextEditingController phobiasRatNowController = TextEditingController();
+  TextEditingController halluSelNowController = TextEditingController();
+  TextEditingController halluRatNowController = TextEditingController();
+  TextEditingController sexualAbuseSelNowController = TextEditingController();
+  TextEditingController sexualAbuseRatNowController = TextEditingController();
+  TextEditingController physicalAbueSelNowController = TextEditingController();
+  TextEditingController physicalAbuseRatNowController = TextEditingController();
+  TextEditingController emotionalAbuseRatNowController = TextEditingController();
+  TextEditingController emotionalAbuseSelNowController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     now = DateTime.now();
     formattedDate = DateFormat('yyyy / MM / dd').format(now);
+    fetchDataFromFirestore();
+  }
+    Future<void> fetchDataFromFirestore() async {
+    try {
+      // Replace 'intakeforms' with your Firestore collection name
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('IntakeForms')
+          .where('UID', isEqualTo: widget.selectedPatientUID)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Assuming only one document will match the query
+        final DocumentSnapshot doc = querySnapshot.docs[0];
+
+        // Populate text fields with data from Firestore
+        setState(() {
+          cellPhoneController.text = doc['CPNum'];
+          allergiesController.text = doc['AllergiesSel'];
+          allergyListController.text = doc['AllergyList'];
+          sexualPrefController.text = doc['SexualPref'];
+          maritalStatusController.text = doc['MaritalStatus'];
+          therapyStatusController.text = doc['TherapyStatus'];
+          currPyschMedsController.text = doc['CurrPsychMeds'];
+          contactPersonNameController.text = doc['CPFname'];
+          suicidalThoughtsController.text = doc['SuicidalThoughts'];
+          suicidalThoughtsPastController.text = doc['SuicidalThoughtsPast'];
+          suicidalThoughtsPastTimeController.text = doc['SuicidalThoughtsPastTime'];
+          currentHomicidalController.text = doc['CurrentHomicidal'];
+          pastHomicidalController.text = doc['HadPreviousHomicide'];
+          pastHomicidalTimeController.text = doc['PastHomicidalTime'];
+          currentPhysHealthController.text = doc['currentPhysicalHealth'];
+          lastPhysExamController.text = doc['LastPhysicalExam'];
+          chronicIllController.text = doc['ChronicIll'];
+          maintMedsController.text = doc['MaintMeds'];
+          alcoholIntController.text = doc['alcoholSubstanceAbueRatingNow'];
+          drugUseController.text = doc['DrugUse'];
+          drugUseSelController.text = doc['DrugUseSel'];
+          smokeSelController.text = doc['SmokeSel'];
+          smokeDailyController.text = doc['CiggDaily'];
+          headInjController.text = doc['HeadInjDef'];
+          signChanController.text = doc['SignChanSel'];
+          depressedMoodNowSelController.text = doc['depressedMoodNowSel'];
+          depressedMoodNowRatController.text = doc['depressendMoodRatingNow'];
+          anxSelController.text = doc['AnxietySel'];
+          anxRatingNowController.text = doc ['anxRatingNowController'];
+          phobiasRatNowController.text = doc ['phobiasRatingNow'];
+          phobiasSelNowController.text = doc ['phobiasSelNow'];
+          halluSelNowController.text = doc ['hallucinationsSelNow'];
+          halluRatNowController.text = doc ['hallucinationsRatingNow'];
+          sexualAbuseSelNowController.text = doc ['sexualAbueSelNow'];
+          sexualAbuseRatNowController.text = doc ['sexualAbuseRatingNow'];
+          physicalAbueSelNowController.text = doc ['physicalAbuseSelNow'];
+          physicalAbuseRatNowController.text = doc ['physicalAbueRatingNow'];
+          emotionalAbuseSelNowController.text = doc ['emotionalAbuseSelNow'];
+          emotionalAbuseRatNowController.text = doc ['emotionalAbuseRatingNow'];
+        });
+      }
+    } catch (error) {
+      print('Error fetching data from Firestore: $error');
+    }
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controllers when the widget is disposed
+    cellPhoneController.dispose();
+    allergiesController.dispose();
+    allergyListController.dispose();
+    sexualPrefController.dispose();
+    maritalStatusController.dispose();
+    therapyStatusController.dispose();
+    currPyschMedsController.dispose();
+    contactPersonNameController.dispose();
+    suicidalThoughtsController.dispose();
+    suicidalThoughtsPastController.dispose();
+    suicidalThoughtsPastTimeController.dispose();
+    currentHomicidalController.dispose();
+    pastHomicidalController.dispose();
+    pastHomicidalTimeController.dispose();
+    currentPhysHealthController.dispose();
+    lastPhysExamController.dispose();
+    chronicIllController.dispose();
+    maintMedsController.dispose();
+    alcoholIntController.dispose();
+    drugUseController.dispose();
+    drugUseSelController.dispose();
+    smokeSelController.dispose();
+    smokeDailyController.dispose();
+    headInjController.dispose();
+    signChanController.dispose();
+    depressedMoodNowSelController.dispose();
+    depressedMoodNowRatController.dispose();
+    anxSelController.dispose();
+    anxRatingNowController.dispose();
+    phobiasSelNowController.dispose();
+    phobiasRatNowController.dispose();
+    sexualAbuseSelNowController.dispose();
+    sexualAbuseRatNowController.dispose();
+    physicalAbueSelNowController.dispose();
+    physicalAbuseRatNowController.dispose();
+    emotionalAbuseSelNowController.dispose();
+    emotionalAbuseRatNowController.dispose();
+    // Dispose of other controllers as needed
+    super.dispose();
   }
 
   @override
@@ -100,8 +253,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 alignment: Alignment.centerLeft,
                 child:Container(
                 margin: EdgeInsets.only(left: 10),
-                child: const Text(
-                  'Cell Phone Number:',
+                child: Text(
+                  'Cell Phone Number: ${widget.selectedPatientUID}',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 15,
@@ -117,6 +270,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  enabled: false,
+                  controller: cellPhoneController,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -144,6 +299,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  enabled: false,
+
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -171,6 +328,7 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -198,6 +356,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: sexualPrefController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -225,6 +385,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  enabled: false,
+                  controller: maritalStatusController,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -252,6 +414,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  enabled: false,
+                  controller: therapyStatusController,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -279,6 +443,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: currPyschMedsController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -306,6 +472,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: contactPersonNameController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -333,6 +501,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: cellPhoneController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -360,6 +530,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: suicidalThoughtsController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -387,6 +559,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: suicidalThoughtsPastTimeController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -414,6 +588,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller:currentHomicidalController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -441,6 +617,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: pastHomicidalTimeController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -468,6 +646,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller:currentPhysHealthController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -495,6 +675,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller:lastPhysExamController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -522,6 +704,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: chronicIllController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -549,6 +733,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${allergiesController.text} | ${allergyListController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -576,6 +762,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: maintMedsController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -603,6 +791,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: alcoholIntController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -630,6 +820,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${drugUseSelController.text} | ${drugUseController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -657,6 +849,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${smokeSelController.text} | ${smokeDailyController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -684,6 +878,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: headInjController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -711,6 +907,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: signChanController,
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -738,6 +936,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${depressedMoodNowSelController.text} | ${depressedMoodNowRatController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -765,6 +965,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${anxSelController.text} | ${anxRatingNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -792,6 +994,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${phobiasSelNowController.text} | ${phobiasRatNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -819,6 +1023,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${halluSelNowController.text} | ${halluRatNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -846,6 +1052,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${sexualAbuseSelNowController.text} | ${sexualAbuseRatNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -873,6 +1081,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${physicalAbueSelNowController.text} | ${physicalAbuseRatNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },
@@ -900,6 +1110,8 @@ class _IntakeFormState extends State<IntakeForm> {
                 width: 350,
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 10 ),
                 child: TextField(
+                  controller: TextEditingController(text: '${emotionalAbuseSelNowController.text} | ${emotionalAbuseRatNowController.text}'),
+                  enabled: false,
                   onChanged: (value) {
                     // Handle the text field value changes here
                   },

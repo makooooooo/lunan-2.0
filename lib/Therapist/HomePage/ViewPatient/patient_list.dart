@@ -83,7 +83,7 @@ class PatientList extends StatelessWidget {
 
                     return InkWell(
                       onTap: () {
-                        final selectedPatientUID = document.id; // Assuming the UID is stored in the document id
+                        final selectedPatientUID = document['UID']; // Assuming the UID is stored in the document id
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -142,34 +142,3 @@ class PatientList extends StatelessWidget {
         .snapshots();
   }
 }
-
-class PatientInfoOverlay extends StatelessWidget {
-  final String selectedPatientUID; // Add this line
-
-  PatientInfoOverlay({Key? key, required this.selectedPatientUID}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: GestureDetector(
-        onTap: () {
-          // Handle tapping on the overlay to close it.
-          Navigator.pop(context);
-        },
-        child: Container(
-          color: Colors.black.withOpacity(0.7), // Adjust the opacity as needed
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: PatientInfo(selectedPatientUID: selectedPatientUID), // Display your PatientInfo widget here
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-
