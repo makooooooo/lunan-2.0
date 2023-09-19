@@ -83,7 +83,7 @@ class PatientList extends StatelessWidget {
 
                     return InkWell(
                       onTap: () {
-                        final selectedPatientUID = document['UID']; // Assuming the UID is stored in the document id
+                        final selectedPatientUID = document['UID'];
                         Navigator.push(
                           context,
                           MaterialPageRoute(

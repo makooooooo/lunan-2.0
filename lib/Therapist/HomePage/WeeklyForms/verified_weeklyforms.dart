@@ -6,7 +6,9 @@ import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class VerifiedWeeklyForms extends StatelessWidget {
-  const VerifiedWeeklyForms({Key? key}) : super(key: key);
+  final String selectedPatientUID;
+
+  const VerifiedWeeklyForms({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const TurnedINWeeklyFroms()),
+                                    TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                           );
                         },
                         child: const Text('Turned In'),
@@ -72,7 +74,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const VerifiedWeeklyForms()),
+                                           VerifiedWeeklyForms(selectedPatientUID: selectedPatientUID)),
                             );
                         },
                         child: const Text('Verified'),
@@ -101,7 +103,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>VerifiedInWeeklyFormsInfo(),
+                            builder: (context) =>VerifiedInWeeklyFormsInfo(selectedPatientUID: selectedPatientUID,),
                           ),
                         );
                       },
@@ -148,7 +150,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const TurnedINWeeklyFroms()),
+                                           TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

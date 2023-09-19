@@ -3,7 +3,8 @@ import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 
 class VerifiedInWeeklyFormsInfo extends StatelessWidget {
-  const VerifiedInWeeklyFormsInfo({super.key});
+  final String selectedPatientUID;
+  const VerifiedInWeeklyFormsInfo({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VerifiedInWeeklyFormsInfo()),
+              MaterialPageRoute(builder: (context) => VerifiedInWeeklyFormsInfo(selectedPatientUID: selectedPatientUID,)),
             );
           },
           color: Color(0xff4D455D),// Change this color to your desired color
@@ -82,7 +83,7 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINWeeklyFroms()),
+                                       TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -106,7 +107,7 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINWeeklyFroms()),
+                                       TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(

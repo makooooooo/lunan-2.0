@@ -3,7 +3,8 @@ import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 
 class TurnedInWeeklyFormsInfo extends StatelessWidget {
-  const TurnedInWeeklyFormsInfo({super.key});
+  final String selectedPatientUID;
+  const TurnedInWeeklyFormsInfo({Key? key, required this.selectedPatientUID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TurnedINWeeklyFroms()),
+              MaterialPageRoute(builder: (context) => TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
             );
           },
           color: Color(0xff4D455D),// Change this color to your desired color
@@ -73,8 +74,8 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
                     Row(
                       children:[
                       Container(
-                      width: 100,
-                      margin: const EdgeInsets.fromLTRB(120, 10, 10, 10),
+                      width: 80,
+                      margin: const EdgeInsets.fromLTRB(140, 10, 10, 10),
                       height: 30,
                       child: ElevatedButton(
                           onPressed: () {
@@ -82,7 +83,7 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINWeeklyFroms()),
+                                       TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -97,7 +98,7 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
                           )),
                     ),
                     Container(
-                      width: 100,
+                      width: 80,
                       margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                       height: 30,
                       child: ElevatedButton(
@@ -106,7 +107,7 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const TurnedINWeeklyFroms()),
+                                      TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID,)),
                             );
                           },
                           style: ElevatedButton.styleFrom(
