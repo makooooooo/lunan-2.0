@@ -5,11 +5,13 @@ import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms_info.d
 import 'package:lunan/Therapist/HomePage/WeeklyForms/verified_weeklyforms.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
+
 class TurnedINWeeklyFroms extends StatelessWidget {
   final String selectedPatientUID;
+  final Map<String, dynamic>? formData;
 
-  const TurnedINWeeklyFroms({Key? key, required this.selectedPatientUID}) : super(key: key);
+  const TurnedINWeeklyFroms({Key? key, required this.selectedPatientUID, this.formData,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +91,14 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    // Handle the "Verified" button press
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                      builder: (context) => VerifiedWeeklyForms(
+                                        selectedPatientUID: selectedPatientUID, 
+                                        )
+                                      ),
+                                    );
                                   },
                                   child: const Text('Verified'),
                                   style: ElevatedButton.styleFrom(
@@ -113,7 +122,7 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: WeeklyFormsList(selectedPatientUID: selectedPatientUID),
+                              child: WeeklyFormsList(selectedPatientUID: selectedPatientUID, formData: formData,),
                             ),
                             Container(
                               width: 150,
@@ -121,7 +130,12 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Handle the "Back to Weekly Forms List" button press
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PatientList(),
+                                ),
+                              );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff7DB9B6),
@@ -130,7 +144,7 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                                   ),
                                 ),
                                 child: const Text(
-                                  'Back to\nWeekly Forms List',
+                                  'Back to\nPatient List',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 12,
@@ -156,12 +170,13 @@ class TurnedINWeeklyFroms extends StatelessWidget {
 
 class WeeklyFormsList extends StatelessWidget {
   final String selectedPatientUID;
+  final Map<String, dynamic>? formData;
 
-  const WeeklyFormsList({Key? key, required this.selectedPatientUID}) : super(key: key);
+  const WeeklyFormsList({Key? key, required this.selectedPatientUID, this.formData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print ('Selected Patient UID: $selectedPatientUID');
+    print('Selected Patient UID: $selectedPatientUID');
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('WeeklyForm')
@@ -189,31 +204,42 @@ class WeeklyFormsList extends StatelessWidget {
             final formDocument = weeklyForms[index];
             final formData = formDocument.data() as Map<String, dynamic>;
             final dateAccomplished = formData['DateSubmitted'] as String;
+            final status = formData['Status'];
+            final documentId = formDocument.id;
+            
 
-            return InkWell(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TurnedInWeeklyFormsInfo(
-          selectedPatientUID: selectedPatientUID,
-        ),
-      ),
-    );
-  },
-  child: Expanded(
-    child: Container(
-      width: 50, // Adjust the width here as needed
-      height: 70,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
-      child: Text('Date Accomplished: $dateAccomplished'),
-    ),
-  ),
-);
+            // Check if Status is null before displaying the item
+            if (status == null) {
+              return InkWell(
+                onTap: () {
+                  String documentId = formDocument.id;
+                  print('Document ID: $documentId');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TurnedInWeeklyFormsInfo(
+                        selectedPatientUID: selectedPatientUID,
+                        formData: formData,
+                        documentId: documentId,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 50, // Adjust the width here as needed
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+                  child: Text('Date Accomplished: $dateAccomplished'),
+                ),
+              );
+            } else {
+              // Return an empty container for documents with non-null Status
+              return Container();
+            }
           },
         );
       },
