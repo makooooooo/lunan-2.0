@@ -265,8 +265,9 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const TurnedINWellnessFroms()),
+                              builder: (context) => 
+                              TurnedINWellnessFroms
+                              (selectedPatientUID: widget.selectedPatientUID)),
                         );
                       },
                       style: ElevatedButton.styleFrom(

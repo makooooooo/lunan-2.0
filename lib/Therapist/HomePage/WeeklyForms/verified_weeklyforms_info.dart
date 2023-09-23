@@ -22,7 +22,7 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text('Verify Document'),
+          title: Text('Verify Doc1ument'),
           content: Text('Are you sure you want to unverify this document?'),
           actions: <Widget>[
             TextButton(

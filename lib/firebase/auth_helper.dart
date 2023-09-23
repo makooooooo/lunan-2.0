@@ -62,3 +62,40 @@ class UnverifyWeeklyForm {
     }
   }
 }
+
+class VerifyWellnessForm {
+  // Pass 'context' as a parameter to the method
+  Future<void> updateWellnessFormStatus(BuildContext context, String selectedPatientUID, String documentId) async {
+  try {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    // Define the collection and document reference
+    final CollectionReference wellnessFormsCollection = _firestore.collection('WellnessForm');
+    final DocumentReference documentReference = wellnessFormsCollection.doc(documentId);
+
+    // Update the Status field to 'Verify'
+    await documentReference.update({'Status': 'Verified'});
+  } catch (error) {
+    // Handle any errors that occur during the update
+    print('Error updating document status: $error');
+  }
+}
+}
+
+class UnverifyWellnessForm {
+  Future<void> unverifyWellnessFormStatus(BuildContext context, String selectedPatientUID, String documentId) async {
+    try {
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      // Define the collection and document reference
+      final CollectionReference wellnessFormsCollection = _firestore.collection('WellnessForm');
+      final DocumentReference documentReference = wellnessFormsCollection.doc(documentId);
+
+      // Update the Status field to 'Unverified' or handle it as needed
+      await documentReference.update({'Status': null});
+    } catch (error) {
+      // Handle any errors that occur during the update
+      print('Error unverifying document status: $error');
+    }
+  }
+}
