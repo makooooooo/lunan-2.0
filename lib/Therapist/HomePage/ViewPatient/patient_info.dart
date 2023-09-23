@@ -11,7 +11,7 @@ class PatientInfo extends StatefulWidget {
   final Map<String, dynamic>? data; // Make the data parameter optional
   final String selectedPatientUID;
 
-  const PatientInfo({Key? key, this.data, required this.selectedPatientUID}) : super(key: key);
+  const PatientInfo({Key? key, this.data, required this.selectedPatientUID,}) : super(key: key);
 
   @override
   State<PatientInfo> createState() => _PatientInfoState();
@@ -112,8 +112,7 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                           child: Row(
                             children: [
                               Container(
-                                width: 225,
-                                height: 30,
+                                width: 200,
                                 margin: EdgeInsets.only(left: 15),
                                 padding: EdgeInsets.only(left: 5),
                                 decoration: BoxDecoration(
@@ -124,9 +123,10 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                                   decoration: InputDecoration(
                                     hintText: 'Enter text',
                                     border: InputBorder.none,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 14.0),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0),
                                   ),
-                                  style: TextStyle(fontSize: 10),
+                                  style: TextStyle(fontSize: 12),
+                                  maxLines: null,
                                 ),
                               ),
                               Checkbox(
@@ -152,7 +152,7 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const IntakeForm()),
+                              builder: (context) => IntakeForm(selectedPatientUID: widget.selectedPatientUID,)),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -236,7 +236,7 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const TurnedINWeeklyFroms()),
+                              builder: (context) => TurnedINWeeklyFroms(selectedPatientUID: widget.selectedPatientUID, )),
                         );
                       },
                       style: ElevatedButton.styleFrom(

@@ -8,7 +8,8 @@ import '../../../Patient/HomePage/Assignment/patient_turn_in.dart';
 
 class CreateCaseNotes extends StatelessWidget {
   final String selectedPatientUID;
-  CreateCaseNotes({Key? key, required this.selectedPatientUID}) : super(key: key);
+
+  CreateCaseNotes({Key? key, required this.selectedPatientUID,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
