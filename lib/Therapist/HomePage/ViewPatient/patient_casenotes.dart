@@ -27,9 +27,12 @@ class PatientCaseNotes extends StatelessWidget {
         ),
       ),
       body: Center(
-          child: SingleChildScrollView(
+      
+      
+  
         child: Column(
-          children: <Widget>[
+      
+          children: [
             Container(
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: const Text(
@@ -66,48 +69,58 @@ class PatientCaseNotes extends StatelessWidget {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewCaseNotes(selectedPatientUID: selectedPatientUID,)),
-                      );
-                    },
-                    child: Container(
-                      width: 330,
-                      height: 80,
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(20),
+                  
+                  SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ViewCaseNotes(selectedPatientUID: selectedPatientUID),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 330,
+                              height: 80,
+                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                              child: Text('Patient Name:\nDate Accomplished:'),
+                            ),
+                          ),
+                          Container(
+                            width: 330,
+                            height: 80,
+                            margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                            child: Text('Patient Name:\nDate Accomplished:'),
+                          ),
+                          Container(
+                            width: 330,
+                            height: 80,
+                            margin: const EdgeInsets.fromLTRB(0, 5, 0, 30),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                            child: Text('Patient Name:\nDate Accomplished:'),
+                          ),
+                          
+                        ],
                       ),
-                      padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                      child: Text('Patient Name:\nDate Accomplished:'),
                     ),
-                  ),
-                  Container(
-                    width: 330,
-                    height: 80,
-                    margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                    child: Text('Patient Name:\nDate Accomplished:'),
-                  ),
-                  Container(
-                    width: 330,
-                    height: 80,
-                    margin: const EdgeInsets.fromLTRB(0, 5, 0, 30),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                    child: Text('Patient Name:\nDate Accomplished:'),
-                  ),
                   Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -172,7 +185,7 @@ class PatientCaseNotes extends StatelessWidget {
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
 import 'package:lunan/Therapist/HomePage/dashboard.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
+import 'package:lunan/Therapist/landing_pageT.dart';
 
 class PatientList extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,7 +26,7 @@ class PatientList extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DashboardT()),
+              MaterialPageRoute(builder: (context) => LandingPageT()),
             );
           },
           color: Color(0xff4D455D), // Change this color to your desired color
@@ -87,7 +89,7 @@ class PatientList extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PatientInfo(
+                            builder: (context) => PatientsInfo(
                               data: document.data() as Map<String, dynamic>,
                               selectedPatientUID: selectedPatientUID,
                             ),
