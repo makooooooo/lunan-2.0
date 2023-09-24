@@ -4,6 +4,7 @@ import 'package:lunan/Patient/HomePage/Dashboard/dashboard_modal.dart';
 import 'package:lunan/Therapist/HomePage/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/landing_pageT.dart';
 import 'package:lunan/firebase/auth_helper.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,7 +35,7 @@ class LoginPage extends StatelessWidget {
         } else if (role == 'Counselor') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const DashboardT()),
+            MaterialPageRoute(builder: (_) => const LandingPageT()),
           );
         } else {
           // Handle unknown role or other cases
