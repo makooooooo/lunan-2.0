@@ -86,7 +86,7 @@ final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
                               margin: const EdgeInsets.only(top: 10),
                               child: Text(
                                 'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   color: Color(0xffF5E9CF),
                                 ),

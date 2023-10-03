@@ -11,7 +11,6 @@ class ProfileSettingT extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
-        iconTheme: const IconThemeData(color: Color(0xff4D455D)),
       ),
       body: SingleChildScrollView(
           child: Column(

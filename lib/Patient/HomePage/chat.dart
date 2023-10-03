@@ -21,7 +21,7 @@ class Chat extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 30, 0, 20),
                   child: const Text(
-                    'Chat',
+                    'INBOX',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',

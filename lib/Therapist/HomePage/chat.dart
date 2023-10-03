@@ -6,10 +6,10 @@ class chatT extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        backgroundColor: const Color(0xff7DB9B6),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+       
       ),
-
       
       body: Center(
           child: Container(
@@ -24,7 +24,7 @@ class chatT extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 30, 0, 20),
                   child: const Text(
-                    'Chat',
+                    'INBOX',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Montserrat',

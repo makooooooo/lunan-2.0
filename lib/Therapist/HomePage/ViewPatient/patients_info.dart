@@ -68,7 +68,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
               child: Text(
                 'Patient Name : $firstName',
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 20,
                   color: Color(0xff4D455D),
                   fontFamily: 'Montserrat',
                 ),
@@ -79,7 +79,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
               child: Text(
                 'Date Added : $dateCreated',
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 20,
                   color: Color(0xff4D455D),
                   fontFamily: 'Montserrat',
                 ),
@@ -90,7 +90,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
               child: const Text(
                 'Last Session',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 20,
                   color: Color(0xff4D455D),
                   fontFamily: 'Montserrat',
                 ),
@@ -101,7 +101,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
             child: const Text(
               'DIAGNOSIS ',
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   color: Color(0xff4D455D),
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold),

@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0xff7DB9B6),
+                        color: Color(0xff4D455D),
                       ),
                     ),
                     labelText: 'Password',
