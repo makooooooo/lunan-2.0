@@ -34,7 +34,7 @@ class WeeklyFormChooser extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+              margin: const EdgeInsets.fromLTRB(20, 100, 20, 20),
               width: 150,
               height: 150,
               child: ElevatedButton(
@@ -57,13 +57,16 @@ class WeeklyFormChooser extends StatelessWidget {
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
                         'View Weekly Question Forms',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   )),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+              margin: const EdgeInsets.fromLTRB(20, 100, 20, 20),
               width: 150,
               height: 150,
               child: ElevatedButton(
@@ -85,7 +88,11 @@ class WeeklyFormChooser extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
-                        'View Weekly Forms',
+                        'View Weekly Forms'
+                        ,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
                         textAlign: TextAlign.center,
                       ),
                     ),

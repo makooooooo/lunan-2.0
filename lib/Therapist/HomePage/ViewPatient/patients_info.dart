@@ -201,7 +201,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                           backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -211,7 +211,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'View Intake Form',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -232,7 +232,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -242,7 +242,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'View Case Notes',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -263,7 +263,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -273,7 +273,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'View Patient Assignment',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -294,8 +294,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromARGB(255, 19, 195, 122),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -305,7 +304,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'Patient Weekly Forms',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -325,7 +324,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                           backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -335,7 +334,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'Patient Wellness Form',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -353,7 +352,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -363,7 +362,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             'Patient Wellness Guide',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Color(0xffF5E9CF),
                             ),
                           )),
@@ -381,283 +380,3 @@ class _PatientsInfoState extends State<PatientsInfo> {
 
 
 
-// child: Column(children: [
-//                 Row(
-//                   children: [
-//                     Center(
-//                       child: Container(
-//                         width: 50, // Adjust the size of the circle as needed
-//                         height: 50, // Adjust the size of the circle as needed
-//                         decoration: BoxDecoration(
-//                           shape: BoxShape.circle,
-//                           color: Colors
-//                               .blue, // Change the background color as needed
-//                         ),
-//                         child: Icon(
-//                           Icons.star, // Replace with your desired icon
-//                           size: 20, // Adjust the icon size as needed
-//                           color:
-//                               Colors.white, // Change the icon color as needed
-//                         ),
-//                       ),
-//                     )
-//                   ],
-//                 )
-//               ]),
-
-//  SingleChildScrollView(
-//           child: Container(
-//             height: 650,
-//             decoration: BoxDecoration(
-//               color: const Color(0xff7DB9B6),
-//               borderRadius: BorderRadius.circular(20),
-//             ),
-//             child: Center(
-//               child: Column(
-//                 children: [
-//                   Align(
-//                     alignment: Alignment.topCenter,
-//                     child: Padding(
-//                       padding: const EdgeInsets.only(left: 16),
-//                       child: Container(
-//                         margin: const EdgeInsets.only(top: 10),
-//                         child: Row(
-//                           children: [
-//                             Container(
-//                               margin: const EdgeInsets.only(left: 60),
-//                               child: const Text(
-//                                 'Patient Info',
-//                                 style: TextStyle(
-//                                   fontSize: 30,
-//                                   color: Colors.white,
-//                                 ),
-//                               ),
-//                             ),
-//                             const Spacer(),
-//                             IconButton(
-//                               icon: const Icon(Icons.close),
-//                               onPressed: () {
-//                                 Navigator.of(context).pop(); // Close the dialog
-//                               },
-//                             )
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                     decoration: BoxDecoration(
-//                       color: const Color(0xff4D455D),
-//                       borderRadius: BorderRadius.circular(20),
-//                     ),
-//                     child: Column(
-//                       children: [
-//                         Align(
-//                           alignment: Alignment.centerLeft,
-//                           child: Padding(
-//                             padding: const EdgeInsets.only(left: 16),
-//                             child: Container(
-//                               margin: const EdgeInsets.only(top: 10),
-//                               child: Text(
-//                                 'Patient Name: $firstName Date Added: $dateCreated\nLast Session: ',
-//                                 style: TextStyle(
-//                                   fontSize: 15,
-//                                   color: Color(0xffF5E9CF),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                         Align(
-//                           alignment: Alignment.centerLeft,
-//                           child: Container(
-//                             margin: EdgeInsets.fromLTRB(15, 20, 0, 10),
-//                             child: const Text(
-//                               'Diagnosis : ',
-//                               style: TextStyle(
-//                                 fontSize: 15,
-//                                 color: Color(0xffF5E9CF),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                         v
-//                         Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 60, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => IntakeForm(selectedPatientUID: widget.selectedPatientUID,)),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: const Color(0xff7DB9B6),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'View Intake\nForm',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//                 Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) =>  PatientCaseNotes(selectedPatientUID: widget.selectedPatientUID,)),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: const Color(0xff7DB9B6),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'View Case\nNotes',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//                 Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => TurendInAssignment(selectedPatientUID: widget.selectedPatientUID,)),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: Color.fromARGB(255, 19, 195, 122),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'View Patient\nAssignment',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//                 Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => TurnedINWeeklyFroms(selectedPatientUID: widget.selectedPatientUID, )),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor:
-//                             const Color.fromARGB(255, 19, 195, 122),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'Patient Weekly\nForms',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//                 Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) =>
-//                               TurnedINWellnessFroms
-//                               (selectedPatientUID: widget.selectedPatientUID)),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: Color.fromARGB(255, 19, 195, 122),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'Patient Wellness Form',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//                  Container(
-//                   width: double.infinity,
-//                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-//                   height: 40,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) =>
-//                                   const WellnessGuide()),
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: Color.fromARGB(255, 19, 195, 122),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(
-//                               20), // Set the corner radius here
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'Patient Wellness Guide',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: Color(0xffF5E9CF),
-//                         ),
-//                       )),
-//                 ),
-//               ]),
-//             ),
-//           ],
-//               )
-//             )
-//         )),

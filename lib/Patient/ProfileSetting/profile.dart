@@ -66,6 +66,7 @@ class ProfileSetting extends StatelessWidget {
                 ),
                 Container(
                   height: 40,
+                  width: 200,
                   margin: const EdgeInsets.fromLTRB(
                       30, 40, 30, 0), // Add horizontal margin
                   child: ElevatedButton(
@@ -87,24 +88,29 @@ class ProfileSetting extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.edit, // Replace with the desired icon
-                          color: Color(0xff4D455D), // Icon color
-                        ),
-                        SizedBox(width: 5), // Spacer between icon and text
-                        Text(
-                          'Edit Profile',
-                          style:
-                              TextStyle(color: Color(0xff4D455D)), // Text color
-                        ),
-                      ],
+                    child:const Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .center, // Center the Row horizontally
+                        children: [
+                          Icon(
+                            Icons.edit, // Replace with the desired icon
+                            color: Color(0xff4D455D), // Icon color
+                          ),
+                          SizedBox(width: 5), // Spacer between icon and text
+                          Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                                color: Color(0xff4D455D)), // Text color
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Container(
                   height: 40,
+                  width: 200,
                   margin: const EdgeInsets.fromLTRB(
                       30, 10, 30, 0), // Add horizontal margin
                   child: ElevatedButton(
@@ -122,29 +128,32 @@ class ProfileSetting extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.logout, // Replace with the desired icon
-                          color: Color(0xff4D455D), // Icon color
-                        ),
-                        SizedBox(width: 5), // Spacer between icon and text
-                        Text(
-                          'Logout',
-                          style:
-                              TextStyle(color: Color(0xff4D455D)), // Text color
-                        ),
-                      ],
+                    child: const Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .center, // Center the Row horizontally
+                        children: [
+                          Icon(
+                            Icons.logout, // Replace with the desired icon
+                            color: Color(0xff4D455D), // Icon color
+                          ),
+                          SizedBox(width: 5), // Spacer between icon and text
+                          Text(
+                            'Logout',
+                            style: TextStyle(
+                                color: Color(0xff4D455D)), // Text color
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           )),
         ));
   }
 }
-
 
 void _showLogoutModal(BuildContext context) {
   showDialog(
@@ -162,11 +171,10 @@ void _showLogoutModal(BuildContext context) {
           ),
           TextButton(
             onPressed: () {
-            
-               Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
             },
             child: Text('Logout'),
           ),
@@ -175,4 +183,3 @@ void _showLogoutModal(BuildContext context) {
     },
   );
 }
-

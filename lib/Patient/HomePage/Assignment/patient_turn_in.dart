@@ -72,10 +72,14 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                 ),
               ),
             ),
-            const Divider(
-              color: Color(0xff4D455D), // Customize the color of the line
-              thickness: 2, // Adjust the thickness of the line
-            ),
+            const Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 20), // Adjust the padding as needed
+                  child: Divider(
+                    color: Color(0xff4D455D),
+                    thickness: 2,
+                  ),
+                ),
             Flex(
               direction: Axis.horizontal,
               children: [
@@ -145,7 +149,7 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const AssignmentChooser()),
+                                      const Completed()),
                             );
                           },
                           style: ElevatedButton.styleFrom(

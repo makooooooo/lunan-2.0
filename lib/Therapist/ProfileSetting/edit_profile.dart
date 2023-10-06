@@ -201,7 +201,7 @@ class EditProfileT extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ProfileSetting()),
+                              builder: (context) => const ProfileSettingT()),
                         );
                       },
                       style: ElevatedButton.styleFrom(

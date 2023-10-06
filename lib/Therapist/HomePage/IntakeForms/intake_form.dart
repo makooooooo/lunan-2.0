@@ -237,7 +237,7 @@ class _IntakeFormState extends State<IntakeForm> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(5, 0, 5, 20),
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
                 child: const Text(
                   'Please provide the following information for my records. Leave blank any question you would rather not answer. Information you provide here is held to the same standards of confidentiality as our therapy. Please print out this form and bring it to your first session.',
                   textAlign: TextAlign.justify,

@@ -126,7 +126,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontFamily: 'Montserrat   ',
-                              fontSize: 28,
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
                               color: Color(0xff4D455D),
                             ),
@@ -136,7 +136,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                             dateSubmitted,
                             style: const TextStyle(
                               fontFamily: 'Montserrat   ',
-                              fontSize: 15,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Color(0xff4D455D),
                             ),
@@ -149,7 +149,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     const Text(
                       'I have felt cheerful and in good spirits. : ', // Replace with your description
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
                         color: Color(0xff4D455D),
                       ),
@@ -159,7 +159,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     Text(
                       updatedWellnessQ1Value, // Replace with your description
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -171,7 +171,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     const Text(
                       'I have felt calm and relaxed. : ', // Replace with your description
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
                         color: Color(0xff4D455D),
                       ),
@@ -181,7 +181,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     Text(
                       updatedWellnessQ2Value, // Replace with your description
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     const Text(
                       'I have felt active and vigorous. :', // Replace with your description
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
                         color: Color(0xff4D455D),
                       ),
@@ -203,7 +203,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     Text(
                       updatedWellnessQ3Value, // Replace with your description
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -215,7 +215,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     const Text(
                       'I woke up feeling fresh and rested. :', // Replace with your description
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
                         color: Color(0xff4D455D),
                       ),
@@ -225,7 +225,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     Text(
                       updatedWellnessQ4Value, // Replace with your description
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -237,7 +237,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     const Text(
                       'My daily life has been filled with things that interest me. :', // Replace with your description
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontFamily: 'Montserrat',
                         color: Color(0xff4D455D),
                       ),
@@ -247,7 +247,7 @@ class WeeklyFormsAnswer extends StatelessWidget {
                     Text(
                       updatedWellnessQ5Value, // Replace with your description
                       style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 18,
                           fontFamily: 'Montserrat',
                           color: Colors.black,
                           fontWeight: FontWeight.bold),

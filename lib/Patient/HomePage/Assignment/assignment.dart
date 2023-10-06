@@ -9,12 +9,11 @@ class Assignment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(  
-    backgroundColor: const Color(0xffF5E9CF), // Set the background color
+    return Scaffold(
+      backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
-        
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -25,12 +24,8 @@ class Assignment extends StatelessWidget {
           },
           color: Color(0xff4D455D), // Change this color to your desired color
         ),
-        
-      
       ),
-      
 
-      
       body: Center(
         child: Column(
           children: <Widget>[
@@ -47,17 +42,20 @@ class Assignment extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(
-              color: Color(0xff4D455D), // Customize the color of the line
-              thickness: 2, // Adjust the thickness of the line
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 20), // Adjust the padding as needed
+              child: Divider(
+                color: Color(0xff4D455D),
+                thickness: 2,
+              ),
             ),
             InkWell(
               onTap: () {
                 Navigator.push(
-                  context, 
+                  context,
                   MaterialPageRoute(
-                     builder: (context) => const PatientTurnIn()
-                    ),
+                      builder: (context) => const PatientTurnIn()),
                 );
               },
               child: Container(
@@ -80,12 +78,9 @@ class Assignment extends StatelessWidget {
                     )),
               ),
             ),
-          
           ],
         ),
-      
       ),
-    
     );
   }
 }

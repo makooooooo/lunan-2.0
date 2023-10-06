@@ -61,10 +61,14 @@ class WellnessForms extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
+                 const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20), // Adjust the padding as needed
+                      child: Divider(
+                        color: Color(0xff4D455D),
+                        thickness: 2,
+                      ),
+                    ),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: forms.length,

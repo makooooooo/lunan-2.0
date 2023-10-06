@@ -36,17 +36,17 @@ class DashboardT extends StatelessWidget {
           return Scaffold(
             backgroundColor:
                 const Color(0xffF5E9CF), // Set the background color
-         
+
             body: SingleChildScrollView(
               child: Center(
                 child: Column(
                   children: <Widget>[
                     Container(
-                    margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+                      margin: const EdgeInsets.fromLTRB(20, 100, 20, 20),
                       child: Text(
                         'Welcome back \n $firstName!',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                           fontSize: 30,
@@ -86,6 +86,9 @@ class DashboardT extends StatelessWidget {
                                   child: const Text(
                                     'View\nPatients',
                                     textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                                 Image.asset('assets/iconEdit.png'),
@@ -118,7 +121,13 @@ class DashboardT extends StatelessWidget {
                                 Container(
                                   margin:
                                       const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: const Text('Schedule'),
+                                  child: const Text(
+                                    'Schedule',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
                                 ),
                                 Image.asset('assets/iconCalendar.png'),
                               ],

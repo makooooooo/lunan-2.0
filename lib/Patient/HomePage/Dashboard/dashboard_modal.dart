@@ -13,38 +13,39 @@ class DashboardModal extends StatelessWidget {
     final userId = user?.uid;
 
     final dateFormatter = DateFormat('yyyy-MM-dd');
-final formData = {
-  'UID': userId,
-  'Mood': mood,
-  'DateSubmitted': dateFormatter.format(DateTime.now()),
-};
+    final formData = {
+      'UID': userId,
+      'Mood': mood,
+      'DateSubmitted': dateFormatter.format(DateTime.now()),
+    };
 
     try {
-  await FirebaseFirestore.instance.collection('MoodTracker').add(formData);
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Success'),
-        content: const Text('Mood submitted successfully!'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the success dialog
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LandingPage(), // Navigate to Dashboard
-                ),
-              );
-            },
-            child: const Text('OK'),
-          ),
-        ],
+      await FirebaseFirestore.instance.collection('MoodTracker').add(formData);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Mood submitted successfully!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close the success dialog
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          LandingPage(), // Navigate to Dashboard
+                    ),
+                  );
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
       );
-    },
-  );
-}catch (e) {
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -86,18 +87,21 @@ final formData = {
             return Text('User not found');
           }
 
-          final firstName = documents[0].get('firstName') as String? ?? 'Unknown';
+          final firstName =
+              documents[0].get('firstName') as String? ?? 'Unknown';
 
           return Scaffold(
             backgroundColor: const Color(0xffF5E9CF),
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: const Color(0xff7DB9B6),
+              elevation: 0,
+              backgroundColor: const Color(0xffF5E9CF),
             ),
             body: Center(
               child: Container(
-                width: 300,
-                height: 325,
+                width: 320,
+                height: 400,
+                margin: const EdgeInsets.only(bottom: 100),
                 decoration: BoxDecoration(
                   color: const Color(0xff7DB9B6),
                   borderRadius: BorderRadius.circular(20),
@@ -106,13 +110,13 @@ final formData = {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 30, 0, 20),
+                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: Text(
-                        'Welcome back $firstName!',
+                        'Welcome back\n $firstName!',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Montserrat',
-                          fontSize: 25,
+                          fontSize: 30,
                           color: Color(0xffffffff),
                         ),
                       ),
@@ -123,7 +127,7 @@ final formData = {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
-                        fontSize: 15,
+                        fontSize: 25,
                         color: Color(0xffffffff),
                       ),
                     ),

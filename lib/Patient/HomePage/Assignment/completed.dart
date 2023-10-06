@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunan/Patient/HomePage/Assignment/chooser.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
 class Completed extends StatelessWidget {
@@ -9,7 +10,20 @@ class Completed extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-        backgroundColor: const Color(0xff7DB9B6),
+        elevation: 0,
+        backgroundColor: const Color(0xffF5E9CF),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AssignmentChooser()),
+            );
+          }, 
+          color: Color(0xff4D455D), // Change this color to your desired color
+        ),
+        
+      
       ),
 
       body: Center(
@@ -28,10 +42,14 @@ class Completed extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(
-              color: Color(0xff4D455D), // Customize the color of the line
-              thickness: 2, // Adjust the thickness of the line
-            ),
+           const Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 20), // Adjust the padding as needed
+                  child: Divider(
+                    color: Color(0xff4D455D),
+                    thickness: 2,
+                  ),
+                ),
             InkWell(
               // onTap: () {
               //   Navigator.push(

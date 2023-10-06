@@ -29,7 +29,7 @@ class WeeklyForms extends StatelessWidget {
               MaterialPageRoute(builder: (context) => WeeklyFormChooser()),
             );
           },
-          color: Color(0xff4D455D),// Change this color to your desired color
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -62,9 +62,13 @@ class WeeklyForms extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Divider(
-                      color: Color(0xff4D455D),
-                      thickness: 2,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20), // Adjust the padding as needed
+                      child: Divider(
+                        color: Color(0xff4D455D),
+                        thickness: 2,
+                      ),
                     ),
                     ListView.builder(
                       shrinkWrap: true,
@@ -113,13 +117,12 @@ class WeeklyForms extends StatelessWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 WeeklyFormEdit(
-                                                documentId: documentId,
+                                              documentId: documentId,
                                               formData: formData,
                                             ),
                                           ),

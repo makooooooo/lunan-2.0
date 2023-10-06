@@ -83,6 +83,8 @@ flutter:
     - assets/iconCalendar.png
     - assets/iconTaskSquare.png
     - assets/iconPaperClip.png
+    - assets/Lexi.png
+    - assets/Lana.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

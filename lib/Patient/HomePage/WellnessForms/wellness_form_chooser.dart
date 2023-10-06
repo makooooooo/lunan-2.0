@@ -59,6 +59,9 @@ class WellnessFormChooser extends StatelessWidget {
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                           child: const Text(
                             'View Wellness Question Forms',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -91,6 +94,9 @@ class WellnessFormChooser extends StatelessWidget {
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                           child: const Text(
                             'View Wellness Forms',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                             
                             textAlign: TextAlign.center,
                           ),

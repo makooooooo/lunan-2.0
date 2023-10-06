@@ -25,7 +25,7 @@ class AssignmentChooser extends StatelessWidget {
               MaterialPageRoute(builder: (context) => LandingPage()),
             );
           },
-          color: Color(0xff4D455D),// Change this color to your desired color
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
       // Add the drawer for the menu
@@ -43,8 +43,7 @@ class AssignmentChooser extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => Assignment()),
+                      MaterialPageRoute(builder: (context) => Assignment()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -59,6 +58,9 @@ class AssignmentChooser extends StatelessWidget {
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
                         'View Assignments',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -88,6 +90,9 @@ class AssignmentChooser extends StatelessWidget {
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                       child: const Text(
                         'Completed Assignments',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),

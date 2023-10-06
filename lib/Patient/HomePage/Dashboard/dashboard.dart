@@ -48,7 +48,12 @@ class Dashboard extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text('Weekly Forms'),
+                              child: const Text(
+                                'Weekly Forms',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             Image.asset('assets/iconEdit.png'),
                           ],
@@ -78,7 +83,12 @@ class Dashboard extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text('Wellness Forms'),
+                              child: const Text(
+                                'Wellness Forms',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             Image.asset('assets/iconEdit2.png'),
                           ],
@@ -98,7 +108,8 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AssignmentChooser()),
+                                builder: (context) =>
+                                    const AssignmentChooser()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -112,7 +123,12 @@ class Dashboard extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text('Assignments'),
+                              child: const Text(
+                                'Assignments',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             Image.asset('assets/iconTaskSquare.png'),
                           ],
@@ -141,7 +157,13 @@ class Dashboard extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text('Wellness Guide'),
+                              child: const Text(
+                                'Wellness Guide',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             Image.asset('assets/iconBookSaved.png'),
                           ],
@@ -174,7 +196,12 @@ class Dashboard extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text('Schedule'),
+                              child: const Text(
+                                'Schedule',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                             Image.asset('assets/iconCalendar.png'),
                           ],

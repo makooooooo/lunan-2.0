@@ -12,8 +12,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
-      final TextEditingController emailController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
     Future<void> loginUser(BuildContext context) async {
@@ -21,7 +20,8 @@ class LoginPage extends StatelessWidget {
       final String password = passwordController.text.trim();
 
       try {
-        UserCredential userCredential = await AuthHelper.loginUser(email, password);
+        UserCredential userCredential =
+            await AuthHelper.loginUser(email, password);
         String uid = userCredential.user!.uid;
 
         DocumentSnapshot userSnapshot = await AuthHelper.getUserDocument(uid);
@@ -78,94 +78,115 @@ class LoginPage extends StatelessWidget {
         );
       }
     }
-  
-    return WillPopScope (
+
+    return WillPopScope(
       onWillPop: () async {
-      return false;
-    },
-    
-    
-    
-    child: Scaffold (
-      backgroundColor: const Color(0xffF5E9CF),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.all(5),
-              ),
-              const Image(image: AssetImage('assets/logo.png')),
-              const Text(
-                'Welcome!',
-                style: TextStyle(fontSize: 30, color: Color(0xff4D455D)),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                child: TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter email',
-                  ),
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xffF5E9CF),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.all(5),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xff4D455D),
+                const Image(image: AssetImage('assets/logo.png')),
+                const Text(
+                  'Hello There!',
+                  style: TextStyle(fontSize: 30, color: Color(0xff4D455D)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff4D455D),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff4D455D),
+                        ),
+                      ),
+                      labelText: 'Email',
+                      hintText: 'Enter email',
+                      labelStyle: TextStyle(
+                        color: Color(
+                            0xff4D455D), // Change the label (hint) text color
+                      ),
+                      hintStyle: TextStyle(
+                        color: Color(0xff4D455D), // Change the hint text color
                       ),
                     ),
-                    labelText: 'Password',
-                    hintText: 'Enter password',
                   ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const ForgotPassword()),
-                  );
-                },
-                child: const Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Color(0xff4D455D)),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff4D455D),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff4D455D),
+                        ),
+                      ),
+                      labelText: 'Password',
+                      hintText: 'Enter Password',
+                      labelStyle: TextStyle(
+                        color: Color(
+                            0xff4D455D), // Change the label (hint) text color
+                      ),
+                      hintStyle: TextStyle(
+                        color: Color(0xff4D455D), // Change the hint text color
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              Container(
-                height: 50,
-                width: 250,
-                decoration: BoxDecoration(
-                  color: const Color(0xff7DB9B6),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextButton(
+                TextButton(
                   onPressed: () {
-                    loginUser(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ForgotPassword()),
+                    );
                   },
                   child: const Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                    'Forgot Password?',
+                    style: TextStyle(color: Color(0xff4D455D)),
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  height: 50,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff4D455D),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      loginUser(context);
+                    },
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-    
     );
-
-
-  
   }
 }
