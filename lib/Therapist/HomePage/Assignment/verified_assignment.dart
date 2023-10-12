@@ -3,6 +3,7 @@ import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_patientA.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 
 class VerifiedAssignment extends StatelessWidget {
@@ -19,7 +20,10 @@ class VerifiedAssignment extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-             Navigator.pop(context);
+             Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  PatientsInfo( selectedPatientUID: selectedPatientUID,)),
+                );
             },
           color: Color(0xff4D455D),// Change this color to your desired color
         ),

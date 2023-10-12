@@ -11,7 +11,11 @@ class TurnedINWeeklyFroms extends StatelessWidget {
   final String selectedPatientUID;
   final Map<String, dynamic>? formData;
 
-  const TurnedINWeeklyFroms({Key? key, required this.selectedPatientUID, this.formData,}) : super(key: key);
+  const TurnedINWeeklyFroms({
+    Key? key,
+    required this.selectedPatientUID,
+    this.formData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +98,11 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                      builder: (context) => VerifiedWeeklyForms(
-                                        selectedPatientUID: selectedPatientUID, 
-                                        )
-                                      ),
+                                          builder: (context) =>
+                                              VerifiedWeeklyForms(
+                                                selectedPatientUID:
+                                                    selectedPatientUID,
+                                              )),
                                     );
                                   },
                                   child: const Text('Verified'),
@@ -122,37 +127,45 @@ class TurnedINWeeklyFroms extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: WeeklyFormsList(selectedPatientUID: selectedPatientUID, formData: formData,),
+                              child: WeeklyFormsList(
+                                selectedPatientUID: selectedPatientUID,
+                                formData: formData,
+                              ),
                             ),
-                            Container(
-                              width: 150,
-                              margin: const EdgeInsets.fromLTRB(170, 0, 0, 0),
-                              height: 45,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PatientList(),
-                                ),
-                              );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff7DB9B6),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 150,
+                                height: 45,
+                                margin: const EdgeInsets.only(
+                                    right: 20,
+                                    bottom: 20), // Adjust the margins as needed
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PatientList(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff7DB9B6),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                ),
-                                child: const Text(
-                                  'Back to\nPatient List',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xffF5E9CF),
+                                  child: const Text(
+                                    'Back to\nPatient List',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xffF5E9CF),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -172,7 +185,9 @@ class WeeklyFormsList extends StatelessWidget {
   final String selectedPatientUID;
   final Map<String, dynamic>? formData;
 
-  const WeeklyFormsList({Key? key, required this.selectedPatientUID, this.formData}) : super(key: key);
+  const WeeklyFormsList(
+      {Key? key, required this.selectedPatientUID, this.formData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +221,6 @@ class WeeklyFormsList extends StatelessWidget {
             final dateAccomplished = formData['DateSubmitted'] as String;
             final status = formData['Status'];
             final documentId = formDocument.id;
-            
 
             // Check if Status is null before displaying the item
             if (status == null) {

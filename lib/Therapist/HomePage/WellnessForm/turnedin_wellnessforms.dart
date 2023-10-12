@@ -124,35 +124,40 @@ class TurnedINWellnessFroms extends StatelessWidget {
                             Expanded(
                               child: WeeklyFormsList(selectedPatientUID: selectedPatientUID, formData: formData,),
                             ),
-                            Container(
-                              width: 150,
-                              margin: const EdgeInsets.fromLTRB(170, 0, 0, 0),
-                              height: 45,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PatientList(),
-                                ),
-                              );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff7DB9B6),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                             Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 150,
+                                height: 45,
+                                margin: const EdgeInsets.only(
+                                    right: 20,
+                                    bottom: 20), // Adjust the margins as needed
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PatientList(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff7DB9B6),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                ),
-                                child: const Text(
-                                  'Back to\nPatient List',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xffF5E9CF),
+                                  child: const Text(
+                                    'Back to\nPatient List',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xffF5E9CF),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),

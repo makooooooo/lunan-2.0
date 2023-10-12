@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms_info.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/verified_wellnessforms.dart';
@@ -23,12 +24,15 @@ class VerifiedWellnessForms extends StatelessWidget {
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color(0xff4D455D),
-        ),
+              icon: const Icon(Icons.arrow_back), // Back button icon
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  PatientsInfo( selectedPatientUID: selectedPatientUID,)),
+                );
+              },
+               color: Color(0xff4D455D),
+            ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -133,35 +137,40 @@ class VerifiedWellnessForms extends StatelessWidget {
                             Expanded(
                               child: WeeklyFormsList(selectedPatientUID: selectedPatientUID, formData: formData,),
                             ),
-                            Container(
-                              width: 150,
-                              margin: const EdgeInsets.fromLTRB(170, 0, 0, 0),
-                              height: 45,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PatientList(),
-                                ),
-                              );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff7DB9B6),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                             Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: 150,
+                                height: 45,
+                                margin: const EdgeInsets.only(
+                                    right: 20,
+                                    bottom: 20), // Adjust the margins as needed
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PatientList(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff7DB9B6),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
                                   ),
-                                ),
-                                child: const Text(
-                                  'Back to\nPatient List',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xffF5E9CF),
+                                  child: const Text(
+                                    'Back to\nPatient List',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xffF5E9CF),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),

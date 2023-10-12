@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:lunan/Patient/MenuList/menulist.dart';
 
-class WellnessGuide extends StatefulWidget {
-  const WellnessGuide({Key? key}) : super(key: key);
+class WellnessGuideT extends StatefulWidget {
+  const WellnessGuideT({Key? key}) : super(key: key);
 
   @override
-  State<WellnessGuide> createState() => _WellnessGuideState();
+  State<WellnessGuideT> createState() => _WellnessGuideTState();
 }
 
-class _WellnessGuideState extends State<WellnessGuide> {
+class _WellnessGuideTState extends State<WellnessGuideT> {
   final videoURL1 = "https://youtu.be/-7-CAFhJn78";
   final videoURL2 = "https://youtu.be/cyMxWXlX9sU";
   final videoURL3 = "https://youtu.be/rvaqPPjtxng";

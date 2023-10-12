@@ -42,7 +42,7 @@ class ProfileSettingT extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(top: 70),
                   child: const Text(
-                    "I'm \n John Doe",
+                    "I'm \n Micah Abalos!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -52,18 +52,18 @@ class ProfileSettingT extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: const Text(
-                    "Mood : 😥",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 18,
-                      color: Color(0xff4D455D),
-                    ),
-                  ),
-                ),
+              //  Container(
+              //    margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              //    child: const Text(
+              //      "Mood : 😥",
+              //      textAlign: TextAlign.center,
+              //      style: TextStyle(
+              //        fontFamily: 'Montserrat',
+              //        fontSize: 18,
+              //        color: Color(0xff4D455D),
+              //      ),
+              //    ),
+              //  ),
                 Container(
                   height: 40,
                   width: 200,
