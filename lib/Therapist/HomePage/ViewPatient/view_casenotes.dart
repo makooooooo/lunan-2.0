@@ -4,10 +4,21 @@ import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 
 class ViewCaseNotes extends StatelessWidget {
     final String selectedPatientUID;
-  ViewCaseNotes({Key? key, required this.selectedPatientUID}) : super(key: key);
+    final Map<String, dynamic>? formData;
+    final String documentId;
+  ViewCaseNotes({
+    Key? key,
+    required this.selectedPatientUID,
+    this.formData,
+    required this.documentId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+        if (formData == null) {
+      // Handle the case where formData is null
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
