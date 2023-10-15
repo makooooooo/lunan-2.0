@@ -147,8 +147,80 @@ class PatientCaseNotes extends StatelessWidget {
               ),
             ],
           ),
+
         ),
       ),
+    );
+  }
+}
+
+class CaseNotesList extends StatelessWidget {
+  final String selectedPatientUID;
+  final Map<String, dynamic>? formData;
+
+  const CaseNotesList(
+      {Key? key, required this.selectedPatientUID, this.formData})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('Selected Patient UID: $selectedPatientUID');
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('CaseNotes')
+          .where('patientUID', isEqualTo: selectedPatientUID)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Text('No case notes found for this user.');
+        }
+
+        final caseNotes = snapshot.data!.docs;
+
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: caseNotes.length,
+          itemBuilder: (context, index) {
+            final formDocument = caseNotes[index];
+            final formData = formDocument.data() as Map<String, dynamic>;
+            final dateAdded = formData['dateAdded'] as String;
+            final documentId = formDocument.id;
+              return InkWell(
+  onTap: () {
+    // Pass both selectedPatientUID and formData to ViewCaseNotes
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ViewCaseNotes(
+          selectedPatientUID: selectedPatientUID,
+          formData: formData,
+
+        ),
+      ),
+    );
+  },
+  child: Container(
+    width: 50, // Adjust the width here as needed
+    height: 70,
+    decoration: BoxDecoration(
+      color: Color.fromARGB(255, 255, 255, 255),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+    child: Text('Date Accomplished: $dateAdded'),
+  ),
+);
+          },
+        );
+      },
     );
   }
 }
