@@ -5,22 +5,22 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PatientTurnIn extends StatefulWidget {
+class turnedIn extends StatefulWidget {
   final Map<String, dynamic> formData;
   final String documentId;
 
-  const PatientTurnIn({required this.formData, Key? key, required this.documentId}) : super(key: key);
+  const turnedIn({required this.formData, Key? key, required this.documentId}) : super(key: key);
 
   @override
-  _PatientTurnInState createState() => _PatientTurnInState();
+  _turnedInState createState() => _turnedInState();
 }
 
-class _PatientTurnInState extends State<PatientTurnIn> {
-  String? selectedFileName;
+class _turnedInState extends State<turnedIn> {
   String? Deadline;
   String? Activity;
   String? Description;
   String? documentId;
+  String? DownloadURL;
   File? selectedFile; // Declare selectedFile here
 
   @override
@@ -29,45 +29,15 @@ class _PatientTurnInState extends State<PatientTurnIn> {
     Deadline = widget.formData['Deadline'] as String?;
     Activity = widget.formData['Activity'];
     Description = widget.formData['Description'];
+    DownloadURL = widget.formData['DownloadURL'];
     documentId = widget.documentId; // Assign the documentId from the widget to the local variable
     print('Document ID: $documentId');
   }
 
-  Future<void> attachFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.any, // You can customize this to specify the file types you want to allow.
-    );
-
-    if (result != null) {
-      selectedFile = File(result.files.single.path!); // Store the selected file
-      // You can use the 'selectedFile' variable for further processing, such as uploading the file.
-
-      // Update the UI to display the selected file name
-      setState(() {
-        selectedFileName = result.files.single.name;
-      });
-    } else {
-      // User canceled the file picking
-      print('File picking canceled');
-    }
-  }
-
-  Future<void> uploadAndSubmit() async {
-    if (selectedFile != null) { // Check if a file has been selected
-      final Reference storageRef = FirebaseStorage.instance.ref().child('/tasks/$selectedFileName');
-      final UploadTask uploadTask = storageRef.putFile(selectedFile!); // Use selectedFile
-
-      await uploadTask.whenComplete(() async {
-        final String downloadURL = await storageRef.getDownloadURL();
-
-        // Update Firestore document
-        await FirebaseFirestore.instance.collection('Tasks').doc(documentId).update({
-          'Status': 'turnedIn',
-          'DownloadURL': downloadURL,
-        });
-
-      });
-    }
+  // Function to extract the filename from the DownloadURL
+  String extractFileName(String downloadURL) {
+    final uri = Uri.parse(downloadURL);
+    return uri.pathSegments.last;
   }
 
   @override
@@ -139,51 +109,16 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                           margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
                           child: Row(
                             children: [
-                              TextButton(
-                                onPressed: () {
-                                  attachFile();
-                                },
-                                style: ButtonStyle(
-                                  foregroundColor: MaterialStateProperty.all<Color>(
-                                    Colors.white,
-                                  ),
-                                  side: MaterialStateProperty.all<BorderSide>(
-                                    const BorderSide(
-                                      color: Color(0xffF5E9CF),
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                ),
-                                child: const Text('Attach File'),
-                              ),
-                              // Display selected file name or "No file selected"
                               Container(
                                 margin: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  selectedFileName ?? 'No file selected',
+                                  extractFileName(DownloadURL!), // Display the filename
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(200, 0, 0, 15),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              uploadAndSubmit();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff7DB97F),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text(
-                              'Submit',
-                            ),
                           ),
                         ),
                       ],
@@ -198,4 +133,3 @@ class _PatientTurnInState extends State<PatientTurnIn> {
     );
   }
 }
-                         

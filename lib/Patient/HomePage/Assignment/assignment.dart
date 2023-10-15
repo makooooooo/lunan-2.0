@@ -3,14 +3,19 @@ import 'package:lunan/Patient/HomePage/Assignment/chooser.dart';
 import 'package:lunan/Patient/HomePage/Assignment/patient_turn_in.dart';
 import 'package:lunan/Patient/HomePage/landing_page.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Assignment extends StatelessWidget {
   const Assignment({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final userId = user?.uid;
+
     return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF), // Set the background color
+      backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
@@ -22,63 +27,97 @@ class Assignment extends StatelessWidget {
               MaterialPageRoute(builder: (context) => AssignmentChooser()),
             );
           },
-          color: Color(0xff4D455D), // Change this color to your desired color
+          color: Color(0xff4D455D),
         ),
       ),
+      body: SingleChildScrollView( // Wrap with SingleChildScrollView
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('Tasks')
+              .where('PatientUID', isEqualTo: userId)
+              .where('Status', isNull: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              final forms = snapshot.data!.docs;
 
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-              child: const Text(
-                'Assignments',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 30,
-                  color: Color(0xff4D455D),
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20), // Adjust the padding as needed
-              child: Divider(
-                color: Color(0xff4D455D),
-                thickness: 2,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PatientTurnIn()),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.all(10),
-                height: 80,
-                decoration: BoxDecoration(
-                  color: const Color(0xff4D455D),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16),
-                      child: Text(
-                        'Activity # 1',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+              return Column( // Remove the outer Column
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    child: const Text(
+                      'View Assignments',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                        fontSize: 30,
+                        color: Color(0xff4D455D),
                       ),
-                    )),
-              ),
-            ),
-          ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Divider(
+                      color: Color(0xff4D455D),
+                      thickness: 2,
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: forms.length,
+                    itemBuilder: (context, index) {
+                      final documentId = forms[index].id as String;
+                      final formData = forms[index].data() as Map<String, dynamic>;
+                      
+
+                      final Activity = formData['Activity'] as String;
+
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PatientTurnIn(formData: formData, documentId: documentId),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff4D455D),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 16),
+                                  child: Text(
+                                    'Activity: $Activity',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            }
+          },
         ),
       ),
     );
