@@ -188,6 +188,7 @@ class PatientCaseNotes extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 
@@ -259,5 +260,6 @@ class CaseNotesList extends StatelessWidget {
         );
       },
     );
+
   }
 }
