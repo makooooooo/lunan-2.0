@@ -9,13 +9,11 @@ class PatientCaseNotes extends StatelessWidget {
   final String selectedPatientUID;
   final Map<String, dynamic>? formData;
 
-  const PatientCaseNotes({
-  Key? key, 
-  required this.selectedPatientUID, 
-  this.formData
-  }) : super(key: key);
+  const PatientCaseNotes(
+      {Key? key, required this.selectedPatientUID, this.formData})
+      : super(key: key);
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
@@ -81,8 +79,7 @@ class PatientCaseNotes extends StatelessWidget {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                              ],
+                              children: [],
                             ),
                             Padding(
                               padding: const EdgeInsets.all(20),
@@ -104,39 +101,80 @@ class PatientCaseNotes extends StatelessWidget {
                                 formData: formData,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                width: 150,
-                                height: 45,
-                                margin: const EdgeInsets.only(
-                                    right: 20,
-                                    bottom: 20), // Adjust the margins as needed
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PatientList(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Container(
+                                    width: 150,
+                                    height: 45,
+                                    margin: const EdgeInsets.only(
+                                        left: 20, bottom: 20),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PatientList(),
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff7DB9B6),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
                                       ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff7DB9B6),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    'Back to\nPatient List',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffF5E9CF),
+                                      child: const Text(
+                                        'Back to\nPatient List',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xffF5E9CF),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Container(
+                                    width: 150,
+                                    height: 45,
+                                    margin: const EdgeInsets.only(
+                                        right: 20, bottom: 20),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => CreateCaseNotes(selectedPatientUID: selectedPatientUID,),
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 19, 195, 122),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Create Case\n Notes',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xffF5E9CF),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             )
                           ],
                         ),
@@ -150,6 +188,7 @@ class PatientCaseNotes extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 
@@ -192,34 +231,35 @@ class CaseNotesList extends StatelessWidget {
             final formData = formDocument.data() as Map<String, dynamic>;
             final dateAdded = formData['dateAdded'] as String;
             final documentId = formDocument.id;
-              return InkWell(
-  onTap: () {
-    // Pass both selectedPatientUID and formData to ViewCaseNotes
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ViewCaseNotes(
-          selectedPatientUID: selectedPatientUID,
-          formData: formData,
-          documentId: documentId,
-        ),
-      ),
-    );
-  },
-  child: Container(
-    width: 50, // Adjust the width here as needed
-    height: 70,
-    decoration: BoxDecoration(
-      color: Color.fromARGB(255, 255, 255, 255),
-      borderRadius: BorderRadius.circular(20),
-    ),
-    padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
-    child: Text('Date Accomplished: $dateAdded'),
-  ),
-);
+            return InkWell(
+              onTap: () {
+                // Pass both selectedPatientUID and formData to ViewCaseNotes
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewCaseNotes(
+                      selectedPatientUID: selectedPatientUID,
+                      formData: formData,
+                      documentId: documentId,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: 50, // Adjust the width here as needed
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+                child: Text('Date Accomplished: $dateAdded'),
+              ),
+            );
           },
         );
       },
     );
+
   }
 }
