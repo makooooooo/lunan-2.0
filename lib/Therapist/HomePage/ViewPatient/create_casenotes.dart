@@ -176,6 +176,107 @@ class CreateCaseNotes extends StatelessWidget {
           ),
         ),
       ),
+
+    );
+  }
+
+  void _attachFile(BuildContext context) async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null) {
+      // Handle the selected file, you can store it or use it as needed.
+    }
+  }
+}
+
+class QuillEditorBasic extends StatefulWidget {
+  final quill.QuillController controller;
+  final String selectedPatientUID;
+
+  QuillEditorBasic({
+    Key? key,
+    required this.controller,
+    required this.selectedPatientUID,
+  }) : super(key: key);
+
+  @override
+  _QuillEditorBasicState createState() => _QuillEditorBasicState();
+}
+
+class _QuillEditorBasicState extends State<QuillEditorBasic> {
+  bool isBoldActive = false;
+  bool isUnderlineActive = false;
+  bool isListActive = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final quill.QuillToolbar toolbar = quill.QuillToolbar(
+      children: <Widget>[
+        _buildQuillIconButton(
+          Icons.format_bold,
+          () {
+            setState(() {
+              isBoldActive = !isBoldActive;
+            });
+            widget.controller.formatSelection(quill.Attribute.bold);
+          },
+          backgroundColor: isBoldActive ? Colors.grey : Colors.white,
+        ),
+        _buildQuillIconButton(
+          Icons.format_underlined,
+          () {
+            setState(() {
+              isUnderlineActive = !isUnderlineActive;
+            });
+            widget.controller.formatSelection(quill.Attribute.underline);
+          },
+          backgroundColor: isUnderlineActive ? Colors.grey : Colors.white,
+        ),
+        _buildQuillIconButton(
+          Icons.format_list_bulleted,
+          () {
+            setState(() {
+              isListActive = !isListActive;
+            });
+            widget.controller.formatSelection(quill.Attribute.list);
+          },
+          backgroundColor: isListActive ? Colors.grey : Colors.white,
+        ),
+      ],
+    );
+
+    return Container(
+      constraints: BoxConstraints(maxHeight: 400),
+      child: Column(
+        children: <Widget>[
+          toolbar,
+          Expanded(
+            child: quill.QuillEditor(
+              controller: widget.controller,
+              scrollController: ScrollController(),
+              scrollable: true,
+              padding: EdgeInsets.all(8),
+              autoFocus: true,
+              expands: true,
+              focusNode: FocusNode(),
+              readOnly: false,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuillIconButton(IconData icon, VoidCallback onPressed, {Color? backgroundColor}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+      child: quill.QuillIconButton(
+        icon: Icon(icon),
+        onPressed: onPressed,
+      ),
+
     );
   }
 
