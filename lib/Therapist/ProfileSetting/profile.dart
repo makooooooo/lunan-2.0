@@ -3,155 +3,174 @@ import 'package:lunan/Therapist/HomePage/dashboard.dart';
 import 'package:lunan/Therapist/ProfileSetting/edit_profile.dart';
 import 'package:lunan/Therapist/landing_pageT.dart';
 import 'package:lunan/Patient/SignIn/log_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileSettingT extends StatelessWidget {
-  const ProfileSettingT({super.key});
+  const ProfileSettingT({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          // Handle back button press
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LandingPageT()),
-          );
-          return false; // Return false to prevent default back behavior
-        },
-     child: Scaffold(
-       backgroundColor: const Color(0xffF5E9CF), // Set the background color
-          appBar: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: const Color(0xffF5E9CF),
-            iconTheme: const IconThemeData(color: Color(0xff4D455D)),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back), // Back button icon
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LandingPageT()),
-                );
-              },
-            ),
-          ), // Set the background color
-        body: SingleChildScrollView(
-              child: Center(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 70),
-                  child: const Text(
-                    "I'm \n Micah Abalos!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                      fontSize: 40,
-                      color: Color(0xff4D455D),
+    final user = FirebaseAuth.instance.currentUser;
+    final userId = user?.uid;
+
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection("Users")
+            .where("UID", isEqualTo: userId)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            final documents = snapshot.data!.docs;
+            if (documents.isEmpty) {
+              return Text('Therapist not found');
+            }
+
+            final firstName =
+                documents[0].get('firstName') as String? ?? 'Unknown';
+
+            return WillPopScope(
+                onWillPop: () async {
+                  // Handle back button press
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LandingPageT()),
+                  );
+                  return false; // Return false to prevent default back behavior
+                },
+                child: Scaffold(
+                  backgroundColor: const Color(0xffF5E9CF),
+                  appBar: AppBar(
+                    elevation: 0,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: const Color(0xffF5E9CF),
+                    iconTheme: const IconThemeData(color: Color(0xff4D455D)),
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LandingPageT()),
+                        );
+                      },
                     ),
                   ),
-                ),
-              //  Container(
-              //    margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              //    child: const Text(
-              //      "Mood : 😥",
-              //      textAlign: TextAlign.center,
-              //      style: TextStyle(
-              //        fontFamily: 'Montserrat',
-              //        fontSize: 18,
-              //        color: Color(0xff4D455D),
-              //      ),
-              //    ),
-              //  ),
-                Container(
-                  height: 40,
-                  width: 200,
-                  margin: const EdgeInsets.fromLTRB(
-                      30, 40, 30, 0), // Add horizontal margin
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EditProfileT()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, // Background color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Adjust the value as needed
-                        side: const BorderSide(
-                          color: Color(0xff4D455D), // Outline color
-                          width: 2.0, // Increase the border width
-                        ),
-                      ),
-                    ),
-                    child:const Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .center, // Center the Row horizontally
-                        children: [
-                          Icon(
-                            Icons.edit, // Replace with the desired icon
-                            color: Color(0xff4D455D), // Icon color
-                          ),
-                          SizedBox(width: 5), // Spacer between icon and text
-                          Text(
-                            'Edit Profile',
+                  body: SingleChildScrollView(
+                      child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(top: 70),
+                          child: Text(
+                            "I'm \n $firstName!",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Color(0xff4D455D)), // Text color
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              fontSize: 40,
+                              color: Color(0xff4D455D),
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  width: 200,
-                  margin: const EdgeInsets.fromLTRB(
-                      30, 10, 30, 0), // Add horizontal margin
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _showLogoutModal(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, // Background color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Adjust the value as needed
-                        side: const BorderSide(
-                          color: Color(0xff4D455D), // Outline color
-                          width: 2.0, // Increase the border width
                         ),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .center, // Center the Row horizontally
-                        children: [
-                          Icon(
-                            Icons.logout, // Replace with the desired icon
-                            color: Color(0xff4D455D), // Icon color
+                        Container(
+                          height: 40,
+                          width: 200,
+                          margin: const EdgeInsets.fromLTRB(
+                              30, 40, 30, 0), // Add horizontal margin
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const EditProfileT()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white, // Background color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Adjust the value as needed
+                                side: const BorderSide(
+                                  color: Color(0xff4D455D), // Outline color
+                                  width: 2.0, // Increase the border width
+                                ),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Center the Row horizontally
+                                children: [
+                                  Icon(
+                                    Icons.edit, // Replace with the desired icon
+                                    color: Color(0xff4D455D), // Icon color
+                                  ),
+                                  SizedBox(
+                                      width: 5), // Spacer between icon and text
+                                  Text(
+                                    'Edit Profile',
+                                    style: TextStyle(
+                                        color: Color(0xff4D455D)), // Text color
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          SizedBox(width: 5), // Spacer between icon and text
-                          Text(
-                            'Logout',
-                            style: TextStyle(
-                                color: Color(0xff4D455D)), // Text color
+                        ),
+                        Container(
+                          height: 40,
+                          width: 200,
+                          margin: const EdgeInsets.fromLTRB(
+                              30, 10, 30, 0), // Add horizontal margin
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _showLogoutModal(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white, // Background color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Adjust the value as needed
+                                side: const BorderSide(
+                                  color: Color(0xff4D455D), // Outline color
+                                  width: 2.0, // Increase the border width
+                                ),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Center the Row horizontally
+                                children: [
+                                  Icon(
+                                    Icons
+                                        .logout, // Replace with the desired icon
+                                    color: Color(0xff4D455D), // Icon color
+                                  ),
+                                  SizedBox(
+                                      width: 5), // Spacer between icon and text
+                                  Text(
+                                    'Logout',
+                                    style: TextStyle(
+                                        color: Color(0xff4D455D)), // Text color
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-          )),
-        ));
+                  )),
+                ));
+          }
+        });
   }
 }
 

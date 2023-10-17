@@ -143,7 +143,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const WellnessGuide()),
+                                builder: (context) => WellnessGuide()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

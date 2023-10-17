@@ -3,94 +3,21 @@ import 'package:lunan/Patient/HomePage/landing_page.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 
-class WellnessGuide extends StatefulWidget {
-  const WellnessGuide({Key? key}) : super(key: key);
-
-  @override
-  State<WellnessGuide> createState() => _WellnessGuideState();
-}
-
-class _WellnessGuideState extends State<WellnessGuide> {
-  final videoURL1 = "https://youtu.be/-7-CAFhJn78";
-  final videoURL2 = "https://youtu.be/cyMxWXlX9sU";
-  final videoURL3 = "https://youtu.be/rvaqPPjtxng";
-  final videoURL4 = "https://youtu.be/8TuRYV71Rgo";
-  final videoURL5 = "https://youtu.be/krBvzDlL0mM";
-  final videoURL6 = "https://youtu.be/C5L8Z3qA1DA";
-
-  late YoutubePlayerController _controller1;
-  late YoutubePlayerController _controller2;
-  late YoutubePlayerController _controller3;
-  late YoutubePlayerController _controller4;
-  late YoutubePlayerController _controller5;
-  late YoutubePlayerController _controller6;
-
-  @override
-  void initState() {
-    super.initState();
-    final videoID1 = YoutubePlayer.convertUrlToId(videoURL1)!;
-    _controller1 = YoutubePlayerController(
-      initialVideoId: videoID1,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID2 = YoutubePlayer.convertUrlToId(videoURL2)!;
-    _controller2 = YoutubePlayerController(
-      initialVideoId: videoID2,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID3 = YoutubePlayer.convertUrlToId(videoURL3)!;
-    _controller3 = YoutubePlayerController(
-      initialVideoId: videoID3,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID4 = YoutubePlayer.convertUrlToId(videoURL4)!;
-    _controller4 = YoutubePlayerController(
-      initialVideoId: videoID4,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID5 = YoutubePlayer.convertUrlToId(videoURL5)!;
-    _controller5 = YoutubePlayerController(
-      initialVideoId: videoID5,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID6 = YoutubePlayer.convertUrlToId(videoURL6)!;
-    _controller6 = YoutubePlayerController(
-      initialVideoId: videoID6,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller1.dispose();
-    _controller2.dispose();
-    _controller3.dispose();
-    _controller4.dispose();
-    _controller5.dispose();
-    _controller6.dispose();
-    super.dispose();
-  }
+class WellnessGuide extends StatelessWidget {
+  final String embeddedVideoURL1 = "https://www.youtube.com/embed/-7-CAFhJn78";
+  final String embeddedVideoURL2 = "https://www.youtube.com/embed/cyMxWXlX9sU";
+  final String embeddedVideoURL3 = "https://www.youtube.com/embed/rvaqPPjtxng";
+  final String embeddedVideoURL4 = "https://www.youtube.com/embed/8TuRYV71Rgo";
+  final String embeddedVideoURL5 = "https://www.youtube.com/embed/krBvzDlL0mM";
+  final String embeddedVideoURL6 = "https://www.youtube.com/embed/C5L8Z3qA1DA";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-      elevation: 0,
+        elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
-        
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -102,7 +29,6 @@ class _WellnessGuideState extends State<WellnessGuide> {
           color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -126,7 +52,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller1,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL1)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(
@@ -154,7 +83,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller2,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL2)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(
@@ -182,7 +114,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller3,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL3)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(
@@ -210,7 +145,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller4,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL4)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(
@@ -238,7 +176,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller5,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL5)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(
@@ -266,7 +207,10 @@ class _WellnessGuideState extends State<WellnessGuide> {
               Container(
                 margin: const EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: _controller6,
+                  controller: YoutubePlayerController(
+                    initialVideoId: YoutubePlayer.convertUrlToId(embeddedVideoURL6)!,
+                    flags: const YoutubePlayerFlags(autoPlay: false),
+                  ),
                   showVideoProgressIndicator: true,
                   progressIndicatorColor: Colors.amber,
                   progressColors: ProgressBarColors(

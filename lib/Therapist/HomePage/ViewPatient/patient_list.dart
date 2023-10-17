@@ -79,14 +79,31 @@ class PatientList extends StatelessWidget {
                   itemCount: documents.length,
                   itemBuilder: (BuildContext context, int index) {
                     final document = documents[index];
-                    final firstName = document['firstName'] as String? ?? '';
-                    final dateCreated = document['dateCreated'] as String? ?? '';
-                    final counselorUID = document['counselorUID'] as String? ?? '';
-                    final profilePicUrl = document['ProfPic'] as String? ?? '';
+                    String firstName = document['firstName'] as String? ?? '';
+                    String dateCreated = document['dateCreated'] as String? ?? '';
+                    String counselorUID = document['counselorUID'] as String? ?? '';
+                    String profilePicUrl = document['ProfPic'] as String? ?? '';
+                    String selectedPatientUID = document['UID'] as String? ?? '';
+
+                    // Check if field exists
+                    if (document['firstName'] != null) {
+                      firstName = document['firstName'] as String;
+                    }
+                    if (document['dateCreated'] != null) {
+                      dateCreated = document['dateCreated'] as String;
+                    }
+                    if (document['counselorUID'] != null) {
+                      counselorUID = document['counselorUID'] as String;
+                    }
+                    if (document['ProfPic'] != null) {
+                      profilePicUrl = document['ProfPic'] as String;
+                    }
+                    if (document['UID'] != null) {
+                      selectedPatientUID = document['UID'] as String;
+                    }
 
                     return InkWell(
                       onTap: () {
-                        final selectedPatientUID = document['UID'];
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -109,7 +126,7 @@ class PatientList extends StatelessWidget {
                             Container(
                               margin: const EdgeInsets.only(left: 16, right: 8),
                               child: CircleAvatar(
-                                backgroundImage: profilePicUrl != null ? NetworkImage(profilePicUrl) : null,
+                                backgroundImage: profilePicUrl.isNotEmpty ? NetworkImage(profilePicUrl) : null,
                                 radius: 20,
                               ),
                             ),

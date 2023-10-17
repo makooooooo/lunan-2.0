@@ -39,6 +39,7 @@ class _WellnessFormQuestion extends State<WellnessFormQuestion> {
       'WellnessQ4': questionFourValue,
       'UID': uid,
       'DateSubmitted': formattedDate,
+      'Status': null,
     };
 
     try {

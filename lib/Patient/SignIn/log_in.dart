@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lunan/Patient/ForgotPassword/forgot_password.dart';
+import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard_modal.dart';
+import 'package:lunan/Patient/HomePage/landing_page.dart';
 import 'package:lunan/Therapist/HomePage/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,10 +31,42 @@ class LoginPage extends StatelessWidget {
         String role = userSnapshot.get('Role');
 
         if (role == 'Patient') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const DashboardModal()),
-          );
+          final user = FirebaseAuth.instance.currentUser;
+          final userId = user?.uid;
+
+          final dateFormatter = DateFormat('yyyy-MM-dd');
+          final currentDateString = dateFormatter.format(DateTime.now());
+
+          // Check if a mood entry for today exists
+          FirebaseFirestore.instance
+              .collection('MoodTracker')
+              .where('UID', isEqualTo: userId)
+              .where('DateSubmitted', isEqualTo: currentDateString)
+              .get()
+              .then((moodEntry) {
+            if (moodEntry.docs.isNotEmpty) {
+              // Mood entry for today already exists, navigate to the Dashboard
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => LandingPage()),
+              );
+            } else {
+              // Mood entry for today doesn't exist, load the DashboardModal
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => DashboardModal()),
+              );
+            }
+          }).catchError((error) {
+            // Handle the error
+            print('Error: $error');
+            // You can choose to navigate to DashboardModal or Dashboard in case of an error
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => DashboardModal()), // or Dashboard()
+            );
+          });
         } else if (role == 'Counselor') {
           Navigator.push(
             context,
