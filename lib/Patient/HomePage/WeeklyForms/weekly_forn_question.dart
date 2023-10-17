@@ -40,6 +40,7 @@ class _WeeklyFormsQuestionState extends State<WeeklyFormsQuestion> {
       'WeeklyQ5': questionFiveValue,
       'UID': uid,
       'DateSubmitted': formattedDate,
+      'Status': null,
     };
 
     try {
