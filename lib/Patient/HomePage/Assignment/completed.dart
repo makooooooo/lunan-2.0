@@ -72,8 +72,6 @@ class Completed extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final documentId = forms[index].id as String;
                       final formData = forms[index].data() as Map<String, dynamic>;
-                      
-
                       final Activity = formData['Activity'] as String;
 
                       return InkWell(
