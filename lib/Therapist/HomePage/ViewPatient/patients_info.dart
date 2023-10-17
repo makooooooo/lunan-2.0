@@ -182,7 +182,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
                 child: Column(
                   children: [
                     Container(

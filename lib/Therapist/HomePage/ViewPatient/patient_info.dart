@@ -304,7 +304,7 @@ class _PatientInfoState extends State<PatientInfo> {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     height: 40,
                     child: ElevatedButton(
                         onPressed: () {

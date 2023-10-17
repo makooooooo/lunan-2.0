@@ -60,7 +60,8 @@ class PatientList extends StatelessWidget {
                 ),
               ),
             ),
-            StreamBuilder<QuerySnapshot>(
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
               stream: getUsersStream(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -127,6 +128,7 @@ class PatientList extends StatelessWidget {
                   },
                 );
               },
+            ),
             ),
           ],
         ),
