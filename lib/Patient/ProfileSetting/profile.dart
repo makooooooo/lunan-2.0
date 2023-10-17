@@ -87,71 +87,93 @@ class ProfileSetting extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const EditProfile(),
+                       Container(
+                          height: 40,
+                          width: 200,
+                          margin: const EdgeInsets.fromLTRB(
+                              30, 40, 30, 0), // Add horizontal margin
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const EditProfile()),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white, // Background color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Adjust the value as needed
+                                side: const BorderSide(
+                                  color: Color(0xff4D455D), // Outline color
+                                  width: 2.0, // Increase the border width
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: const Color(0xff4D455D),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            side: const BorderSide(
-                              color: Color(0xff4D455D),
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.edit,
-                              color: Color(0xff4D455D),
-                            ),
-                            const SizedBox(width: 5),
-                            const Text(
-                              'Edit Profile',
-                            ),
-                          ],
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _showLogoutModal(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: const Color(0xff4D455D),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            side: const BorderSide(
-                              color: Color(0xff4D455D),
-                              width: 2.0,
+                            child: const Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Center the Row horizontally
+                                children: [
+                                  Icon(
+                                    Icons.edit, // Replace with the desired icon
+                                    color: Color(0xff4D455D), // Icon color
+                                  ),
+                                  SizedBox(
+                                      width: 5), // Spacer between icon and text
+                                  Text(
+                                    'Edit Profile',
+                                    style: TextStyle(
+                                        color: Color(0xff4D455D)), // Text color
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.logout,
-                              color: Color(0xff4D455D),
+                        Container(
+                          height: 40,
+                          width: 200,
+                          margin: const EdgeInsets.fromLTRB(
+                              30, 10, 30, 0), // Add horizontal margin
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _showLogoutModal(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white, // Background color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Adjust the value as needed
+                                side: const BorderSide(
+                                  color: Color(0xff4D455D), // Outline color
+                                  width: 2.0, // Increase the border width
+                                ),
+                              ),
                             ),
-                            const SizedBox(width: 5),
-                            const Text(
-                              'Logout',
+                            child: const Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Center the Row horizontally
+                                children: [
+                                  Icon(
+                                    Icons
+                                        .logout, // Replace with the desired icon
+                                    color: Color(0xff4D455D), // Icon color
+                                  ),
+                                  SizedBox(
+                                      width: 5), // Spacer between icon and text
+                                  Text(
+                                    'Logout',
+                                    style: TextStyle(
+                                        color: Color(0xff4D455D)), // Text color
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

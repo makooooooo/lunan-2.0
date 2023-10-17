@@ -9,22 +9,29 @@ class ChatDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xff7DB9B6),
         title: Text(name),
       ),
       body: Center(
-        child: Container(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.end, // Align at the bottom
+        children: [
+          Container(
             padding: EdgeInsets.all(2.0),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     style: TextStyle(
-                        fontFamily: 'Poppins-Regular', fontSize: 13.5),
+                      fontSize: 13.5,
+                    ),
                     decoration: InputDecoration(
                       hintText: 'Type a message',
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF9DC08B)),
+                        borderSide: BorderSide(color: const Color(0xff4D455D)),
                       ),
                     ),
                   ),
@@ -37,13 +44,14 @@ class ChatDetailScreen extends StatelessWidget {
                     style: TextStyle(fontFamily: 'Poppins-Regular'),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFA9AF7E),
+                    primary: const Color(0xff4D455D),
                   ),
                 ),
               ],
             ),
           ),
-      ),
+        ],
+      )),
     );
   }
 }
