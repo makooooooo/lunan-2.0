@@ -116,7 +116,7 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-      elevation: 0,
+        elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -162,46 +162,46 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
                             fontWeight: FontWeight.bold),
                       ),
                       if (upQuestionOneValue == 0)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a very happy person.')),
-                          )
-                        else if (upQuestionOneValue == 1)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a happy person.')),
-                          )
-                        else if (upQuestionOneValue == 2)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Somewhat happy person.')),
-                          )
-                        else if (upQuestionOneValue == 3)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A moderately happy person.')),
-                          )
-                        else if (upQuestionOneValue == 4)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A happy person.')),
-                          )
-                        else if (upQuestionOneValue == 5)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A very happy person.')),
-                          )
-                        else if (upQuestionOneValue == 6)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(
-                                ('- A very happy and joyful person.')),
-                          ),
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a very happy person.')),
+                        )
+                      else if (upQuestionOneValue == 1)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a happy person.')),
+                        )
+                      else if (upQuestionOneValue == 2)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Somewhat happy person.')),
+                        )
+                      else if (upQuestionOneValue == 3)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A moderately happy person.')),
+                        )
+                      else if (upQuestionOneValue == 4)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A happy person.')),
+                        )
+                      else if (upQuestionOneValue == 5)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A very happy person.')),
+                        )
+                      else if (upQuestionOneValue == 6)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child:
+                              const Text(('- A very happy and joyful person.')),
+                        ),
                       Slider(
                           value: upQuestionOneValue,
                           min: 0,
-                          max: 5,
-                          divisions: 5,
+                          max: 6,
+                          divisions: 6,
                           label: upQuestionOneValue.toStringAsFixed(0),
                           activeColor: const Color(0xff7DB9B6),
                           thumbColor: const Color(0xff4D455D),
@@ -226,41 +226,41 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
                             fontWeight: FontWeight.bold),
                       ),
                       if (upQuestionTwoValue == 0)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a very happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 1)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 2)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Somewhat happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 3)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A moderately happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 4)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 5)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A very happy person.')),
-                          )
-                        else if (upQuestionTwoValue == 6)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(
-                                ('- A very happy and joyful person.')),
-                          ),
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a very happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 1)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 2)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Somewhat happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 3)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A moderately happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 4)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 5)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A very happy person.')),
+                        )
+                      else if (upQuestionTwoValue == 6)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child:
+                              const Text(('- A very happy and joyful person.')),
+                        ),
                       Slider(
                           value: upQuestionTwoValue,
                           min: 0,
@@ -290,41 +290,41 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
                             fontWeight: FontWeight.bold),
                       ),
                       if (upQuestionThreeValue == 0)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a very happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 1)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 2)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Somewhat happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 3)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A moderately happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 4)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 5)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A very happy person.')),
-                          )
-                        else if (upQuestionThreeValue == 6)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(
-                                ('- A very happy and joyful person.')),
-                          ),
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a very happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 1)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 2)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Somewhat happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 3)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A moderately happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 4)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 5)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A very happy person.')),
+                        )
+                      else if (upQuestionThreeValue == 6)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child:
+                              const Text(('- A very happy and joyful person.')),
+                        ),
                       Slider(
                           value: upQuestionThreeValue,
                           min: 0,
@@ -354,41 +354,41 @@ class _WellnessFormEditableState extends State<WellnessFormEditable> {
                             fontWeight: FontWeight.bold),
                       ),
                       if (upQuestionFourValue == 0)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a very happy person.')),
-                          )
-                        else if (upQuestionFourValue == 1)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Not a happy person.')),
-                          )
-                        else if (upQuestionFourValue == 2)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- Somewhat happy person.')),
-                          )
-                        else if (upQuestionFourValue == 3)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A moderately happy person.')),
-                          )
-                        else if (upQuestionFourValue == 4)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A happy person.')),
-                          )
-                        else if (upQuestionFourValue == 5)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(('- A very happy person.')),
-                          )
-                        else if (upQuestionFourValue == 6)
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            child: const Text(
-                                ('- A very happy and joyful person.')),
-                          ),
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a very happy person.')),
+                        )
+                      else if (upQuestionFourValue == 1)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Not a happy person.')),
+                        )
+                      else if (upQuestionFourValue == 2)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- Somewhat happy person.')),
+                        )
+                      else if (upQuestionFourValue == 3)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A moderately happy person.')),
+                        )
+                      else if (upQuestionFourValue == 4)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A happy person.')),
+                        )
+                      else if (upQuestionFourValue == 5)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child: const Text(('- A very happy person.')),
+                        )
+                      else if (upQuestionFourValue == 6)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          child:
+                              const Text(('- A very happy and joyful person.')),
+                        ),
                       Slider(
                           value: upQuestionFourValue,
                           min: 0,

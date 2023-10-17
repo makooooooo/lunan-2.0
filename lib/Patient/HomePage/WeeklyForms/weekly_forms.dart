@@ -4,9 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_chooser.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_form_editable.dart';
 import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forms_answer.dart';
-import 'package:lunan/Patient/HomePage/WeeklyForms/weekly_forn_question.dart';
-import 'package:lunan/Patient/MenuList/menulist.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class WeeklyForms extends StatelessWidget {
   const WeeklyForms({Key? key});
@@ -77,10 +74,8 @@ class WeeklyForms extends StatelessWidget {
                         final documentId = forms[index].id as String;
                         final formData =
                             forms[index].data() as Map<String, dynamic>;
-
                         final dateSubmitted =
                             formData['DateSubmitted'] as String;
-
                         return InkWell(
                           onTap: () {
                             Navigator.push(

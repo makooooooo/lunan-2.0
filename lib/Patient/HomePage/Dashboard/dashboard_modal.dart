@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:intl/intl.dart';
+import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/landing_page.dart';
 
 class DashboardModal extends StatelessWidget {
@@ -13,56 +13,78 @@ class DashboardModal extends StatelessWidget {
     final userId = user?.uid;
 
     final dateFormatter = DateFormat('yyyy-MM-dd');
-    final formData = {
-      'UID': userId,
-      'Mood': mood,
-      'DateSubmitted': dateFormatter.format(DateTime.now()),
-    };
+    final currentDateString = dateFormatter.format(DateTime.now());
+    print(currentDateString);
+    // Check if a mood entry for today exists
+    final moodEntry = await FirebaseFirestore.instance
+        .collection('MoodTracker')
+        .where('UID', isEqualTo: userId)
+        .where('DateSubmitted', isEqualTo: currentDateString)
+        .get();
 
-    try {
-      await FirebaseFirestore.instance.collection('MoodTracker').add(formData);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Mood submitted successfully!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context); // Close the success dialog
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          LandingPage(), // Navigate to Dashboard
-                    ),
-                  );
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+    if (moodEntry.docs.isNotEmpty) {
+      // Mood entry for today already exists, show an error message or take another action
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Dashboard(),
+        ),
       );
-    } catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: Text('Error submitting mood: $e'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context); // Go back to previous screen
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+    } else {
+      // Mood entry for today doesn't exist, submit the mood
+      final formData = {
+        'UID': userId,
+        'Mood': mood,
+        'DateSubmitted': currentDateString,
+      };
+
+      try {
+        await FirebaseFirestore.instance
+            .collection('MoodTracker')
+            .add(formData);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Success'),
+              content: const Text('Mood submitted successfully!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the success dialog
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LandingPage(), // Navigate to Dashboard
+                      ),
+                    );
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: Text('Error submitting mood: $e'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Go back to previous screen
+                  },
+                  child: const Text('OK'),
+                )
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
@@ -73,8 +95,8 @@ class DashboardModal extends StatelessWidget {
 
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection("Users")
-          .where("UID", isEqualTo: userId)
+          .collection('Users')
+          .where('UID', isEqualTo: userId)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -140,7 +162,7 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Angry');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            primary: Colors.white,
                             shape: const CircleBorder(),
                           ),
                           child: const Text(
@@ -152,7 +174,7 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Feel like crying');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            primary: Colors.white,
                             shape: const CircleBorder(),
                           ),
                           child: const Text(
@@ -164,7 +186,7 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Sad');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            primary: Colors.white,
                             shape: const CircleBorder(),
                           ),
                           child: const Text(
@@ -176,7 +198,7 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Okay');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            primary: Colors.white,
                             shape: const CircleBorder(),
                           ),
                           child: const Text(
@@ -194,8 +216,8 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Calm');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder(),
+                            primary: Colors.white,
+                            shape: const CircleBorder(),
                           ),
                           child: const Text(
                             '🙂',
@@ -206,8 +228,8 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Happy');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder(),
+                            primary: Colors.white,
+                            shape: const CircleBorder(),
                           ),
                           child: const Text(
                             '😊',
@@ -218,8 +240,8 @@ class DashboardModal extends StatelessWidget {
                             _submitMood(context, 'Cheerful');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder(),
+                            primary: Colors.white,
+                            shape: const CircleBorder(),
                           ),
                           child: const Text(
                             '🤗',
