@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 
 class CreateCaseNotes extends StatelessWidget {
   final String selectedPatientUID;
@@ -135,9 +137,7 @@ class CreateCaseNotes extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Cancel',
-                                ),
+                                child: const Text('Cancel'),
                               ),
                             ),
                             Container(
@@ -146,13 +146,7 @@ class CreateCaseNotes extends StatelessWidget {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          PatientCaseNotes(selectedPatientUID: selectedPatientUID),
-                                    ),
-                                  );
+                                  saveCaseNote(context, _controller, selectedPatientUID);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromARGB(255, 19, 195, 122),
@@ -160,9 +154,7 @@ class CreateCaseNotes extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Save',
-                                ),
+                                child: const Text('Save'),
                               ),
                             ),
                           ],
@@ -176,7 +168,6 @@ class CreateCaseNotes extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 
@@ -269,21 +260,90 @@ class _QuillEditorBasicState extends State<QuillEditorBasic> {
   Widget _buildQuillIconButton(IconData icon, VoidCallback onPressed, {Color? backgroundColor}) {
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: backgroundColor ?? Colors.white,
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: quill.QuillIconButton(
         icon: Icon(icon),
         onPressed: onPressed,
       ),
-
     );
   }
+}
 
-  void _attachFile(BuildContext context) async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.image);
-    if (result != null) {
-      // Handle the selected file, you can store it or use it as needed.
+void saveCaseNote(BuildContext context, quill.QuillController controller, String selectedPatientUID) async {
+  // Get the current user
+  final user = FirebaseAuth.instance.currentUser;
+  final counselorUID = user?.uid;
+
+  // Get the current date
+  final dateAdded = Timestamp.now().toDate();
+
+  // Format the date as a string in "YYYY-MM-DD" format
+  final formattedDate = "${dateAdded.year}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}";
+
+  // Get the Quill Delta content from the controller
+  final delta = controller.document.toDelta();
+
+  // Convert the Quill Delta to HTML using the custom function
+  final contentHtml = convertQuillDeltaToHtml(delta);
+
+  // Prepare the data to be saved to Firestore
+  final caseNoteData = {
+    'content': contentHtml, // Store content as HTML with tags
+    'counselorUID': counselorUID,
+    'dateAdded': formattedDate,
+    'patientUID': selectedPatientUID,
+  };
+
+  // Reference to the Firestore collection
+  final collection = FirebaseFirestore.instance.collection('CaseNotes');
+
+  // Add the data to Firestore
+  await collection.add(caseNoteData);
+
+  // Navigate back to the previous screen
+  Navigator.pop(context);
+}
+
+String convertQuillDeltaToHtml(quill.Delta delta) {
+  final List<String> htmlParts = [];
+  String? listType;
+
+  for (final op in delta.toList()) {
+    final data = op.data;
+    final attributes = op.attributes;
+
+    if (data is String) {
+      // Handle line breaks
+      final lines = data.split('\n');
+      var wrappedLines = lines.map((line) => '<p>$line</p>').join('<br>');
+
+      if (attributes?['bold'] == true) {
+        wrappedLines = '<strong>$wrappedLines</strong>';
+      }
+      if (attributes?['italic'] == true) {
+        wrappedLines = '<em>$wrappedLines</em>';
+      }
+      if (attributes?['underline'] == true) {
+        wrappedLines = '<u>$wrappedLines</u>';
+      }
+      htmlParts.add(wrappedLines);
+    } else if (data is Map<String, dynamic> && data['insert'] is String) {
+      final insert = data['insert'] as String;
+      final html = StringBuffer();
+      if (attributes != null) {
+        if (attributes['list'] != null) {
+          listType = attributes['list'] == 'ordered' ? 'ol' : 'ul';
+          html.write('<$listType>');
+        }
+      }
+      html.write(insert);
+      if (attributes != null && listType != null) {
+        html.write('</$listType>');
+      }
+      htmlParts.add(html.toString());
     }
   }
+  return htmlParts.join('\n');
 }
