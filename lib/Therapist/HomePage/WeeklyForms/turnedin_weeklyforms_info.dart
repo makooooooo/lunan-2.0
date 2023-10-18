@@ -17,7 +17,8 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
     required this.documentId,
   }) : super(key: key);
 
-Future<void> _showVerificationDialog(BuildContext context, String documentId) async {
+  Future<void> _showVerificationDialog(
+      BuildContext context, String documentId) async {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -45,37 +46,38 @@ Future<void> _showVerificationDialog(BuildContext context, String documentId) as
       },
     );
   }
-void _verifyDocument(BuildContext context) {
-  if (documentId != null) {
-    VerifyWeeklyForm().updateWeeklyFormStatus(context, selectedPatientUID, documentId).then((_) {
-      // Show a Snackbar
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Document verified successfully.'),
-      ));
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => VerifiedInWeeklyFormsInfo(
-            selectedPatientUID: selectedPatientUID,
-            formData: formData,
-            documentId: documentId,
+
+  void _verifyDocument(BuildContext context) {
+    if (documentId != null) {
+      VerifyWeeklyForm()
+          .updateWeeklyFormStatus(context, selectedPatientUID, documentId)
+          .then((_) {
+        // Show a Snackbar
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Document verified successfully.'),
+        ));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => VerifiedInWeeklyFormsInfo(
+              selectedPatientUID: selectedPatientUID,
+              formData: formData,
+              documentId: documentId,
+            ),
           ),
-        ),
-      );
-    }).catchError((error) {
-      // Handle the error if the update fails
+        );
+      }).catchError((error) {
+        // Handle the error if the update fails
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Error verifying document. Please try again later.'),
+        ));
+        print('Error updating document status: $error');
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error verifying document. Please try again later.'),
+        content: Text('Error: Document ID is null.'),
       ));
-      print('Error updating document status: $error');
-    });
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Error: Document ID is null.'),
-    ));
+    }
   }
-}
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +133,8 @@ void _verifyDocument(BuildContext context) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    TurnedINWeeklyFroms(selectedPatientUID: selectedPatientUID, formData: formData),
+                builder: (context) => TurnedINWeeklyFroms(
+                    selectedPatientUID: selectedPatientUID, formData: formData),
               ),
             );
           },
@@ -287,21 +289,23 @@ void _verifyDocument(BuildContext context) {
                 ),
               ),
             ),
-            const SizedBox(height: 20), // Add some space between the card and the button
+            const SizedBox(
+                height: 20), // Add some space between the card and the button
           ],
         ),
       ),
       floatingActionButton: Align(
         alignment: Alignment.centerRight,
         child: Padding(
-          padding: const EdgeInsets.only(top: 350, right: 20), // Add margin to the top and right
+          padding: const EdgeInsets.only(
+              top: 350, right: 20), // Add margin to the top and right
           child: ElevatedButton(
             onPressed: () {
-            _showVerificationDialog(context, documentId);
-  },
-  style: ElevatedButton.styleFrom(
-    primary: const Color(0xff7DB9B6),
-  ),
+              _showVerificationDialog(context, documentId);
+            },
+            style: ElevatedButton.styleFrom(
+              primary: const Color(0xff7DB9B6),
+            ),
             child: const Text(
               'Verify',
               style: TextStyle(

@@ -1,69 +1,43 @@
-import 'package:flutter/material.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_info.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_patientA.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
-import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/addassignment.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks_info.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
+import 'package:lunan/Therapist/MenuList/menulist.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 
-class VerifiedAssignment extends StatelessWidget {
+class AssignedTasks extends StatelessWidget {
   final String selectedPatientUID;
-
   final Map<String, dynamic>? formData;
 
-  VerifiedAssignment({
+  AssignedTasks({
     Key? key,
     required this.selectedPatientUID,
     this.formData,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      backgroundColor: const Color(0xffF5E9CF), // Set the background color
-
+      backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PatientsInfo(
-                        selectedPatientUID: selectedPatientUID,
-                      )),
-            );
+            Navigator.pop(context);
           },
-          color: Color(0xff4D455D), // Change this color to your desired color
+          color: Color(0xff4D455D),
         ),
       ),
-
-      body: WillPopScope(
-        onWillPop: () async {
-          // Add your custom logic here
-          // You can navigate to a different route using Navigator
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => PatientsInfo(
-                selectedPatientUID: selectedPatientUID,
-              ),
-            ),
-          );
-          // Return true if the route change is successful
-          return true;
-        },
-        child: Center(
-            child: SingleChildScrollView(
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-             StreamBuilder<QuerySnapshot>(
+              StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Users')
                     .where('UID', isEqualTo: selectedPatientUID)
@@ -89,7 +63,7 @@ class VerifiedAssignment extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                         child: Text(
-                          'Verified\nAssignments of \n$firstName',
+                          'Assigned\nAssignments of \n$firstName',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -112,17 +86,7 @@ class VerifiedAssignment extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AssignedTasks(
-                                          selectedPatientUID:
-                                              selectedPatientUID,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () {},
                                   child: const Text('Assigned'),
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color(0xff4D455D),
@@ -194,6 +158,24 @@ class VerifiedAssignment extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 20, 50),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddAssignment(
+                  selectedPatientUID: selectedPatientUID,
+                ),
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: const Color(0xff7DB9B6),
+        ),
+      ),
     );
   }
 }
@@ -240,14 +222,14 @@ class AssignedTasksList extends StatelessWidget {
             final documentId = taskDocument.id;
             final status = taskData['Status'];
 
-            if (status == 'Verified') {
+            if (status == null) {
               return InkWell(
                 onTap: () {
                   // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => VerifiedAssignmentInfo(
+                      builder: (context) => AssignedTasksInfo(
                         selectedPatientUID: selectedPatientUID,
                         formData: taskData,
                         documentId: documentId,
@@ -273,7 +255,6 @@ class AssignedTasksList extends StatelessWidget {
           },
         );
       },
-
     );
   }
 }

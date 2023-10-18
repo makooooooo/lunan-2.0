@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/addassignment.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TurendInAssignment extends StatelessWidget {
   final String selectedPatientUID;
+  final Map<String, dynamic>? formData;
 
-  TurendInAssignment({Key? key, required this.selectedPatientUID})
-      : super(key: key);
+
+  TurendInAssignment({
+    Key? key,
+    required this.selectedPatientUID,
+    this.formData,
+  }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +30,7 @@ class TurendInAssignment extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
+
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -52,6 +61,29 @@ class TurendInAssignment extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('Users')
+                    .where('UID', isEqualTo: selectedPatientUID)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return Text('User not found');
+                  }
+                  final userDocument = snapshot.data!.docs.first;
+                  final userData = userDocument.data() as Map<String, dynamic>;
+                  final firstName = userData['firstName'] as String;
+
+                  return Column(
+                    children: <Widget>[
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                   child: const Text(
@@ -144,43 +176,117 @@ class TurendInAssignment extends StatelessWidget {
                         width: 330,
                         height: 80,
                         margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: const Color(0xff4D455D),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
-                        child: Text('Patient Name:\nDate Given:\nHW Name:'),
-                      ),
-                      Container(
-                        width: 330,
-                        height: 80,
-                        margin: const EdgeInsets.fromLTRB(0, 5, 0, 30),
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(20),
+
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AssignedTasks(
+                                          selectedPatientUID:
+                                              selectedPatientUID,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Assigned'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xff4D455D),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TurendInAssignment(
+                                          selectedPatientUID:
+                                              selectedPatientUID,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Turned In'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xff4D455D),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            VerifiedAssignment(
+                                          selectedPatientUID:
+                                              selectedPatientUID,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Verified'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xff4D455D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Search...',
+                                  prefixIcon: Icon(Icons.search),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Use AssignedTasksList widget to display the list of tasks
+                            AssignedTasksList(
+                                selectedPatientUID: selectedPatientUID),
+                          ],
                         ),
-                        padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
-                        child: Text('Patient Name:\nDate Given:\nHW Name:'),
                       ),
                     ],
-                  ),
-                ),
-              ],
-            ),
+                  );
+                },
+              ),
+            ],
+
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Container(
+
         margin: const EdgeInsets.fromLTRB(
             0, 0, 20, 50), // Adjust the margin as needed
+
         child: FloatingActionButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    AddAssignment(selectedPatientUID: selectedPatientUID),
+
+                builder: (context) => AddAssignment(
+                  selectedPatientUID: selectedPatientUID,
+                ),
+
               ),
             );
           },
@@ -188,6 +294,85 @@ class TurendInAssignment extends StatelessWidget {
           backgroundColor: const Color(0xff7DB9B6),
         ),
       ),
+    );
+  }
+}
+
+class AssignedTasksList extends StatelessWidget {
+  final String selectedPatientUID;
+  final Map<String, dynamic>? formData;
+
+  const AssignedTasksList(
+      {Key? key, required this.selectedPatientUID, this.formData})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('Selected Patient UID: $selectedPatientUID');
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('Tasks')
+          .where('PatientUID', isEqualTo: selectedPatientUID)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Text('No tasks found for this user.');
+        }
+
+        final tasks = snapshot.data!.docs;
+
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            final taskDocument = tasks[index];
+            final taskData = taskDocument.data() as Map<String, dynamic>;
+            final activity = taskData['Activity'] as String;
+            final deadline = taskData['Deadline'] as String;
+            final documentId = taskDocument.id;
+            final status = taskData['Status'];
+
+            if (status == 'turnedIn') {
+              return InkWell(
+                onTap: () {
+                  // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TurnedInAssignmentInfo(
+                        selectedPatientUID: selectedPatientUID,
+                        formData: taskData,
+                        documentId: documentId,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 50,
+                  height: 70,
+                  margin: const EdgeInsets.fromLTRB(5, 5, 5, 30),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text('Activity: $activity\nDeadline: $deadline'),
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        );
+      },
     );
   }
 }

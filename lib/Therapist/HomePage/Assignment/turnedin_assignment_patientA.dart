@@ -6,7 +6,8 @@ import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 
 class TurnedINAssignmentPatientA extends StatelessWidget {
   final String selectedPatientUID;
-  TurnedINAssignmentPatientA({Key? key, required this.selectedPatientUID}) : super(key: key);
+  TurnedINAssignmentPatientA({Key? key, required this.selectedPatientUID})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +53,9 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                     TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
+                                builder: (context) => TurendInAssignment(
+                                      selectedPatientUID: selectedPatientUID,
+                                    )),
                           );
                         },
                         child: const Text('Turned In'),
@@ -63,12 +65,13 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                                  Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          VerifiedAssignment(selectedPatientUID: selectedPatientUID,)),
-                            );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VerifiedAssignment(
+                                      selectedPatientUID: selectedPatientUID,
+                                    )),
+                          );
                         },
                         child: const Text('Verified'),
                         style: ElevatedButton.styleFrom(
@@ -77,41 +80,44 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                       ),
                     ],
                   ),
-                     Padding(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  prefixIcon: Icon(Icons.search),
-                  filled: true,
-                fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>TurnedInAssignmentInfo(selectedPatientUID: selectedPatientUID,),
-                          ),
-                        );
-                      },
-                  child: Container(
-                    width: 330,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        prefixIcon: Icon(Icons.search),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
-                    child: Text('Patient Name:\nDate Given:\nHW Name:'),
                   ),
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => TurnedInAssignmentInfo(
+                      //       selectedPatientUID: selectedPatientUID,
+                      //       documentId: '',
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: Container(
+                      width: 330,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+                      child: Text('Patient Name:\nDate Given:\nHW Name:'),
                     ),
-                   Container(
+                  ),
+                  Container(
                     width: 330,
                     height: 80,
                     margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
@@ -122,7 +128,7 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
                     child: Text('Patient Name:\nDate Given:\nHW Name:'),
                   ),
-                   Container(
+                  Container(
                     width: 330,
                     height: 80,
                     margin: const EdgeInsets.fromLTRB(0, 5, 0, 30),
@@ -133,34 +139,37 @@ class TurnedINAssignmentPatientA extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
                     child: Text('Patient Name:\nDate Given:\nHW Name:'),
                   ),
-                Container(
-                          width: 150,
-                          margin: const EdgeInsets.fromLTRB(170 , 0, 0, 0),
-                          height: 45,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          TurendInAssignment(selectedPatientUID: selectedPatientUID,)),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff7DB9B6),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      20), // Set the corner radius here
-                                ),
-                              ),
-                              child: const Text(
-                                'Back to\nAssignment List', textAlign: TextAlign.center, style: TextStyle( 
-                              fontSize: 12,
-                              color: Color(0xffF5E9CF),
-                            ),
-                              )),
+                  Container(
+                    width: 150,
+                    margin: const EdgeInsets.fromLTRB(170, 0, 0, 0),
+                    height: 45,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TurendInAssignment(
+                                      selectedPatientUID: selectedPatientUID,
+                                    )),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff7DB9B6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                20), // Set the corner radius here
+                          ),
                         ),
-              ],
+                        child: const Text(
+                          'Back to\nAssignment List',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xffF5E9CF),
+                          ),
+                        )),
+                  ),
+                ],
               ),
             ),
           ],
