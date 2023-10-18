@@ -22,7 +22,7 @@ class TurnedInAssignmentInfo extends StatefulWidget {
 
   @override
   _TurnedInAssignmentInfoState createState() =>
-      _TurnedInAssignmentInfoState(selectedPatientUID, documentId);
+      _TurnedInAssignmentInfoState(selectedPatientUID, documentId, formData);
 }
 
 class _TurnedInAssignmentInfoState extends State<TurnedInAssignmentInfo> {
@@ -33,8 +33,10 @@ class _TurnedInAssignmentInfoState extends State<TurnedInAssignmentInfo> {
   String? fileName;
   final String selectedPatientUID;
   final String documentId;
+  final Map<String, dynamic>? formData;
 
-  _TurnedInAssignmentInfoState(this.selectedPatientUID, this.documentId);
+  _TurnedInAssignmentInfoState(
+      this.selectedPatientUID, this.documentId, this.formData);
 
   @override
   void initState() {
@@ -75,7 +77,7 @@ class _TurnedInAssignmentInfoState extends State<TurnedInAssignmentInfo> {
                   MaterialPageRoute(
                     builder: (context) => VerifiedAssignmentInfo(
                       selectedPatientUID: selectedPatientUID,
-                      // formData: formData,
+                      formData: formData,
                       documentId: documentId,
                     ),
                   ),
