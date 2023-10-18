@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 
 class CreateCaseNotes extends StatelessWidget {
@@ -123,11 +124,11 @@ class CreateCaseNotes extends StatelessWidget {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
+                                  Navigator.of(context).pushReplacement(
+        
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          PatientInfo(selectedPatientUID: selectedPatientUID),
+                                          PatientCaseNotes(selectedPatientUID: selectedPatientUID),
                                     ),
                                   );
                                 },

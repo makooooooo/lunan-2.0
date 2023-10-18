@@ -92,7 +92,7 @@ class ViewCaseNotes extends StatelessWidget {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // You can add navigation here if needed
+                              Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color.fromARGB(255, 211, 34, 87),

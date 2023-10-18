@@ -7,6 +7,7 @@ import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/IntakeForms/intake_form.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patient_list.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dart';
 import 'package:lunan/Therapist/HomePage/dashboard.dart';
@@ -44,12 +45,35 @@ class _PatientsInfoState extends State<PatientsInfo> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                  builder: (context) => PatientList(
+                        
+                      )),
+            );
           },
           color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-      body: Column(
+      body: WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => PatientList(
+           
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+      
+      
+      
+      
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -374,6 +398,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
             ),
           )
         ],
+      ),
       ),
     );
   }

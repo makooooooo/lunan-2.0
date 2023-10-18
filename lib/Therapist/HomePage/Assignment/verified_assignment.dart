@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VerifiedAssignment extends StatelessWidget {
   final String selectedPatientUID;
+
   final Map<String, dynamic>? formData;
 
   VerifiedAssignment({
@@ -18,26 +19,51 @@ class VerifiedAssignment extends StatelessWidget {
     this.formData,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF),
+
+      backgroundColor: const Color(0xffF5E9CF), // Set the background color
+
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PatientsInfo(
+                        selectedPatientUID: selectedPatientUID,
+                      )),
+            );
           },
-          color: Color(0xff4D455D),
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
+
+      body: WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => PatientsInfo(
+                selectedPatientUID: selectedPatientUID,
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+        child: Center(
+            child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              StreamBuilder<QuerySnapshot>(
+             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Users')
                     .where('UID', isEqualTo: selectedPatientUID)
@@ -247,6 +273,7 @@ class AssignedTasksList extends StatelessWidget {
           },
         );
       },
+
     );
   }
 }

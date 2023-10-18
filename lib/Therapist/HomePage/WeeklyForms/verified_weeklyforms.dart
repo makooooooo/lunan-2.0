@@ -36,7 +36,24 @@ class VerifiedWeeklyForms extends StatelessWidget {
                color: Color(0xff4D455D),
             ),
       ),
-      body: Center(
+      body: WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => PatientsInfo(
+                selectedPatientUID: selectedPatientUID,
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+      
+      
+      
+      child: Center(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -105,17 +122,8 @@ class VerifiedWeeklyForms extends StatelessWidget {
                                   ),
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                      builder: (context) => VerifiedWeeklyForms(
-                                        selectedPatientUID: selectedPatientUID, 
-                                        )
-                                      ),
-                                    );
-                                  },
-                                  child: const Text('Verified'),
+                                  onPressed: null,
+                                  child: const Text('Verified', style: TextStyle(color: Colors.white),),
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color(0xff4D455D),
                                   ),
@@ -183,6 +191,7 @@ class VerifiedWeeklyForms extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

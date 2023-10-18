@@ -3,6 +3,7 @@ import 'package:lunan/Therapist/HomePage/Assignment/addassignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
+import 'package:lunan/Therapist/HomePage/ViewPatient/patients_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,11 +12,13 @@ class TurendInAssignment extends StatelessWidget {
   final String selectedPatientUID;
   final Map<String, dynamic>? formData;
 
+
   TurendInAssignment({
     Key? key,
     required this.selectedPatientUID,
     this.formData,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +30,38 @@ class TurendInAssignment extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PatientsInfo(
+            
+                        selectedPatientUID: selectedPatientUID,
+                      )),
+            ); // This will navigate back to the previous screen
           },
-          color: Color(0xff4D455D),
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              StreamBuilder<QuerySnapshot>(
+      body: WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => PatientsInfo(
+                selectedPatientUID: selectedPatientUID,
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Users')
                     .where('UID', isEqualTo: selectedPatientUID)
@@ -59,26 +84,104 @@ class TurendInAssignment extends StatelessWidget {
 
                   return Column(
                     children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                        child: Text(
-                          'Turned In\nAssignments of \n$firstName',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat',
-                            fontSize: 30,
-                            color: Color(0xff4D455D),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                  child: const Text(
+                    'Turned-in\nAssignments',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      fontSize: 30,
+                      color: Color(0xff4D455D),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 370,
+                  height: 550,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff4D455D),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: null,
+                            child: const Text(
+                              'Turned In',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xff4D455D),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VerifiedAssignment(
+                                      selectedPatientUID: selectedPatientUID),
+                                ),
+                              );
+                            },
+                            child: const Text('Verified'),
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xff4D455D),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search...',
+                            prefixIcon: Icon(Icons.search),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                       ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TurnedInAssignmentInfo(
+                                selectedPatientUID: selectedPatientUID,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 330,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+                          child: Text('Patient Name:\nDate Given:\nHW Name:'),
+                        ),
+                      ),
                       Container(
-                        width: 370,
-                        height: 550,
+                        width: 330,
+                        height: 80,
+                        margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+
                         decoration: BoxDecoration(
                           color: const Color(0xff4D455D),
                           borderRadius: BorderRadius.circular(20),
                         ),
+
                         child: Column(
                           children: [
                             Row(
@@ -164,20 +267,26 @@ class TurendInAssignment extends StatelessWidget {
                 },
               ),
             ],
+
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 20, 50),
+
+        margin: const EdgeInsets.fromLTRB(
+            0, 0, 20, 50), // Adjust the margin as needed
+
         child: FloatingActionButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
+
                 builder: (context) => AddAssignment(
                   selectedPatientUID: selectedPatientUID,
                 ),
+
               ),
             );
           },

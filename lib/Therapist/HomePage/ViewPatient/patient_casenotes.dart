@@ -245,6 +245,9 @@ class CaseNotesList extends StatelessWidget {
                   ),
                 );
               },
+              child: Padding(
+              
+              padding: const EdgeInsets.all(10),
               child: Container(
                 width: 50, // Adjust the width here as needed
                 height: 70,
@@ -255,6 +258,7 @@ class CaseNotesList extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
                 child: Text('Date Accomplished: $dateAdded'),
               ),
+              )
             );
           },
         );
