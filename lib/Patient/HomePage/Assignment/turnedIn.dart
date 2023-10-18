@@ -10,7 +10,8 @@ class turnedIn extends StatefulWidget {
   final Map<String, dynamic> formData;
   final String documentId;
 
-  const turnedIn({required this.formData, Key? key, required this.documentId}) : super(key: key);
+  const turnedIn({required this.formData, Key? key, required this.documentId})
+      : super(key: key);
 
   @override
   _turnedInState createState() => _turnedInState();
@@ -24,12 +25,13 @@ class _turnedInState extends State<turnedIn> {
   String? downloadURL;
   String? fileName; // Add a variable to store the file name
   String? extractFileName(String? downloadURL) {
-  if (downloadURL == null) {
-    return null; // Return null if downloadURL is null
+    if (downloadURL == null) {
+      return null; // Return null if downloadURL is null
+    }
+    final uri = Uri.parse(downloadURL);
+    return uri.pathSegments.last;
   }
-  final uri = Uri.parse(downloadURL);
-  return uri.pathSegments.last;
-}
+
   @override
   void initState() {
     super.initState();
@@ -43,23 +45,23 @@ class _turnedInState extends State<turnedIn> {
 
   // Function to download the file
   void downloadFile() async {
-  if (downloadURL != null) {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (downloadURL != null) {
+      final FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      // You can use Firebase Storage to upload the selected file here
-      // Example: Upload the file to Firebase Storage with documentId as the file name
-      final Reference storageReference =
-          FirebaseStorage.instance.ref().child(documentId!);
-      await storageReference.putFile(file);
+      if (result != null) {
+        File file = File(result.files.single.path!);
+        // You can use Firebase Storage to upload the selected file here
+        // Example: Upload the file to Firebase Storage with documentId as the file name
+        final Reference storageReference =
+            FirebaseStorage.instance.ref().child(documentId!);
+        await storageReference.putFile(file);
 
-      // Display a message or navigate to another page after successful upload
+        // Display a message or navigate to another page after successful upload
+      }
+    } else {
+      // Handle the case where downloadURL is null (e.g., show an error message)
     }
-  } else {
-    // Handle the case where downloadURL is null (e.g., show an error message)
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -137,21 +139,22 @@ class _turnedInState extends State<turnedIn> {
                                     if (downloadURL != null) {
                                       if (await canLaunch(downloadURL!)) {
                                         await launch(downloadURL!);
-                                        } else {
-                                          print('Could not launch $downloadURL');
-                                        }
+                                      } else {
+                                        print('Could not launch $downloadURL');
                                       }
-                                    },
-                                child: Text(
-                                  fileName!,
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                    }
+                                  },
+                                  child: Text(
+                                    fileName!,
+                                    style: TextStyle(
+                                      color: Colors.white,
                                     ),
-                                    overflow: TextOverflow.ellipsis, // Truncate and add ellipsis
+                                    overflow: TextOverflow
+                                        .ellipsis, // Truncate and add ellipsis
                                     maxLines: 1, // Display on a single line
-                                    ),
                                   ),
-                                )
+                                ),
+                              )
                             ],
                           ),
                         ),

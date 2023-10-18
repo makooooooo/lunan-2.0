@@ -1,17 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/addassignment.dart';
-import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks_info.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:lunan/Therapist/MenuList/menulist.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TurendInAssignment extends StatelessWidget {
+class AssignedTasks extends StatelessWidget {
   final String selectedPatientUID;
   final Map<String, dynamic>? formData;
 
-  TurendInAssignment({
+  AssignedTasks({
     Key? key,
     required this.selectedPatientUID,
     this.formData,
@@ -62,7 +63,7 @@ class TurendInAssignment extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                         child: Text(
-                          'Turned In\nAssignments of \n$firstName',
+                          'Assigned\nAssignments of \n$firstName',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -85,17 +86,7 @@ class TurendInAssignment extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AssignedTasks(
-                                          selectedPatientUID:
-                                              selectedPatientUID,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () {},
                                   child: const Text('Assigned'),
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color(0xff4D455D),
@@ -231,14 +222,14 @@ class AssignedTasksList extends StatelessWidget {
             final documentId = taskDocument.id;
             final status = taskData['Status'];
 
-            if (status == 'turnedIn') {
+            if (status == null) {
               return InkWell(
                 onTap: () {
                   // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TurnedInAssignmentInfo(
+                      builder: (context) => AssignedTasksInfo(
                         selectedPatientUID: selectedPatientUID,
                         formData: taskData,
                         documentId: documentId,

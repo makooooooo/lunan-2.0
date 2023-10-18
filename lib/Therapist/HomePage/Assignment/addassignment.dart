@@ -1,24 +1,65 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
-import 'package:lunan/Therapist/MenuList/menulist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddAssignment extends StatefulWidget {
   final String selectedPatientUID;
   AddAssignment({Key? key, required this.selectedPatientUID}) : super(key: key);
-  
+
   @override
   State<AddAssignment> createState() => _AddAssignmentState();
 }
 
 class _AddAssignmentState extends State<AddAssignment> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   TextEditingController dateinput = TextEditingController();
+  TextEditingController taskNameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   void initState() {
     dateinput.text = "";
     super.initState();
+  }
+
+  // Function to save data to Firestore
+  Future<void> saveAssignmentToFirestore({
+    required String taskName,
+    required String date,
+    required String description,
+  }) async {
+    final User? user = _auth.currentUser;
+    final uid = user?.uid;
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final newDocumentRef = firestore.collection('Tasks').doc();
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+
+      await newDocumentRef.set({
+        'PatientUID': widget.selectedPatientUID,
+        'Activity': taskName,
+        'Deadline': date,
+        'Description': description,
+        'DateCreated': formattedDate,
+        'Status': null,
+        'counselorUID': uid,
+      });
+
+      // Data saved successfully
+      print('Assignment saved to Firestore.');
+    } catch (e) {
+      // Handle any errors that occurred during the data saving process
+      print('Error saving assignment: $e');
+    }
   }
 
   @override
@@ -31,8 +72,8 @@ class _AddAssignmentState extends State<AddAssignment> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-             Navigator.pop(context);
-            },
+            Navigator.pop(context);
+          },
           color: Color(0xff4D455D),
         ),
       ),
@@ -85,9 +126,10 @@ class _AddAssignmentState extends State<AddAssignment> {
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const TextField(
+                            child: TextField(
+                              controller: taskNameController,
                               decoration: InputDecoration(
-                                hintText: 'Enter text',
+                                hintText: 'Enter task name',
                                 border: InputBorder.none,
                                 contentPadding:
                                     EdgeInsets.symmetric(vertical: 14.0),
@@ -98,8 +140,10 @@ class _AddAssignmentState extends State<AddAssignment> {
                           TextField(
                             controller: dateinput,
                             decoration: InputDecoration(
-                              icon: Icon(Icons.calendar_today,
-                                  color: Color(0xffF5E9CF)),
+                              icon: Icon(
+                                Icons.calendar_today,
+                                color: Color(0xffF5E9CF),
+                              ),
                               labelText: "Enter Date",
                               labelStyle: TextStyle(color: Color(0xffF5E9CF)),
                               enabledBorder: UnderlineInputBorder(
@@ -160,9 +204,10 @@ class _AddAssignmentState extends State<AddAssignment> {
                                   color: Colors.grey[200],
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const TextField(
+                                child: TextField(
+                                  controller: descriptionController,
                                   decoration: InputDecoration(
-                                    hintText: 'Enter text',
+                                    hintText: 'Enter description',
                                     border: InputBorder.none,
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 14.0),
@@ -172,28 +217,42 @@ class _AddAssignmentState extends State<AddAssignment> {
                               ),
                               Container(
                                 width: 90,
-                                margin: const EdgeInsets.fromLTRB(200, 40, 0, 0),
+                                margin:
+                                    const EdgeInsets.fromLTRB(200, 40, 0, 0),
                                 height: 30,
                                 child: ElevatedButton(
-                                    onPressed: () {
-  Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => TurendInAssignment(selectedPatientUID: widget.selectedPatientUID),
-  ),
-);
-},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 19, 195, 122),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            15), // Set the corner radius here
+                                  onPressed: () {
+                                    final taskName = taskNameController.text;
+                                    final date = dateinput.text;
+                                    final description =
+                                        descriptionController.text;
+
+                                    saveAssignmentToFirestore(
+                                      taskName: taskName,
+                                      date: date,
+                                      description: description,
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AssignedTasks(
+                                          selectedPatientUID:
+                                              widget.selectedPatientUID,
+                                        ),
                                       ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 19, 195, 122),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: const Text(
-                                      'Submit',
-                                    )),
+                                  ),
+                                  child: const Text(
+                                    'Submit',
+                                  ),
+                                ),
                               ),
                             ],
                           ),

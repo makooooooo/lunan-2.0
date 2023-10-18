@@ -10,14 +10,15 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
   final String documentId;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-    VerifiedInWeeklyFormsInfo({
+  VerifiedInWeeklyFormsInfo({
     Key? key,
     required this.selectedPatientUID,
     this.formData,
     required this.documentId,
   }) : super(key: key);
 
- Future<void> _showVerificationDialog(BuildContext context, String documentId) async {
+  Future<void> _showVerificationDialog(
+      BuildContext context, String documentId) async {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -45,13 +46,15 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
       },
     );
   }
-void _verifyDocument(BuildContext context) {
-  if (documentId != null) {
-    UnverifyWeeklyForm().unverifyWeeklyFormStatus(context, selectedPatientUID, documentId);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Document unverified successfully.'),
-    ));
-          Navigator.of(context).push(
+
+  void _verifyDocument(BuildContext context) {
+    if (documentId != null) {
+      UnverifyWeeklyForm()
+          .unverifyWeeklyFormStatus(context, selectedPatientUID, documentId);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Document unverified successfully.'),
+      ));
+      Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => TurnedInWeeklyFormsInfo(
             selectedPatientUID: selectedPatientUID,
@@ -60,12 +63,12 @@ void _verifyDocument(BuildContext context) {
           ),
         ),
       );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Error: Document ID is null.'),
-    ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error: Document ID is null.'),
+      ));
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +124,8 @@ void _verifyDocument(BuildContext context) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    VerifiedWeeklyForms(selectedPatientUID: selectedPatientUID, formData: formData),
+                builder: (context) => VerifiedWeeklyForms(
+                    selectedPatientUID: selectedPatientUID, formData: formData),
               ),
             );
           },
@@ -277,21 +280,23 @@ void _verifyDocument(BuildContext context) {
                 ),
               ),
             ),
-            const SizedBox(height: 20), // Add some space between the card and the button
+            const SizedBox(
+                height: 20), // Add some space between the card and the button
           ],
         ),
       ),
       floatingActionButton: Align(
         alignment: Alignment.centerRight,
         child: Padding(
-          padding: const EdgeInsets.only(top: 350, right: 20), // Add margin to the top and right
+          padding: const EdgeInsets.only(
+              top: 350, right: 20), // Add margin to the top and right
           child: ElevatedButton(
             onPressed: () {
-            _showVerificationDialog(context, documentId);
-  },
-  style: ElevatedButton.styleFrom(
-    primary: Color.fromARGB(255, 209, 119, 119),
-  ),
+              _showVerificationDialog(context, documentId);
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 209, 119, 119),
+            ),
             child: const Text(
               'Unverify',
               style: TextStyle(

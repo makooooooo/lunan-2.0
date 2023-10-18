@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/WellnessGuide/wellness_guide.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/assigned_tasks.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/IntakeForms/intake_form.dart';
 import 'package:lunan/Therapist/HomePage/ViewPatient/patient_casenotes.dart';
@@ -201,7 +202,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                           backgroundColor: const Color(0xFF4D455D),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
@@ -256,7 +257,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TurendInAssignment(
+                                  builder: (context) => AssignedTasks(
                                         selectedPatientUID:
                                             widget.selectedPatientUID,
                                       )),
@@ -324,7 +325,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                           backgroundColor: const Color(0xFF4D455D),
+                            backgroundColor: const Color(0xFF4D455D),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   20), // Set the corner radius here
