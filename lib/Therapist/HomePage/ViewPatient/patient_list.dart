@@ -24,15 +24,36 @@ class PatientList extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LandingPageT()),
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                  builder: (context) => LandingPageT(
+                        
+                      )),
             );
           },
           color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-      body: Center(
+      body: WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => LandingPageT(
+                
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+      
+      
+      
+      
+      
+      child: Center(
         child: Column(
           children: <Widget>[
             Container(
@@ -149,6 +170,7 @@ class PatientList extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }
