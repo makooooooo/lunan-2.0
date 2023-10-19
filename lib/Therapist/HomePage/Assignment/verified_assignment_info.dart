@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment_info.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_patientA.dart';
@@ -67,15 +68,15 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                // Close the dialog
                 Navigator.of(context).pop();
+                
               },
               child: Text('No'),
             ),
             TextButton(
               onPressed: () {
                 // Close the dialog and verify the document
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => TurnedInAssignmentInfo(
                       selectedPatientUID: selectedPatientUID,
@@ -114,7 +115,25 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+          onWillPop: () async {
+            // Add your custom logic here
+            // You can navigate to a different route using Navigator
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => VerifiedAssignment(
+                  selectedPatientUID: selectedPatientUID,
+                ),
+              ),
+            );
+            // Return true if the route change is successful
+            return true;
+          },
+    
+    
+    
+    
+    child: Scaffold(
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
         elevation: 0,
@@ -122,7 +141,13 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => TurendInAssignment(
+                  selectedPatientUID: selectedPatientUID,
+                ),
+              ),
+            );
           },
           color: Color(0xff4D455D),
         ),
@@ -178,28 +203,31 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
                           margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
                           child: Row(
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                child: TextButton(
-                                  onPressed: () async {
-                                    if (downloadURL != null) {
-                                      if (await canLaunch(downloadURL!)) {
-                                        await launch(downloadURL!);
-                                      } else {
-                                        print('Could not launch $downloadURL');
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10),
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      if (downloadURL != null) {
+                                        if (await canLaunch(downloadURL!)) {
+                                          await launch(downloadURL!);
+                                        } else {
+                                          print(
+                                              'Could not launch $downloadURL');
+                                        }
                                       }
-                                    }
-                                  },
-                                  child: Text(
-                                    fileName ?? 'No file attached',
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                    },
+                                    child: Text(
+                                      fileName ?? 'No file attached',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -234,6 +262,7 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
           ),
         ),
       ),
+    ),
     );
   }
 }
