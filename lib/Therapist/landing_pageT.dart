@@ -26,9 +26,30 @@ class _LandingPageTState extends State<LandingPageT> {
 
   ];
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context){
   
-      body: Center (
+      return  WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => LandingPageT(
+             
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+      
+      
+      
+      
+      
+      
+      child: Scaffold(
+        body: Center (
         child: _pages.elementAt(currentIndex)
       ),
   
@@ -63,11 +84,14 @@ class _LandingPageTState extends State<LandingPageT> {
         ],
          onTap: (int index) => setState(() => currentIndex = index),
         
-      ),
+      )
+        
+        
+        ),
       
+      );
       
-  
-  ); 
+
 }
 
 void _showLogoutModal(BuildContext context) {
@@ -98,4 +122,6 @@ void _showLogoutModal(BuildContext context) {
       );
     },
   );
+}
+
 }

@@ -45,28 +45,13 @@ class ProfileSettingT extends StatelessWidget {
                 },
                 child: Scaffold(
                   backgroundColor: const Color(0xffF5E9CF),
-                  appBar: AppBar(
-                    elevation: 0,
-                    automaticallyImplyLeading: false,
-                    backgroundColor: const Color(0xffF5E9CF),
-                    iconTheme: const IconThemeData(color: Color(0xff4D455D)),
-                    leading: IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LandingPageT()),
-                        );
-                      },
-                    ),
-                  ),
+                
                   body: SingleChildScrollView(
                       child: Center(
                     child: Column(
                       children: <Widget>[
                         Container(
-                          margin: const EdgeInsets.only(top: 70),
+                          margin: const EdgeInsets.only(top: 100),
                           child: Text(
                             "I'm \n $firstName!",
                             textAlign: TextAlign.center,

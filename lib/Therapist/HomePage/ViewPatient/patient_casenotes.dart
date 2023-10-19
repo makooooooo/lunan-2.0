@@ -151,7 +151,11 @@ class PatientCaseNotes extends StatelessWidget {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => CreateCaseNotes(selectedPatientUID: selectedPatientUID,),
+                                            builder: (context) =>
+                                                CreateCaseNotes(
+                                              selectedPatientUID:
+                                                  selectedPatientUID,
+                                            ),
                                           ),
                                         );
                                       },
@@ -188,7 +192,6 @@ class PatientCaseNotes extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
 
@@ -203,7 +206,8 @@ class CaseNotesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Selected Patient UID: $selectedPatientUID');
-    return StreamBuilder<QuerySnapshot>(
+    return Expanded(
+        child: StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('CaseNotes')
           .where('patientUID', isEqualTo: selectedPatientUID)
@@ -232,38 +236,36 @@ class CaseNotesList extends StatelessWidget {
             final dateAdded = formData['dateAdded'] as String;
             final documentId = formDocument.id;
             return InkWell(
-              onTap: () {
-                // Pass both selectedPatientUID and formData to ViewCaseNotes
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ViewCaseNotes(
-                      selectedPatientUID: selectedPatientUID,
-                      formData: formData,
-                      documentId: documentId,
+                onTap: () {
+                  // Pass both selectedPatientUID and formData to ViewCaseNotes
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ViewCaseNotes(
+                        selectedPatientUID: selectedPatientUID,
+                        formData: formData,
+                        documentId: documentId,
+                      ),
                     ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    width: 50, // Adjust the width here as needed
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: EdgeInsets.only(left: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text('Date Accomplished: $dateAdded'),
                   ),
-                );
-              },
-              child: Padding(
-              
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                width: 50, // Adjust the width here as needed
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
-                child: Text('Date Accomplished: $dateAdded'),
-              ),
-              )
-            );
+                ));
           },
         );
       },
-    );
-
+    ));
   }
 }

@@ -28,10 +28,13 @@ class TurnedINWeeklyFroms extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-           Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  PatientsInfo( selectedPatientUID: selectedPatientUID,)),
-                );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PatientsInfo(
+                        selectedPatientUID: selectedPatientUID,
+                      )),
+            );
           },
           color: Color(0xff4D455D),
         ),
@@ -215,7 +218,8 @@ class WeeklyFormsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Selected Patient UID: $selectedPatientUID');
-    return StreamBuilder<QuerySnapshot>(
+    return Expanded(
+        child: StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('WeeklyForm')
           .where('UID', isEqualTo: selectedPatientUID)
@@ -266,12 +270,13 @@ class WeeklyFormsList extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Container(
                       width: 50, // Adjust the width here as needed
-                      height: 70,
+                      height: 60,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+                      padding: const EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
                       child: Text('Date Accomplished: $dateAccomplished'),
                     ),
                   ));
@@ -282,6 +287,6 @@ class WeeklyFormsList extends StatelessWidget {
           },
         );
       },
-    );
+    ));
   }
 }
