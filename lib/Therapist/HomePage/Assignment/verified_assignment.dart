@@ -30,12 +30,12 @@ class VerifiedAssignment extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.push(
-                context,
+              Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                    builder: (context) => PatientsInfo(
-                          selectedPatientUID: selectedPatientUID,
-                        )),
+                  builder: (context) => PatientsInfo(
+                    selectedPatientUID: selectedPatientUID,
+                  ),
+                ),
               );
             },
             color: Color(0xff4D455D), // Change this color to your desired color
@@ -145,19 +145,10 @@ class VerifiedAssignment extends StatelessWidget {
                                       ),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                VerifiedAssignment(
-                                              selectedPatientUID:
-                                                  selectedPatientUID,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: const Text('Verified'),
+                                      onPressed: null,
+                                      child: const Text('Verified',
+                                          style:
+                                              TextStyle(color: Colors.white)),
                                       style: ElevatedButton.styleFrom(
                                         primary: const Color(0xff4D455D),
                                       ),
@@ -207,7 +198,8 @@ class AssignedTasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Selected Patient UID: $selectedPatientUID');
-    return StreamBuilder<QuerySnapshot>(
+    return Expanded(
+        child: StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('Tasks')
           .where('PatientUID', isEqualTo: selectedPatientUID)
@@ -240,37 +232,39 @@ class AssignedTasksList extends StatelessWidget {
 
             if (status == 'Verified') {
               return InkWell(
-                onTap: () {
-                  // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VerifiedAssignmentInfo(
-                        selectedPatientUID: selectedPatientUID,
-                        formData: taskData,
-                        documentId: documentId,
+                  onTap: () {
+                    // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VerifiedAssignmentInfo(
+                          selectedPatientUID: selectedPatientUID,
+                          formData: taskData,
+                          documentId: documentId,
+                        ),
                       ),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Container(
+                      width: 50,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Activity: $activity\nDeadline: $deadline'),
                     ),
-                  );
-                },
-                child: Container(
-                  width: 50,
-                  height: 70,
-                  margin: const EdgeInsets.fromLTRB(5, 5, 5, 30),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                  child: Text('Activity: $activity\nDeadline: $deadline'),
-                ),
-              );
+                  ));
             } else {
               return Container();
             }
           },
         );
       },
-    );
+    ));
   }
 }

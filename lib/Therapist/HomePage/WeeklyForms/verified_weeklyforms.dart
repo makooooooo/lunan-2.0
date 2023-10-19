@@ -206,7 +206,8 @@ class WeeklyFormsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('Selected Patient UID: $selectedPatientUID');
-    return StreamBuilder<QuerySnapshot>(
+    return Expanded(
+      child: StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('WeeklyForm')
           .where('UID', isEqualTo: selectedPatientUID)
@@ -254,16 +255,20 @@ class WeeklyFormsList extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
                   width: 50, // Adjust the width here as needed
-                  height: 70,
+                  height: 60,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+                  padding: const EdgeInsets.only(left: 20),
+                  alignment: Alignment.centerLeft,
                   child: Text('Date Accomplished: $dateAccomplished'),
                 ),
+                )
               );
             } else {
               // Return an empty container for documents with non-null Status
@@ -272,6 +277,7 @@ class WeeklyFormsList extends StatelessWidget {
           },
         );
       },
+    )
     );
   }
 }
