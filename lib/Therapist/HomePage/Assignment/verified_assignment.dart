@@ -246,7 +246,7 @@ class AssignedTasksList extends StatelessWidget {
                     );
                   },
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(10),
                     child: Container(
                       width: 50,
                       height: 60,

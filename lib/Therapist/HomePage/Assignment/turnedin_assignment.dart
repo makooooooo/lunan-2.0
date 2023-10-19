@@ -234,8 +234,8 @@ class AssignedTasksList extends StatelessWidget {
               return InkWell(
                   onTap: () {
                     // Pass selectedPatientUID, formData, and documentId to TurnedInAssignmentInfo
-                    Navigator.push(
-                      context,
+                    Navigator.of(context).pushReplacement(
+        
                       MaterialPageRoute(
                         builder: (context) => TurnedInAssignmentInfo(
                           selectedPatientUID: selectedPatientUID,
@@ -250,7 +250,6 @@ class AssignedTasksList extends StatelessWidget {
                     child: Container(
                       width: 50,
                       height: 60,
-                      margin: const EdgeInsets.fromLTRB(5, 5, 5, 30),
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
                         borderRadius: BorderRadius.circular(20),

@@ -4,6 +4,7 @@ import 'package:lunan/Therapist/HomePage/Assignment/turnedin_assignment.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment.dart';
 import 'package:lunan/Therapist/HomePage/Assignment/verified_assignment_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
@@ -73,7 +74,7 @@ class _TurnedInAssignmentInfoState extends State<TurnedInAssignmentInfo> {
             TextButton(
               onPressed: () {
                 // Close the dialog and verify the document
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => VerifiedAssignmentInfo(
                       selectedPatientUID: selectedPatientUID,
@@ -112,126 +113,148 @@ class _TurnedInAssignmentInfoState extends State<TurnedInAssignmentInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xffF5E9CF),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color(0xff4D455D),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-              child: Text(
-                '$activity',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 30,
-                  color: Color(0xff4D455D),
-                ),
+    return WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => TurendInAssignment(
+                selectedPatientUID: selectedPatientUID,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                color: Color(0xff4D455D),
-                thickness: 2,
-              ),
-            ),
-            Flex(
-              direction: Axis.horizontal,
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff4D455D),
-                      borderRadius: BorderRadius.circular(20),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xffF5E9CF),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xffF5E9CF),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => TurendInAssignment(
+                      selectedPatientUID: selectedPatientUID,
                     ),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Text(
-                              '$activity\n$description | Due: $deadline',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                child: TextButton(
-                                  onPressed: () async {
-                                    if (downloadURL != null) {
-                                      if (await canLaunch(downloadURL!)) {
-                                        await launch(downloadURL!);
-                                      } else {
-                                        print('Could not launch $downloadURL');
-                                      }
-                                    }
-                                  },
-                                  child: Text(
-                                    fileName ?? 'No file attached',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
+                  ),
+                );
+              },
+              color: Color(0xff4D455D),
+            ),
+          ),
+          body: Center(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: Text(
+                    '$activity',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                      fontSize: 30,
+                      color: Color(0xff4D455D),
                     ),
                   ),
                 ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Divider(
+                    color: Color(0xff4D455D),
+                    thickness: 2,
+                  ),
+                ),
+                Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: const Color(0xff4D455D),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Text(
+                                  '$activity\n$description | Due: $deadline',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: TextButton(
+                                      onPressed: () async {
+                                        if (downloadURL != null) {
+                                          if (await canLaunch(downloadURL!)) {
+                                            await launch(downloadURL!);
+                                          } else {
+                                            print(
+                                                'Could not launch $downloadURL');
+                                          }
+                                        }
+                                      },
+                                      child: Text(
+                                        fileName ?? 'No file attached',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                  ))
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.centerRight,
-        child: Padding(
-          padding: const EdgeInsets.only(
-              top: 350, right: 20), // Add margin to the top and right
-          child: ElevatedButton(
-            onPressed: () {
-              showVerifyConfirmationDialog();
-            },
-            style: ElevatedButton.styleFrom(
-              primary: const Color(0xff7DB9B6),
-            ),
-            child: const Text(
-              'Verify',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xffF5E9CF),
+          ),
+          floatingActionButton: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 350, right: 20), // Add margin to the top and right
+              child: ElevatedButton(
+                onPressed: () {
+                  showVerifyConfirmationDialog();
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xff7DB9B6),
+                ),
+                child: const Text(
+                  'Verify',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xffF5E9CF),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
