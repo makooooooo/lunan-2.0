@@ -33,10 +33,10 @@ class AssignmentChooser extends StatelessWidget {
       body: SingleChildScrollView(
           child: Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+             margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
               width: 150,
               height: 150,
               child: ElevatedButton(
@@ -67,7 +67,7 @@ class AssignmentChooser extends StatelessWidget {
                   )),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+              margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
               width: 150,
               height: 150,
               child: ElevatedButton(

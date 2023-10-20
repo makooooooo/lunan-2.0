@@ -130,54 +130,59 @@ class CreateCaseNotes extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 100,
-                              margin:
-                                  const EdgeInsets.fromLTRB(120, 10, 10, 10),
-                              height: 30,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => PatientCaseNotes(
-                                          selectedPatientUID:
-                                              selectedPatientUID),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                margin:
+                                    const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                                height: 30,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => PatientCaseNotes(
+                                            selectedPatientUID:
+                                                selectedPatientUID),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 211, 34, 87),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 211, 34, 87),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
                                   ),
+                                  child: const Text('Cancel'),
                                 ),
-                                child: const Text('Cancel'),
                               ),
-                            ),
-                            Container(
-                              width: 100,
-                              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              height: 30,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  saveCaseNote(
-                                      context, _controller, selectedPatientUID);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 19, 195, 122),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                margin:
+                                    const EdgeInsets.fromLTRB(5, 10, 10, 10),
+                                height: 30,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    saveCaseNote(context, _controller,
+                                        selectedPatientUID);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 19, 195, 122),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
                                   ),
+                                  child: const Text('Save'),
                                 ),
-                                child: const Text('Save'),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),

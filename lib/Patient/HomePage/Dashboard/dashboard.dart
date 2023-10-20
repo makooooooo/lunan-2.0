@@ -25,7 +25,7 @@ class Dashboard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
@@ -60,7 +60,7 @@ class Dashboard extends StatelessWidget {
                         )),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
@@ -100,7 +100,7 @@ class Dashboard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(20),
+                   margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
@@ -135,7 +135,7 @@ class Dashboard extends StatelessWidget {
                         )),
                   ),
                   Container(
-                    margin: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
@@ -175,7 +175,7 @@ class Dashboard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
