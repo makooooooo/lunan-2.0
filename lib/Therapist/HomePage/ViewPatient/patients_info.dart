@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
@@ -188,6 +188,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
             ),
           ),
           Expanded(
+              child: SingleChildScrollView(
             child: Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -397,7 +398,7 @@ class _PatientsInfoState extends State<PatientsInfo> {
               ),
             ),
           )
-        ],
+      )],
       ),
       ),
     );

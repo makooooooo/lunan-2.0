@@ -56,13 +56,22 @@ class ViewCaseNotes extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(10, 25, 10, 20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff4D455D),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+               Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(10, 15, 10, 20),
+                      decoration: BoxDecoration(
+                        color: const Color(0xff4D455D),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              decoration: BoxDecoration(
+                                color: Color(0xffF5E9CF),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                     child: Column(
                       children: [
                         Align(
@@ -75,7 +84,7 @@ class ViewCaseNotes extends StatelessWidget {
                                 'Patient A\nDate Created: ${formData['dateAdded'] ?? ''}\nDiagnosis ',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: Color(0xffF5E9CF),
+                                  color: const Color(0xff4D455D),
                                 ),
                               ),
                             ),
@@ -111,7 +120,7 @@ class ViewCaseNotes extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+             ]),
+    ))));
   }
 }

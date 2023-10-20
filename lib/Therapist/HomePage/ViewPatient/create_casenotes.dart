@@ -11,7 +11,8 @@ class CreateCaseNotes extends StatelessWidget {
   final String selectedPatientUID;
   final quill.QuillController _controller = quill.QuillController.basic();
 
-  CreateCaseNotes({Key? key, required this.selectedPatientUID}) : super(key: key);
+  CreateCaseNotes({Key? key, required this.selectedPatientUID})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +91,8 @@ class CreateCaseNotes extends StatelessWidget {
                                   _attachFile(context);
                                 },
                                 style: ButtonStyle(
-                                  foregroundColor: MaterialStateProperty.all<Color>(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
                                     Colors.white,
                                   ),
                                   side: MaterialStateProperty.all<BorderSide>(
@@ -110,30 +112,44 @@ class CreateCaseNotes extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: Column(
-                            children: [
-                              QuillEditorBasic(controller: _controller, selectedPatientUID: selectedPatientUID),
-                            ],
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                QuillEditorBasic(
+                                  controller: _controller,
+                                  selectedPatientUID: selectedPatientUID,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Row(
                           children: [
                             Container(
                               width: 100,
-                              margin: const EdgeInsets.fromLTRB(120, 10, 10, 10),
+                              margin:
+                                  const EdgeInsets.fromLTRB(120, 10, 10, 10),
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pushReplacement(
-        
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          PatientCaseNotes(selectedPatientUID: selectedPatientUID),
+                                      builder: (context) => PatientCaseNotes(
+                                          selectedPatientUID:
+                                              selectedPatientUID),
                                     ),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color.fromARGB(255, 211, 34, 87),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 211, 34, 87),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
@@ -147,10 +163,12 @@ class CreateCaseNotes extends StatelessWidget {
                               height: 30,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  saveCaseNote(context, _controller, selectedPatientUID);
+                                  saveCaseNote(
+                                      context, _controller, selectedPatientUID);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color.fromARGB(255, 19, 195, 122),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 19, 195, 122),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
@@ -258,7 +276,8 @@ class _QuillEditorBasicState extends State<QuillEditorBasic> {
     );
   }
 
-  Widget _buildQuillIconButton(IconData icon, VoidCallback onPressed, {Color? backgroundColor}) {
+  Widget _buildQuillIconButton(IconData icon, VoidCallback onPressed,
+      {Color? backgroundColor}) {
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor ?? Colors.white,
@@ -272,7 +291,8 @@ class _QuillEditorBasicState extends State<QuillEditorBasic> {
   }
 }
 
-void saveCaseNote(BuildContext context, quill.QuillController controller, String selectedPatientUID) async {
+void saveCaseNote(BuildContext context, quill.QuillController controller,
+    String selectedPatientUID) async {
   // Get the current user
   final user = FirebaseAuth.instance.currentUser;
   final counselorUID = user?.uid;
@@ -281,7 +301,8 @@ void saveCaseNote(BuildContext context, quill.QuillController controller, String
   final dateAdded = Timestamp.now().toDate();
 
   // Format the date as a string in "YYYY-MM-DD" format
-  final formattedDate = "${dateAdded.year}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}";
+  final formattedDate =
+      "${dateAdded.year}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}";
 
   // Get the Quill Delta content from the controller
   final delta = controller.document.toDelta();

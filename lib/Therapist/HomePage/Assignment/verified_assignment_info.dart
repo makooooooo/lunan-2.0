@@ -69,7 +69,6 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                
               },
               child: Text('No'),
             ),
@@ -116,95 +115,105 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-          onWillPop: () async {
-            // Add your custom logic here
-            // You can navigate to a different route using Navigator
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => VerifiedAssignment(
-                  selectedPatientUID: selectedPatientUID,
-                ),
-              ),
-            );
-            // Return true if the route change is successful
-            return true;
-          },
-    
-    
-    
-    
-    child: Scaffold(
-      backgroundColor: const Color(0xffF5E9CF),
-      appBar: AppBar(
-        elevation: 0,
+      onWillPop: () async {
+        // Add your custom logic here
+        // You can navigate to a different route using Navigator
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => VerifiedAssignment(
+              selectedPatientUID: selectedPatientUID,
+            ),
+          ),
+        );
+        // Return true if the route change is successful
+        return true;
+      },
+      child: Scaffold(
         backgroundColor: const Color(0xffF5E9CF),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => TurendInAssignment(
-                  selectedPatientUID: selectedPatientUID,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xffF5E9CF),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TurendInAssignment(
+                    selectedPatientUID: selectedPatientUID,
+                  ),
                 ),
-              ),
-            );
-          },
-          color: Color(0xff4D455D),
+              );
+            },
+            color: Color(0xff4D455D),
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-              child: Text(
-                '$activity',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 30,
-                  color: Color(0xff4D455D),
+        body: Center(
+            child: SingleChildScrollView(
+                child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 400,
+          margin: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: const Color(0xff7DB9B6),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    '$activity',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                color: Color(0xff4D455D),
-                thickness: 2,
-              ),
-            ),
-            Flex(
-              direction: Axis.horizontal,
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff4D455D),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Text(
-                              '$activity\n$description | Due: $deadline',
-                              style: TextStyle(
-                                color: Colors.white,
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(10, 15, 10, 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xff4D455D),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        decoration: BoxDecoration(
+                          color: Color(0xffF5E9CF),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        // Display the assignment information
+                        child: Column(children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  '$activity\n$description | Due: $deadline',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: const Color(0xff4D455D),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Container(
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(9, 0, 0, 10),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Container(
                                   margin: const EdgeInsets.only(left: 10),
                                   child: TextButton(
                                     onPressed: () async {
@@ -220,49 +229,51 @@ class _VerifiedAssignmentInfoState extends State<VerifiedAssignmentInfo> {
                                     child: Text(
                                       fileName ?? 'No file attached',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: const Color(0xff4D455D),
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                     ),
                                   ),
-                                ),
-                              ),
-                            ],
+                                ))
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            right: 20), // Adjust margin as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showVerifyConfirmationDialog();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color.fromARGB(255, 209, 119, 119),
+                             shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                          ),
+                          child: const Text(
+                            'Unverify',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xffF5E9CF),
+                            ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Align(
-        alignment: Alignment.centerRight,
-        child: Padding(
-          padding: const EdgeInsets.only(
-              top: 350, right: 20), // Add margin to the top and right
-          child: ElevatedButton(
-            onPressed: () {
-              showVerifyConfirmationDialog();
-            },
-            style: ElevatedButton.styleFrom(
-              primary: const Color.fromARGB(255, 209, 119, 119),
-            ),
-            child: const Text(
-              'Unverify',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xffF5E9CF),
               ),
             ),
-          ),
-        ),
+          ]),
+        ))),
       ),
-    ),
     );
   }
 }

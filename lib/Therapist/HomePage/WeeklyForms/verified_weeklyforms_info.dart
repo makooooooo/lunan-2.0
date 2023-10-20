@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/verified_weeklyforms.dart';
 import 'package:lunan/firebase/auth_helper.dart';
 import 'package:lunan/Therapist/HomePage/WeeklyForms/turnedin_weeklyforms_info.dart';
@@ -112,7 +113,21 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
     final updatedWellnessQ4Value = mapNumericValueToString(wellnessQ4Value);
     final updatedWellnessQ5Value = mapNumericValueToString(wellnessQ5Value);
 
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        // Add your custom logic here
+        // You can navigate to a different route using Navigator
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => VerifiedWeeklyForms(
+              selectedPatientUID: selectedPatientUID,
+            ),
+          ),
+        );
+        // Return true if the route change is successful
+        return true;
+      },
+    child:Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
@@ -124,7 +139,7 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VerifiedWeeklyForms(
+                builder: (context) => TurnedINWeeklyFroms(
                     selectedPatientUID: selectedPatientUID, formData: formData),
               ),
             );
@@ -307,6 +322,6 @@ class VerifiedInWeeklyFormsInfo extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

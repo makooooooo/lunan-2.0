@@ -120,7 +120,22 @@ void _verifyDocument(BuildContext context) {
     final updatedWellnessQ3Value = mapNumericValueToString(wellnessQ3Value);
     final updatedWellnessQ4Value = mapNumericValueToString(wellnessQ4Value);
 
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => TurnedINWellnessFroms(
+                selectedPatientUID: selectedPatientUID,
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+
+    child:Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
@@ -328,6 +343,6 @@ void _verifyDocument(BuildContext context) {
           ),
         ),
       ),
-    );
+     ) );
   }
 }

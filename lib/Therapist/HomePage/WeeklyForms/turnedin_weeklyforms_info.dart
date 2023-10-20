@@ -121,7 +121,23 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
     final updatedWellnessQ4Value = mapNumericValueToString(wellnessQ4Value);
     final updatedWellnessQ5Value = mapNumericValueToString(wellnessQ5Value);
 
-    return Scaffold(
+
+    return WillPopScope(
+        onWillPop: () async {
+          // Add your custom logic here
+          // You can navigate to a different route using Navigator
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => TurnedINWeeklyFroms(
+                selectedPatientUID: selectedPatientUID,
+              ),
+            ),
+          );
+          // Return true if the route change is successful
+          return true;
+        },
+
+    child: Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
@@ -316,6 +332,6 @@ class TurnedInWeeklyFormsInfo extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
