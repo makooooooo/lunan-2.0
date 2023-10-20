@@ -73,26 +73,38 @@ class _PatientTurnInState extends State<PatientTurnIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xffF5E9CF),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Assignment()),
-            );
-          },
-          color: Color(0xff4D455D),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+          backgroundColor: const Color(0xffF5E9CF),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xffF5E9CF),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                   MaterialPageRoute(builder: (context) => Assignment()),
+                );
+              },
+              color: Color(0xff4D455D),
+            ),
+          ),
+          body: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 400,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xff7DB9B6),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 10),
               child: Text(
                 '${Activity}',
                 textAlign: TextAlign.center,
@@ -100,41 +112,46 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Montserrat',
                   fontSize: 30,
-                  color: Color(0xff4D455D),
+                  color: Colors.white,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                color: Color(0xff4D455D),
-                thickness: 2,
-              ),
-            ),
-            Flex(
-              direction: Axis.horizontal,
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff4D455D),
-                      borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
+            Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(10, 15, 10, 20),
+                      decoration: BoxDecoration(
+                        color: const Color(0xff4D455D),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              decoration: BoxDecoration(
+                                color: Color(0xffF5E9CF),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              // Display the assignment information
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Container(
+                                        margin: const EdgeInsets.only(top: 10),
                             child: Text(
                               '${Activity} \n ${Description} | Due: ${Deadline}',
                               style: TextStyle(
-                                color: Colors.white,
+                               color: const Color(0xff4D455D),
                               ),
                             ),
                           ),
                         ),
+                                  ),
                         Container(
                           margin: const EdgeInsets.fromLTRB(9, 0, 0, 20),
                           child: Row(
@@ -145,11 +162,11 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                                 },
                                 style: ButtonStyle(
                                   foregroundColor: MaterialStateProperty.all<Color>(
-                                    Colors.white,
+                                   const Color(0xff4D455D),
                                   ),
                                   side: MaterialStateProperty.all<BorderSide>(
                                     const BorderSide(
-                                      color: Color(0xffF5E9CF),
+                                      color: const Color(0xff4D455D),
                                       width: 2.0,
                                     ),
                                   ),
@@ -162,15 +179,22 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                                 child: Text(
                                   selectedFileName ?? 'No file selected',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                   color: const Color(0xff4D455D),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(200, 0, 0, 15),
+                       ],
+                    ),
+                  ),
+                ),
+                 Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            right: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               uploadAndSubmit();
@@ -186,16 +210,13 @@ class _PatientTurnInState extends State<PatientTurnIn> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                              )
               ],
             ),
-          ],
+        ))],
         ),
       ),
-    );
+           ))) ;
   }
 }
 
