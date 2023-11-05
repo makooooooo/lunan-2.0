@@ -25,10 +25,7 @@ class PatientList extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                  builder: (context) => LandingPageT(
-                        
-                      )),
+              MaterialPageRoute(builder: (context) => LandingPageT()),
             );
           },
           color: Color(0xff4D455D), // Change this color to your desired color
@@ -40,137 +37,156 @@ class PatientList extends StatelessWidget {
           // You can navigate to a different route using Navigator
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => LandingPageT(
-                
-              ),
+              builder: (context) => LandingPageT(),
             ),
           );
           // Return true if the route change is successful
           return true;
         },
-      
-      
-      
-      
-      
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 10, 20),
-              child: const Text(
-                'Patient List',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Montserrat',
-                  fontSize: 30,
-                  color: Color(0xff4D455D),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 20, 10, 20),
+                child: const Text(
+                  'Patient List',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                    fontSize: 30,
+                    color: Color(0xff4D455D),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-              stream: getUsersStream(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                }
-
-                final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: documents.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final document = documents[index];
-                    String firstName = document['firstName'] as String? ?? '';
-                    String dateCreated = document['dateCreated'] as String? ?? '';
-                    String counselorUID = document['counselorUID'] as String? ?? '';
-                    String profilePicUrl = document['ProfPic'] as String? ?? '';
-                    String selectedPatientUID = document['UID'] as String? ?? '';
-
-                    // Check if field exists
-                    if (document['firstName'] != null) {
-                      firstName = document['firstName'] as String;
-                    }
-                    if (document['dateCreated'] != null) {
-                      dateCreated = document['dateCreated'] as String;
-                    }
-                    if (document['counselorUID'] != null) {
-                      counselorUID = document['counselorUID'] as String;
-                    }
-                    if (document['ProfPic'] != null) {
-                      profilePicUrl = document['ProfPic'] as String;
-                    }
-                    if (document['UID'] != null) {
-                      selectedPatientUID = document['UID'] as String;
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: getUsersStream(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
                     }
 
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PatientsInfo(
-                              data: document.data() as Map<String, dynamic>,
-                              selectedPatientUID: selectedPatientUID,
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+
+                    final List<QueryDocumentSnapshot> documents =
+                        snapshot.data!.docs;
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: documents.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final document = documents[index];
+                        String firstName =
+                            document['firstName'] as String? ?? '';
+                        String dateCreated =
+                            document['dateCreated'] as String? ?? '';
+                        String counselorUID =
+                            document['counselorUID'] as String? ?? '';
+                        String profilePicUrl =
+                            document['ProfPic'] as String? ?? '';
+                        String selectedPatientUID =
+                            document['UID'] as String? ?? '';
+                        String PhoneNum =
+                            document['CellPhone'] as String? ?? '';
+                        String HomePhone =
+                            document['HomePhone'] as String? ?? '';
+                        String Email = document['Email'] as String? ?? '';
+                        // Check if field exists
+                        if (document['firstName'] != null) {
+                          firstName = document['firstName'] as String;
+                        }
+                        if (document['dateCreated'] != null) {
+                          dateCreated = document['dateCreated'] as String;
+                        }
+                        if (document['counselorUID'] != null) {
+                          counselorUID = document['counselorUID'] as String;
+                        }
+                        if (document['ProfPic'] != null) {
+                          profilePicUrl = document['ProfPic'] as String;
+                        }
+                        if (document['UID'] != null) {
+                          selectedPatientUID = document['UID'] as String;
+                        }
+                        if (document['CellPhone'] != null) {
+                          PhoneNum = document['CellPhone'] as String;
+                        }
+                        if (document['HomePhone'] != null) {
+                          HomePhone = document['HomePhone'] as String;
+                        }
+                        if (document['Email'] != null) {
+                          Email = document['Email'] as String;
+                        }
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PatientsInfo(
+                                  data: document.data() as Map<String, dynamic>,
+                                  selectedPatientUID: selectedPatientUID,
+                                  PhoneNum: PhoneNum,
+                                  HomePhone: HomePhone,
+                                  Email: Email,
+                                  firstName: firstName,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            height: 80,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff4D455D),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 16, right: 8),
+                                  child: CircleAvatar(
+                                    backgroundImage: profilePicUrl.isNotEmpty
+                                        ? NetworkImage(profilePicUrl)
+                                        : null,
+                                    radius: 20,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
                       },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff4D455D),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 16, right: 8),
-                              child: CircleAvatar(
-                                backgroundImage: profilePicUrl.isNotEmpty ? NetworkImage(profilePicUrl) : null,
-                                radius: 20,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Patient Name: $firstName\nDate Added: $dateCreated\nLast Session: ',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     );
                   },
-                );
-              },
-            ),
-            ),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }

@@ -16,8 +16,8 @@ class VerifiedAssignmentPatientA extends StatelessWidget {
         backgroundColor: const Color(0xff7DB9B6),
       ),
       drawer: Drawer(
-        child: MenuListT(),
-      ),
+          // child: MenuListT(),
+          ),
       body: Center(
           child: SingleChildScrollView(
         child: Column(

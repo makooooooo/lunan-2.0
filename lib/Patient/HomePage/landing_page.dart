@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/HomePage/Dashboard/dashboard.dart';
 import 'package:lunan/Patient/HomePage/chat.dart';
@@ -13,58 +12,35 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  
   int currentIndex = 0;
-  
-  final List<Widget> _pages = <Widget>[
-    Dashboard(),
-    ProfileSetting(),
-    Chat()
 
-  ];
+  final List<Widget> _pages = <Widget>[Dashboard(), ProfileSetting(), Chat()];
   @override
   Widget build(BuildContext context) => Scaffold(
-  
-      body: Center (
-        child: _pages.elementAt(currentIndex)
-      ),
-  
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xff7DB9B6),
-        unselectedItemColor: Colors.white70,
-        selectedItemColor:  Colors.white,
-        showUnselectedLabels: false,
-        
-        
-        currentIndex: currentIndex,
-       
-        
-        
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-        
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Profile',
-           
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Chat',
-           
-          )
-          
-        ],
-         onTap: (int index) => setState(() => currentIndex = index),
-        
-      ),
-      
-      
-  
-  ); 
+        body: Center(child: _pages.elementAt(currentIndex)),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color(0xff7DB9B6),
+          unselectedItemColor: Colors.white70,
+          selectedItemColor: Colors.white,
+          showUnselectedLabels: false,
+          currentIndex: currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label: 'Chat',
+            )
+          ],
+          onTap: (int index) => setState(() => currentIndex = index),
+        ),
+      );
 }
 
 void _showLogoutModal(BuildContext context) {
@@ -83,11 +59,10 @@ void _showLogoutModal(BuildContext context) {
           ),
           TextButton(
             onPressed: () {
-            
-               Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
             },
             child: Text('Logout'),
           ),

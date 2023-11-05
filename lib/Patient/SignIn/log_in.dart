@@ -9,15 +9,96 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunan/Therapist/landing_pageT.dart';
 import 'package:lunan/firebase/auth_helper.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  LoginPage({Key? key});
+
+  Future<void> fetchAndUseTwilioToken(BuildContext context) async {
+    final String email = emailController.text.trim();
+    final String password = passwordController.text.trim();
+
+    final url = Uri.parse(
+        'https://conversations-chatting-2605.twil.io/token-service?identity=$email&password=$password');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final jwtToken = response.body; // This should be the JWT token
+      print('Twilio JWT Token: $jwtToken');
+
+      // Now, you can use the `jwtToken` for Twilio authentication
+      // Set the identity to the user's email
+      // Add your Twilio integration logic here...
+
+      // After getting the JWT token, create a user account in Twilio Conversations API
+      await createTwilioConversationsAccount(email);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Token Retrieval Error'),
+            content: Text('Failed to retrieve Twilio JWT token.'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+// Function to create a user account in Twilio Conversations API
+  Future<void> createTwilioConversationsAccount(String email) async {
+    final url = Uri.parse(
+        'https://conversations.twilio.com/v1/Services/IS9d948a5aea154f75bdd0aa0b1191b53c/Users');
+
+    final Map<String, dynamic> body = {
+      'Identity': email,
+      // 'FriendlyName': email,
+    };
+    final String accountSid = 'AC189848464c030fae6d1513f6dd03b233';
+    final String authToken = 'c42c893db2b14e10143770cc6ba07ef3';
+
+// Combine Account SID and Auth Token
+    final String credentials = '$accountSid:$authToken';
+
+// Base64 encode the combined string
+    final String base64Credentials = base64Encode(utf8.encode(credentials));
+
+// Use the constructed string in the 'Authorization' header
+    final headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic $base64Credentials',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      print('Twilio Conversations account created successfully.');
+      // You can now proceed with other actions or use the Twilio Conversations API as needed.
+    } else {
+      print('Failed to create Twilio Conversations account: ${response.body}');
+      // Handle the error appropriately, show an alert or take other actions.
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
     Future<void> loginUser(BuildContext context) async {
       final String email = emailController.text.trim();
       final String password = passwordController.text.trim();
@@ -43,15 +124,17 @@ class LoginPage extends StatelessWidget {
               .where('UID', isEqualTo: userId)
               .where('DateSubmitted', isEqualTo: currentDateString)
               .get()
-              .then((moodEntry) {
+              .then((moodEntry) async {
             if (moodEntry.docs.isNotEmpty) {
               // Mood entry for today already exists, navigate to the Dashboard
+              await fetchAndUseTwilioToken(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => LandingPage()),
               );
             } else {
               // Mood entry for today doesn't exist, load the DashboardModal
+              await fetchAndUseTwilioToken(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => DashboardModal()),
@@ -68,6 +151,7 @@ class LoginPage extends StatelessWidget {
             );
           });
         } else if (role == 'Counselor') {
+          await fetchAndUseTwilioToken(context);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const LandingPageT()),
