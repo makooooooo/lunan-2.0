@@ -96,7 +96,8 @@ class ForgotPassMobileOtp extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ResetPasswordPhoneNumber()),
+                          builder: (context) =>
+                              const ResetPasswordPhoneNumber()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -116,7 +117,7 @@ class ForgotPassMobileOtp extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
                 child: const Text(

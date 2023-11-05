@@ -45,7 +45,6 @@ class ProfileSettingT extends StatelessWidget {
                 },
                 child: Scaffold(
                   backgroundColor: const Color(0xffF5E9CF),
-                
                   body: SingleChildScrollView(
                       child: Center(
                     child: Column(
@@ -177,7 +176,7 @@ void _showLogoutModal(BuildContext context) {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
             child: Text('Logout'),

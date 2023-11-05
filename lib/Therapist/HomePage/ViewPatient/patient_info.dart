@@ -10,12 +10,17 @@ import 'package:lunan/Therapist/HomePage/WellnessForm/turnedin_wellnessforms.dar
 class PatientInfo extends StatefulWidget {
   final Map<String, dynamic>? data; // Make the data parameter optional
   final String selectedPatientUID;
-
-  const PatientInfo({
-    Key? key,
-    this.data,
-    required this.selectedPatientUID,
-  }) : super(key: key);
+  final String? HomePhone;
+  final String? Email;
+  final String? firstName;
+  const PatientInfo(
+      {Key? key,
+      this.data,
+      required this.selectedPatientUID,
+      this.HomePhone,
+      this.Email,
+      this.firstName})
+      : super(key: key);
 
   @override
   State<PatientInfo> createState() => _PatientInfoState();
@@ -29,7 +34,6 @@ class _PatientInfoState extends State<PatientInfo> {
     // Extract the patient's information from the data map
     final String firstName = (widget.data ?? {})['firstName'] ?? '';
     final String dateCreated = (widget.data ?? {})['dateCreated'] ?? '';
-
     return Theme(
       data:
           Theme.of(context).copyWith(dialogBackgroundColor: Colors.transparent),
@@ -159,6 +163,9 @@ class _PatientInfoState extends State<PatientInfo> {
                                 builder: (context) => IntakeForm(
                                       selectedPatientUID:
                                           widget.selectedPatientUID,
+                                      HomePhone: widget.HomePhone,
+                                      Email: widget.Email,
+                                      firstName: widget.firstName,
                                     )),
                           );
                         },
@@ -225,7 +232,7 @@ class _PatientInfoState extends State<PatientInfo> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                         backgroundColor:const Color(0xFF96C291),
+                          backgroundColor: const Color(0xFF96C291),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 20), // Set the corner radius here

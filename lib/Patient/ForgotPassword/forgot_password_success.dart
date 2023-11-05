@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/SignIn/log_in.dart';
 
-
 void main() => runApp(const MaterialApp(
       home: ForgotPasswordSuccess(),
     ));
@@ -49,8 +48,7 @@ class ForgotPasswordSuccess extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

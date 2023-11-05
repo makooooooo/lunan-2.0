@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lunan/Patient/SignIn/log_in.dart';
+
 class ResetPasswordPhoneNumberT extends StatelessWidget {
   const ResetPasswordPhoneNumberT({super.key});
 
@@ -89,8 +90,7 @@ class ResetPasswordPhoneNumberT extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -106,7 +106,6 @@ class ResetPasswordPhoneNumberT extends StatelessWidget {
               ),
             ],
           ),
-        )
-        );
+        ));
   }
 }

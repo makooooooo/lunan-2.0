@@ -19,8 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const LoginPage(),
+          pageBuilder: (context, animation, secondaryAnimation) => LoginPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var begin = Offset(1.0, 0.0);
             var end = Offset.zero;
