@@ -13,7 +13,7 @@ class WellnessFormChooser extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5E9CF), // Set the background color
       appBar: AppBar(
-       elevation: 0,
+        elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -27,89 +27,83 @@ class WellnessFormChooser extends StatelessWidget {
         ),
       ),
       // Add the drawer for the menu
-     
-      body: SingleChildScrollView(
-        child: Center(
-         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                width: 150,
-                height: 150,
-                child: ElevatedButton(
-                    onPressed: () {
-                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WellnessFormQuestion()),
-                      );
-                    
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7DB9B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15), // Set the corner radius here
+
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Expanded(
+                child: Container(
+                  constraints: const BoxConstraints(
+                     maxWidth: 150,
+                    maxHeight: 150,
+                  ),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WellnessFormQuestion()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff7DB9B6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              15), // Set the corner radius here
+                        ),
                       ),
-                    ),
-                    child: Center(
-        
+                      child: Center(
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                           child: const Text(
                             'View Wellness Question Forms',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
-                  
-                    
-                    )),
-              ),
-              Container(
-               margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                width: 150,
-                height: 150,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const WellnessForms()),
-                      );
-                     
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7DB9B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15), // Set the corner radius here
+                      )),
+                ),
+              )),
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Expanded(
+                child: Container(
+                  constraints: const BoxConstraints( maxWidth: 150,maxHeight: 150),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WellnessForms()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff7DB9B6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              15), // Set the corner radius here
+                        ),
                       ),
-                    ),
-                    child: Center(
-                       child: Container(
+                      child: Center(
+                        child: Container(
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                           child: const Text(
                             'View Wellness Forms',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                            
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
-                   
-                    )
-                    ),
-              ),
-            ],
-          ),
-      )),
-
-  
+                      )),
+                ),
+              ))
+        ],
+      ),
     );
   }
 }

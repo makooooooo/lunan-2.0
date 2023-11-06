@@ -198,114 +198,142 @@ class LoginPage extends StatelessWidget {
       }
     }
 
-    return WillPopScope(
+     return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
-        backgroundColor: const Color(0xffF5E9CF),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.all(5),
-                ),
-                const Image(image: AssetImage('assets/logo.png')),
-                const Text(
-                  'Hello There!',
-                  style: TextStyle(fontSize: 30, color: Color(0xff4D455D)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+          backgroundColor: const Color(0xffF5E9CF),
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 300,
+                      maxHeight: 300,
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Image.asset(
+                            'assets/logo.png',
+                          ),
+                        )),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      'Hello There!',
+                      style: TextStyle(
+                          fontSize: 30,
                           color: Color(0xff4D455D),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff4D455D),
-                        ),
-                      ),
-                      labelText: 'Email',
-                      hintText: 'Enter email',
-                      labelStyle: TextStyle(
-                        color: Color(
-                            0xff4D455D), // Change the label (hint) text color
-                      ),
-                      hintStyle: TextStyle(
-                        color: Color(0xff4D455D), // Change the hint text color
-                      ),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff4D455D),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff4D455D),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff4D455D),
+                              ),
+                            ),
+                            labelText: 'Email',
+                            hintText: 'Enter email',
+                            labelStyle: TextStyle(
+                              color: Color(
+                                  0xff4D455D), // Change the label (hint) text color
+                            ),
+                            hintStyle: TextStyle(
+                              color: Color(
+                                  0xff4D455D), // Change the hint text color
+                            ),
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff4D455D),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      labelText: 'Password',
-                      hintText: 'Enter Password',
-                      labelStyle: TextStyle(
-                        color: Color(
-                            0xff4D455D), // Change the label (hint) text color
-                      ),
-                      hintStyle: TextStyle(
-                        color: Color(0xff4D455D), // Change the hint text color
-                      ),
+                        TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff4D455D),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff4D455D),
+                              ),
+                            ),
+                            labelText: 'Password',
+                            hintText: 'Enter Password',
+                            labelStyle: TextStyle(
+                              color: Color(
+                                  0xff4D455D), // Change the label (hint) text color
+                            ),
+                            hintStyle: TextStyle(
+                              color: Color(
+                                  0xff4D455D), // Change the hint text color
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const ForgotPassword()),
-                    );
-                  },
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Color(0xff4D455D)),
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff4D455D),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(
+                  TextButton(
                     onPressed: () {
-                      loginUser(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ForgotPassword()),
+                      );
                     },
                     child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                      'Forgot Password?',
+                      style: TextStyle(color: Color(0xff4D455D)),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff4D455D),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color(0xff4D455D), // Background color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20), // Set the border radius here
+                        ),
+                      ),
+                      onPressed: () {
+                        loginUser(context);
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }

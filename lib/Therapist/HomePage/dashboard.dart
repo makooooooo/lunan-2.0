@@ -33,112 +33,127 @@ class DashboardT extends StatelessWidget {
           final firstName =
               documents[0].get('firstName') as String? ?? 'Unknown';
 
-          return Scaffold(
+         return Scaffold(
             backgroundColor:
                 const Color(0xffF5E9CF), // Set the background color
 
-            body: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 100, 20, 20),
-                      child: Text(
-                        'Welcome back \n $firstName!',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat',
-                          fontSize: 30,
-                          color: const Color(0xff4D455D),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                    const Spacer(flex: 1,),
+                   Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 300,
+                        
+                      ),
+                     
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            'Welcome back \n $firstName!',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              fontSize: 30,
+                              color: const Color(0xff4D455D),
+                            ),
+                          ),
+                        ),
+                      )),
+             
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(20, 20, 10, 0),
+                        constraints: const BoxConstraints(
+                          maxWidth: 150,
+                          maxHeight: 150,
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PatientList(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff7DB9B6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                15,
+                              ), // Set the corner radius here
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                child: const Text(
+                                  'View Patients',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Image.asset('assets/iconEdit.png'),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                          width: 150,
-                          height: 150,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PatientList(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff7DB9B6),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  15,
-                                ), // Set the corner radius here
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: const Text(
-                                    'View\nPatients',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Image.asset('assets/iconEdit.png'),
-                              ],
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(10, 20, 20, 0),
+                        constraints: const BoxConstraints(
+                          maxWidth: 150,
+                          maxHeight: 150,
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Schedule()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff7DB9B6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                15,
+                              ), // Set the corner radius here
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                          width: 150,
-                          height: 150,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Schedule()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff7DB9B6),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  15,
-                                ), // Set the corner radius here
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: const Text(
-                                    'Schedule',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                child: const Text(
+                                  'Schedule',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
                                   ),
                                 ),
-                                Image.asset('assets/iconCalendar.png'),
-                              ],
-                            ),
+                              ),
+                              Image.asset('assets/iconCalendar.png'),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    )
                   ],
                 ),
-              ),
+                const Spacer(flex: 2,),
+              ],
             ),
           );
         }

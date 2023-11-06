@@ -30,77 +30,82 @@ class AssignmentChooser extends StatelessWidget {
       ),
       // Add the drawer for the menu
 
-      body: SingleChildScrollView(
-          child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-             margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-              width: 150,
-              height: 150,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Assignment()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff7DB9B6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          15), // Set the corner radius here
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      child: const Text(
-                        'View Assignments',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Expanded(
+                  child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 150,
+                  maxHeight: 150,
+                ),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Assignment()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff7DB9B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            15), // Set the corner radius here
                       ),
                     ),
-                  )),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-              width: 150,
-              height: 150,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Completed()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff7DB9B6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          15), // Set the corner radius here
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      child: const Text(
-                        'Completed Assignments',
-                        style: TextStyle(
-                          fontSize: 18,
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: const Text(
+                          'View Assignments',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
+                      ),
+                    )),
+              ))),
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Expanded(
+                  child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 150,
+                  maxHeight: 150,
+                ),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Completed()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff7DB9B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            15), // Set the corner radius here
                       ),
                     ),
-                  )),
-            ),
-          ],
-        ),
-      )),
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: const Text(
+                          'Completed Assignments',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )),
+              ))),
+        ],
+      ),
     );
   }
 }

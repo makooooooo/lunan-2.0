@@ -23,84 +23,90 @@ class WeeklyFormChooser extends StatelessWidget {
               MaterialPageRoute(builder: (context) => LandingPage()),
             );
           },
-          color: Color(0xff4D455D),// Change this color to your desired color
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
       // Add the drawer for the menu
 
-      body: SingleChildScrollView(
-          child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-              width: 150,
-              height: 150,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WeeklyFormsQuestion()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff7DB9B6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          15), // Set the corner radius here
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      child: const Text(
-                        'View Weekly Question Forms',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                        textAlign: TextAlign.center,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Expanded(
+              child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: 150,
+                  maxHeight: 150,
+                ),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WeeklyFormsQuestion()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff7DB9B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            15), // Set the corner radius here
                       ),
                     ),
-                  )),
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: const Text(
+                          'View Weekly Question Forms',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )),
+              ),
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-              width: 150,
-              height: 150,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const WeeklyForms()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff7DB9B6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          15), // Set the corner radius here
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      child: const Text(
-                        'View Weekly Forms'
-                        ,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                        textAlign: TextAlign.center,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Expanded(
+              child: Container(
+                constraints:
+                    const BoxConstraints(maxWidth: 150, maxHeight: 150),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WeeklyForms()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff7DB9B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            15), // Set the corner radius here
                       ),
                     ),
-                  )),
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: const Text(
+                          'View Weekly Forms',
+                          style: TextStyle(
+                            fontSize:18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )),
+              ),
             ),
-          ],
-        ),
-      )),
+          )
+        ],
+      ),
     );
   }
 }
