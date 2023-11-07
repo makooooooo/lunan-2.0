@@ -79,14 +79,43 @@ class ChatDetailScreen extends StatelessWidget {
 
                 final messages = snapshot.data?.docs;
 
-                return ListView.builder(
+               return ListView.builder(
                   itemCount: messages?.length,
                   itemBuilder: (context, index) {
                     final message =
                         messages?[index].data() as Map<String, dynamic>;
-                    return ListTile(
-                      title: Text(message['user']),
-                      subtitle: Text(message['text']),
+
+                    // Check if the message is from the current user
+                    final isCurrentUser = message['user'] == name;
+
+                    // Define the alignment for the message bubble
+                    final alignment = isCurrentUser ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+
+                    // Define the background color for the message bubble
+                    final bubbleColor = isCurrentUser ? Colors.white : const Color(0xff4D455D);
+
+                    // Define the text color
+                    final textColor = isCurrentUser ? Colors.black : Colors.white;
+
+                    return Column(
+                      crossAxisAlignment: alignment,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            color: bubbleColor,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Text(
+                            message['text'],
+                            style: TextStyle(
+                              color: textColor,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   },
                 );
@@ -221,7 +250,8 @@ class chatT extends StatelessWidget {
                         var userData =
                             allUsers[index].data() as Map<String, dynamic>;
 
-                        return InkWell(
+                        return Padding(padding: EdgeInsets.all(10) ,
+                          child : InkWell(
                           onTap: () {
                             String roomName = generateRoomName(
                               _auth.currentUser!.uid,
@@ -254,6 +284,8 @@ class chatT extends StatelessWidget {
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
+                        )
+                      
                         );
                       },
                     );

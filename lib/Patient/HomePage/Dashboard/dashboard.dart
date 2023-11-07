@@ -17,16 +17,15 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color(0xffF5E9CF), // Set the background color
 
-        body: Center(
-          child: SingleChildScrollView(
-              child: Center(
-            child: Column(children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    width: 150,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        left: 20, right: 10, top: 10, bottom: 10),
                     height: 150,
                     child: ElevatedButton(
                         onPressed: () {
@@ -45,23 +44,23 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text(
-                                'Weekly Forms',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                            const Text(
+                              'Weekly Forms',
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                             Image.asset('assets/iconEdit.png'),
                           ],
                         )),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    width: 150,
+                ),
+                Expanded(
+                  child: Container(
+                   margin: const EdgeInsets.only(
+                        left: 10, right: 20, top: 10, bottom: 10),
                     height: 150,
                     child: ElevatedButton(
                         onPressed: () {
@@ -80,28 +79,29 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text(
-                                'Wellness Forms',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                            const Text(
+                              'Wellness Forms',
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                             Image.asset('assets/iconEdit2.png'),
                           ],
                         )),
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    width: 150,
+
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                     margin: const EdgeInsets.only(
+                        left: 20, right: 10, top: 10, bottom: 10),
+
                     height: 150,
                     child: ElevatedButton(
                         onPressed: () {
@@ -120,23 +120,23 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text(
-                                'Assignments',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                            const Text(
+                              'Assignments',
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                             Image.asset('assets/iconTaskSquare.png'),
                           ],
                         )),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    width: 150,
+                ),
+                Expanded(
+                  child: Container(
+                      margin: const EdgeInsets.only(
+                        left: 10, right: 20, top: 10, bottom: 10),
                     height: 150,
                     child: ElevatedButton(
                         onPressed: () {
@@ -154,31 +154,31 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text(
-                                'Wellness Guide',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                            const Text(
+                              'Wellness Guide',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                             Image.asset('assets/iconBookSaved.png'),
                           ],
                         )),
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-                    width: 150,
-                    height: 150,
-                    child: ElevatedButton(
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5, // Set the width factor to 50%
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 150,
+                      child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -193,24 +193,24 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: const Text(
-                                'Schedule',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                            const Text(
+                              'Schedule',
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                             Image.asset('assets/iconCalendar.png'),
                           ],
-                        )),
-                  )
-                ],
-              )
-            ]),
-          )),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
         ));
   }
 }
