@@ -1,86 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lunan/Therapist/HomePage/ViewPatient/patient_info.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class WellnessGuideT extends StatefulWidget {
+class WellnessGuideT extends StatelessWidget {
   const WellnessGuideT({Key? key}) : super(key: key);
-
-  @override
-  State<WellnessGuideT> createState() => _WellnessGuideTState();
-}
-
-class _WellnessGuideTState extends State<WellnessGuideT> {
-  final videoURL1 = "https://youtu.be/-7-CAFhJn78";
-  final videoURL2 = "https://youtu.be/cyMxWXlX9sU";
-  final videoURL3 = "https://youtu.be/rvaqPPjtxng";
-  final videoURL4 = "https://youtu.be/8TuRYV71Rgo";
-  final videoURL5 = "https://youtu.be/krBvzDlL0mM";
-  final videoURL6 = "https://youtu.be/C5L8Z3qA1DA";
-
-  late YoutubePlayerController _controller1;
-  late YoutubePlayerController _controller2;
-  late YoutubePlayerController _controller3;
-  late YoutubePlayerController _controller4;
-  late YoutubePlayerController _controller5;
-  late YoutubePlayerController _controller6;
-
-  @override
-  void initState() {
-    super.initState();
-    final videoID1 = YoutubePlayer.convertUrlToId(videoURL1)!;
-    _controller1 = YoutubePlayerController(
-      initialVideoId: videoID1,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID2 = YoutubePlayer.convertUrlToId(videoURL2)!;
-    _controller2 = YoutubePlayerController(
-      initialVideoId: videoID2,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID3 = YoutubePlayer.convertUrlToId(videoURL3)!;
-    _controller3 = YoutubePlayerController(
-      initialVideoId: videoID3,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID4 = YoutubePlayer.convertUrlToId(videoURL4)!;
-    _controller4 = YoutubePlayerController(
-      initialVideoId: videoID4,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID5 = YoutubePlayer.convertUrlToId(videoURL5)!;
-    _controller5 = YoutubePlayerController(
-      initialVideoId: videoID5,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-    final videoID6 = YoutubePlayer.convertUrlToId(videoURL6)!;
-    _controller6 = YoutubePlayerController(
-      initialVideoId: videoID6,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller1.dispose();
-    _controller2.dispose();
-    _controller3.dispose();
-    _controller4.dispose();
-    _controller5.dispose();
-    _controller6.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,195 +16,140 @@ class _WellnessGuideTState extends State<WellnessGuideT> {
           onPressed: () {
             Navigator.pop(context);
           },
-          color: Color(0xff4D455D),// Change this color to your desired color
+          color: Color(0xff4D455D), // Change this color to your desired color
         ),
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Breathing Exercise',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller1,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Meditation Guide',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller2,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Sleep Meditation',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller3,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Stretching Guide',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller4,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Relaxation Guide',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller5,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    child: const Text(
-                      'Positive Energy',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: Color(0xff4D455D),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Color(0xff4D455D),
-                    thickness: 2,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: YoutubePlayer(
-                      controller: _controller6,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.amber,
-                      progressColors: ProgressBarColors(
-                        playedColor: Colors.amber,
-                        handleColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: WellnessVideos(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        onPressed: () {
+          // Add your action here
+        },
+        child: Icon(Icons.add),
         backgroundColor: const Color(0xff4D455D),
       ),
+    );
+  }
+}
+
+class WellnessVideos extends StatefulWidget {
+  @override
+  _WellnessVideosState createState() => _WellnessVideosState();
+}
+
+class _WellnessVideosState extends State<WellnessVideos> {
+  final List<String> videoURLs = [
+    "https://youtu.be/-7-CAFhJn78",
+    "https://youtu.be/cyMxWXlX9sU",
+    "https://youtu.be/rvaqPPjtxng",
+    "https://youtu.be/8TuRYV71Rgo",
+    "https://youtu.be/krBvzDlL0mM",
+    "https://youtu.be/C5L8Z3qA1DA",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            for (int i = 0; i < videoURLs.length; i++) ...{
+              WellnessVideoCard(videoURL: videoURLs[i]),
+            }
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WellnessVideoCard extends StatefulWidget {
+  final String videoURL;
+
+  WellnessVideoCard({required this.videoURL});
+
+  @override
+  _WellnessVideoCardState createState() => _WellnessVideoCardState();
+}
+
+class _WellnessVideoCardState extends State<WellnessVideoCard> {
+  late YoutubePlayerController _controller;
+  bool isVideoLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final videoID = YoutubePlayer.convertUrlToId(widget.videoURL)!;
+    _controller = YoutubePlayerController(
+      initialVideoId: videoID,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false, // Auto-play is disabled
+      ),
+    );
+    _controller.addListener(listener);
+  }
+
+  void listener() {
+    if (_controller.value.isReady && !isVideoLoaded) {
+      setState(() {
+        isVideoLoaded = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          child: Text(
+            'Video Title', // Replace with your video title
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 20,
+              color: Color(0xff4D455D),
+            ),
+          ),
+        ),
+        const Divider(
+          color: Color(0xff4D455D),
+          thickness: 2,
+        ),
+        isVideoLoaded
+            ? YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.amber,
+                progressColors: ProgressBarColors(
+                  playedColor: Colors.amber,
+                  handleColor: Colors.amberAccent,
+                ),
+              )
+            : InkWell(
+                onTap: () {
+                  _controller.play();
+                },
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  color: Colors.black,
+                  child: Center(
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 60,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }
