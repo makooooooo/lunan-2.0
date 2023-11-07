@@ -33,15 +33,11 @@ class AssignmentChooser extends StatelessWidget {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Expanded(
-                  child: Container(
-                constraints: const BoxConstraints(
-                  maxWidth: 150,
-                  maxHeight: 150,
-                ),
-                child: ElevatedButton(
+          Expanded(
+              child: Container(
+                  margin: const EdgeInsets.only(left: 20, right: 10, top: 20),
+                  height: 150,
+                  child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -56,27 +52,22 @@ class AssignmentChooser extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: const Text(
-                          'View Assignments',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.center,
+                        child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      child: const Text(
+                        'View Assignments',
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     )),
-              ))),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Expanded(
-                  child: Container(
-                constraints: const BoxConstraints(
-                  maxWidth: 150,
-                  maxHeight: 150,
-                ),
-                child: ElevatedButton(
+                  ))),
+          Expanded(
+              child: Container(
+                  margin: const EdgeInsets.only(left: 10, right: 20, top: 20),
+                  height: 150,
+                  child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -92,18 +83,17 @@ class AssignmentChooser extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: const Text(
-                          'Completed Assignments',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.center,
+                        child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      child: const Text(
+                        'Completed Assignments',
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     )),
-              ))),
+                  ))),
         ],
       ),
     );

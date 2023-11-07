@@ -31,80 +31,74 @@ class WeeklyFormChooser extends StatelessWidget {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Expanded(
-              child: Container(
-                constraints: const BoxConstraints(
-                  maxWidth: 150,
-                  maxHeight: 150,
-                ),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WeeklyFormsQuestion()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7DB9B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15), // Set the corner radius here
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(
+                  left: 20, right: 10, top: 20),
+              height: 150,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WeeklyFormsQuestion()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff7DB9B6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15), // Set the corner radius here
+                    ),
+                  ),
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      child: const Text(
+                        'View Weekly Question Forms',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: const Text(
-                          'View Weekly Question Forms',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )),
-              ),
+                  )),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Expanded(
-              child: Container(
-                constraints:
-                    const BoxConstraints(maxWidth: 150, maxHeight: 150),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const WeeklyForms()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7DB9B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15), // Set the corner radius here
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(
+                  left: 10, right: 20, top: 20),
+              height: 150,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WeeklyForms()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff7DB9B6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          15), // Set the corner radius here
+                    ),
+                  ),
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      child: const Text(
+                        'View Weekly Forms',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: const Text(
-                          'View Weekly Forms',
-                          style: TextStyle(
-                            fontSize:18,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )),
-              ),
+                  )),
             ),
-          )
+          ),
         ],
       ),
     );
