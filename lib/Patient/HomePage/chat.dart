@@ -1,18 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-// Create a new screen for the chat details
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MaterialApp(
-    home: Chat(),
-  ));
-}
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatDetailScreen extends StatelessWidget {
   final String name;
@@ -88,30 +80,34 @@ class ChatDetailScreen extends StatelessWidget {
                     final message =
                         messages?[index].data() as Map<String, dynamic>;
 
-                    // Check if the message is from the current user
                     final isCurrentUser = message['user'] == name;
 
-                    // Define the alignment for the message bubble
-                    final alignment = isCurrentUser ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+                    final alignment = isCurrentUser
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.end;
 
-                    // Define the background color for the message bubble
-                    final bubbleColor = isCurrentUser ? Colors.white : const Color(0xff4D455D);
+                    final bubbleColor =
+                        isCurrentUser ? Colors.white : const Color(0xff4D455D);
 
-                    // Define the text color
-                    final textColor = isCurrentUser ? Colors.black : Colors.white;
+                    final textColor =
+                        isCurrentUser ? Colors.black : Colors.white;
 
                     return Column(
                       crossAxisAlignment: alignment,
                       children: [
                         Container(
                           padding: EdgeInsets.all(8.0),
-                          margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 8.0),
                           decoration: BoxDecoration(
                             color: bubbleColor,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          child: Text(
-                            message['text'],
+                          child: Linkify(
+                            onOpen: (url) {
+                              launchURLInWebView(url.url);
+                            },
+                            text: message['text'],
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.0,
@@ -164,6 +160,14 @@ class ChatDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  void launchURLInWebView(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceSafariVC: false, forceWebView: false);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
 
 class Chat extends StatefulWidget {
@@ -174,8 +178,7 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? counselorUID;
-  bool isCounselorUIDFetched =
-      false; // Add a flag to track if counselorUID is fetched
+  bool isCounselorUIDFetched = false;
 
   @override
   void initState() {
@@ -199,7 +202,7 @@ class _ChatState extends State<Chat> {
           print('Counselor UID: $counselorUID');
           controller.add(counselorUID!);
           setState(() {
-            isCounselorUIDFetched = true; // Set the flag to true
+            isCounselorUIDFetched = true;
           });
         } else {
           print('User document not found');
@@ -218,7 +221,7 @@ class _ChatState extends State<Chat> {
     String roomName = currentUserUID.compareTo(selectedUserUID) < 0
         ? '$currentUserUID and $selectedUserUID'
         : '$selectedUserUID and $currentUserUID';
-    print("Room Name: $roomName"); // Print the room name to the console
+    print("Room Name: $roomName");
     return roomName;
   }
 
@@ -250,7 +253,6 @@ class _ChatState extends State<Chat> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Check if counselorUID is fetched before building UI
           isCounselorUIDFetched
               ? Expanded(
                   child: StreamBuilder<QuerySnapshot>(
@@ -266,7 +268,6 @@ class _ChatState extends State<Chat> {
                         return Text('Error: ${snapshot.error}');
                       }
 
-                      // Create a separate StreamBuilder for Admin accounts
                       return StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('Users')
@@ -281,7 +282,6 @@ class _ChatState extends State<Chat> {
                             return Text('Error: ${adminSnapshot.error}');
                           }
 
-                          // Combine the data from both snapshots
                           final List<QueryDocumentSnapshot> allUsers = [];
                           if (snapshot.hasData) {
                             allUsers.addAll(snapshot.data!.docs);
@@ -301,43 +301,42 @@ class _ChatState extends State<Chat> {
                                   as Map<String, dynamic>;
 
                               return InkWell(
-                                onTap: () {
-                                  String roomName = generateRoomName(
-                                    _auth.currentUser!.uid,
-                                    userData['UID'] as String,
-                                  );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ChatDetailScreen(
-                                        name: userData['firstName'] as String,
-                                        roomName: roomName,
+                                  onTap: () {
+                                    String roomName = generateRoomName(
+                                      _auth.currentUser!.uid,
+                                      userData['UID'] as String,
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChatDetailScreen(
+                                          name: userData['firstName'] as String,
+                                          roomName: roomName,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage:
+                                            AssetImage('assets/ProfPic.png'),
+                                      ),
+                                      title: Text(
+                                        userData['firstName'] as String,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      trailing: Text(
+                                        '2:30 PM',
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                  );
-                                },
-                                child: Padding(padding: EdgeInsets.all(10),
-                                
-                                  child: ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage('assets/ProfPic.png'),
-                                  ),
-                                  title: Text(
-                                    userData['firstName'] as String,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  trailing: Text(
-                                    '2:30 PM',
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ),
-                                )
-                              );
+                                  ));
                             },
                           );
                         },
@@ -345,9 +344,7 @@ class _ChatState extends State<Chat> {
                     },
                   ),
                 )
-              : Center(
-                  child:
-                      CircularProgressIndicator()), // Display loading indicator while fetching counselorUID
+              : Center(child: CircularProgressIndicator()),
         ],
       ),
     );
