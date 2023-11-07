@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:lunan/Patient/Scheduling/utils.dart';
 import 'package:lunan/table_calendar.dart';
-import 'package:lunan/Patient/MenuList/menulist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+class Event {
+  final DateTime date;
+  final DateTime end;
+  final String title;
+  final String patient;
+
+  Event({
+    required this.date,
+    required this.title,
+    required this.patient,
+    required this.end,
+  });
+
+  String getFormattedDateAndTime(DateTime dateTime) {
+    final formattedDate = DateFormat('MMMM d, y').format(dateTime);
+    final formattedTime = DateFormat('h:mm a').format(dateTime);
+    return '$formattedDate $formattedTime';
+  }
+
+  @override
+  String toString() {
+    return 'Title: $title\nStart: ${getFormattedDateAndTime(date)}\nEnd: ${getFormattedDateAndTime(end)}';
+  }
+}
 
 class Schedule extends StatefulWidget {
   @override
@@ -9,41 +35,62 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
-  late final ValueNotifier<List<Event>> _selectedEvents;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
-      .toggledOff; // Can be toggled on/off by longpressing a date
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
 
+  late final ValueNotifier<List<Event>> _selectedEvents = ValueNotifier([]);
+  List<Event> _selectedDayEvents = [];
+
   @override
   void initState() {
     super.initState();
-
     _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
   }
 
-  @override
-  void dispose() {
-    _selectedEvents.dispose();
-    super.dispose();
+  Stream<List<Event>> fetchAppointmentsStream() {
+    final uid = _auth.currentUser?.uid;
+    print("Current User UID: $uid"); // Print the UID to the console
+    return FirebaseFirestore.instance
+        .collection('Appointments')
+        .where('patient', isEqualTo: _auth.currentUser?.uid)
+        .snapshots()
+        .asyncMap((querySnapshot) async {
+      final appointments = querySnapshot.docs;
+      final eventList = <Event>[];
+      for (final doc in appointments) {
+        final Timestamp timestamp = doc['start'];
+        final Timestamp endtimestamp = doc['end'];
+        final DateTime dateTime = timestamp.toDate();
+        final DateTime enddateTime = endtimestamp.toDate();
+        final String title = doc['title'];
+        final String patientUID = doc['patient'];
+        final String patientFirstName = await getPatientFirstName(patientUID);
+        final event = Event(
+            date: dateTime,
+            title: title,
+            patient: patientFirstName,
+            end: enddateTime);
+        eventList.add(event);
+      }
+      return eventList;
+    });
   }
 
-  List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    return kEvents[day] ?? [];
-  }
-
-  List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
-    final days = daysInRange(start, end);
-
-    return [
-      for (final d in days) ..._getEventsForDay(d),
-    ];
+  Future<String> getPatientFirstName(String patientUID) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .where('UID', isEqualTo: patientUID)
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs[0].get('firstName') as String;
+    } else {
+      return "Unknown Patient";
+    }
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -51,140 +98,126 @@ class _ScheduleState extends State<Schedule> {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
+        _rangeStart = null;
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
+        _selectedDayEvents = _getEventsForDay(selectedDay);
       });
-
-      _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
 
-  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-    setState(() {
-      _selectedDay = null;
-      _focusedDay = focusedDay;
-      _rangeStart = start;
-      _rangeEnd = end;
-      _rangeSelectionMode = RangeSelectionMode.toggledOn;
-    });
-
-    // `start` or `end` could be null
-    if (start != null && end != null) {
-      _selectedEvents.value = _getEventsForRange(start, end);
-    } else if (start != null) {
-      _selectedEvents.value = _getEventsForDay(start);
-    } else if (end != null) {
-      _selectedEvents.value = _getEventsForDay(end);
-    }
-  }
-
-  void _showConfirmationDialog(Event event) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Session Confirmation'),
-          content: Text('Do you want to attend the session on this date?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Confirm button pressed
-                Navigator.pop(context);
-                // Perform confirmation action here
-                print('Confirmed: $event');
-              },
-              child: Text(
-                'Confirm',
-                style: TextStyle(color: Colors.green),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                // Cancel button pressed
-                Navigator.pop(context);
-                // Perform cancellation action here
-                print('Cancelled: $event');
-              },
-              child: Text(
-                'Cancel',
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+  List<Event> _getEventsForDay(DateTime day) {
+    return _selectedEvents.value
+        .where((event) => isSameDay(event.date, day))
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E9CF), // Set the background color
+      backgroundColor: const Color(0xffF5E9CF),
       appBar: AppBar(
-      elevation: 0,
+        elevation: 0,
         backgroundColor: const Color(0xffF5E9CF),
       ),
-      
-      body: Column(
+      body: Stack(
         children: [
-          TableCalendar<Event>(
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
-            calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: _getEventsForDay,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: CalendarStyle(
-              // Use `CalendarStyle` to customize the UI
-              outsideDaysVisible: false,
-            ),
-            onDaySelected: _onDaySelected,
-            onRangeSelected: _onRangeSelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
-          ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    final event = value[index];
-                    return GestureDetector(
-                      onTap: () => _showConfirmationDialog(event),
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 4.0,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: ListTile(
-                          title: Text('$event'),
-                        ),
+          Column(
+            children: [
+              StreamBuilder<List<Event>>(
+                stream: fetchAppointmentsStream(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    _selectedEvents.value = snapshot.data!;
+                    return TableCalendar<Event>(
+                      firstDay: DateTime(2023),
+                      lastDay: DateTime(2023, 12, 31),
+                      focusedDay: _focusedDay,
+                      selectedDayPredicate: (day) =>
+                          isSameDay(_selectedDay, day),
+                      calendarFormat: _calendarFormat,
+                      startingDayOfWeek: StartingDayOfWeek.monday,
+                      calendarStyle: CalendarStyle(
+                        outsideDaysVisible: false,
+                      ),
+                      onDaySelected: _onDaySelected,
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
+                      eventLoader: (day) {
+                        return _selectedEvents.value
+                            .where((event) => isSameDay(event.date, day))
+                            .toList();
+                      },
+                      calendarBuilders: CalendarBuilders(
+                        markerBuilder: (context, day, events) {
+                          final eventCount = events.length;
+                          if (eventCount == 0) {
+                            return null;
+                          } else if (eventCount == 1) {
+                            return CircleAvatar(
+                              radius: 5,
+                              backgroundColor: Colors.blue,
+                            );
+                          } else {
+                            return CircleAvatar(
+                              radius: 10,
+                              backgroundColor: Colors.red,
+                              child: Text(
+                                '$eventCount',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     );
-                  },
-                );
-              },
-            ),
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
+              ),
+              if (_selectedDayEvents.isNotEmpty)
+                Expanded(
+                  child: ListView(
+                    children: _selectedDayEvents.map((event) {
+                      return Card(
+                        margin: const EdgeInsets.all(16),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.blue, width: 1.0),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Event for Selected Day:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  event.toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+            ],
           ),
         ],
       ),

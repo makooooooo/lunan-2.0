@@ -7,7 +7,7 @@ import 'package:lunan/Patient/HomePage/WellnessForms/wellness_form_chooser.dart'
 import 'package:lunan/Patient/HomePage/WellnessGuide/wellness_guide.dart';
 import 'package:lunan/Patient/MenuList/menulist.dart';
 import 'package:lunan/Patient/HomePage/chat.dart';
-import 'package:lunan/Therapist/Scheduling/schedule.dart';
+import 'package:lunan/Patient/Scheduling/schedule.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -100,7 +100,7 @@ class Dashboard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                   margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     width: 150,
                     height: 150,
                     child: ElevatedButton(
