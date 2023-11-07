@@ -50,7 +50,10 @@ class _SplashScreenState extends State<SplashScreen>
     return const Scaffold(
         backgroundColor: Color(0xffF5E9CF),
         body: Center(
-          child: Image(image: AssetImage('assets/logo.png')),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Image(image: AssetImage('assets/logo.png')),
+          ),
         ));
   }
 }
